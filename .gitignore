@@ -1,0 +1,12 @@
+node_modules
+.env
+.env.example
+.env.local
+.env.production
+.env.development
+.env.test
+Full-Stack Portfolio + Client Management System.md
+Complete UI Pages and Components List.md
+Development Guide for AI Coding Agent.md
+Quick Start Build Guide.md
+AI Agent Build Instructions.md
