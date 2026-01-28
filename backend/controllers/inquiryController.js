@@ -7,6 +7,19 @@ const { newInquiryEmail } = require('../utils/emailTemplates');
 // @access  Public
 exports.createInquiry = async (req, res) => {
     try {
+        const { email, description } = req.body;
+
+        // Check for duplicate inquiry in the last 30 seconds
+        const duplicateInquiry = await Inquiry.findOne({
+            email,
+            description,
+            createdAt: { $gte: new Date(Date.now() - 30 * 1000) }
+        });
+
+        if (duplicateInquiry) {
+            return res.status(400).json({ message: 'Duplicate inquiry detected. Please wait a moment.' });
+        }
+
         const inquiry = await Inquiry.create(req.body);
 
         // Send email to admin

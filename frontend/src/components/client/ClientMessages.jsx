@@ -1,10 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import api from '../../services/api';
-import Button from '../common/Button';
-import Input from '../common/Input';
 import Loader from '../common/Loader';
 import { useAuth } from '../../context/AuthContext';
-import { FaPaperPlane } from 'react-icons/fa';
 
 const ClientMessages = ({ projectId }) => {
     const { user } = useAuth();
@@ -27,8 +24,7 @@ const ClientMessages = ({ projectId }) => {
 
     useEffect(() => {
         fetchMessages();
-        // In a real app, you might set up a socket connection or polling here
-        const interval = setInterval(fetchMessages, 10000); // Poll every 10s for simplicity
+        const interval = setInterval(fetchMessages, 10000);
         return () => clearInterval(interval);
     }, [projectId]);
 
@@ -44,7 +40,7 @@ const ClientMessages = ({ projectId }) => {
         try {
             await api.post(`/messages/${projectId}`, { content: newMessage });
             setNewMessage('');
-            fetchMessages(); // Refresh messages immediately
+            fetchMessages();
         } catch (err) {
             console.error('Error sending message:', err);
         } finally {
@@ -52,51 +48,70 @@ const ClientMessages = ({ projectId }) => {
         }
     };
 
-    if (loading) return <Loader />;
+    if (loading) return (
+        <div className="flex items-center justify-center p-20">
+            <Loader />
+        </div>
+    );
 
     return (
-        <div className="flex flex-col h-[500px] border rounded-lg overflow-hidden bg-white">
-            <div className="bg-gray-50 px-4 py-3 border-b">
-                <h3 className="font-medium text-gray-700">Project Discussion</h3>
+        <div className="flex flex-col h-[500px] border border-white/5 rounded-sm overflow-hidden bg-background-dark/30 backdrop-blur-md">
+            <div className="bg-white/[0.02] px-6 py-4 border-b border-white/5 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                    <span className="size-2 rounded-full bg-[#00F0FF] animate-pulse"></span>
+                    <h3 className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-[0.2em]">Secure_Thread // Archive</h3>
+                </div>
+                <span className="text-[8px] font-mono text-slate-700">AES-256 Enabled</span>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
                 {messages.length > 0 ? (
                     messages.map((msg) => {
-                        const isMe = msg.senderId._id === user._id || msg.senderId === user._id; // Adjust based on populate
+                        const isMe = msg.senderId._id === user._id || msg.senderId === user._id;
                         return (
-                            <div key={msg._id} className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}>
-                                <div className={`max-w-[75%] rounded-lg px-4 py-2 ${isMe ? 'bg-primary-600 text-white' : 'bg-gray-100 text-gray-800'
+                            <div key={msg._id} className={`flex ${isMe ? 'justify-end' : 'justify-start'} animate-in slide-in-from-bottom-2 duration-300`}>
+                                <div className={`max-w-[85%] rounded-xl px-4 py-3 border ${isMe ? 'bg-primary/10 border-primary/30 text-white rounded-tr-none' : 'bg-surface-dark/60 border-white/5 text-slate-300 rounded-tl-none'
                                     }`}>
-                                    <p className="text-sm">{msg.content}</p>
-                                    <p className={`text-xs mt-1 ${isMe ? 'text-primary-100' : 'text-gray-500'}`}>
-                                        {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                    </p>
+                                    <p className="text-xs leading-relaxed">{msg.content}</p>
+                                    <div className={`flex items-center gap-2 mt-2 ${isMe ? 'flex-row-reverse' : ''}`}>
+                                        <p className={`text-[8px] font-mono uppercase tracking-widest ${isMe ? 'text-primary/60' : 'text-slate-600'}`}>
+                                            {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                        </p>
+                                        <span className="size-0.5 rounded-full bg-slate-700"></span>
+                                        <p className="text-[8px] font-mono text-slate-600 uppercase">Verified</p>
+                                    </div>
                                 </div>
                             </div>
                         );
                     })
                 ) : (
-                    <div className="text-center text-gray-500 mt-10">
-                        No messages yet. Start the discussion!
+                    <div className="h-full flex flex-col items-center justify-center text-slate-600 font-mono text-[10px] uppercase tracking-widest gap-4">
+                        <span className="material-symbols-outlined text-4xl opacity-20">history</span>
+                        <span>No historical data found in this buffer</span>
                     </div>
                 )}
                 <div ref={messagesEndRef} />
             </div>
 
-            <div className="p-4 border-t bg-white">
-                <form onSubmit={handleSend} className="flex gap-2">
-                    <Input
-                        name="message"
-                        value={newMessage}
-                        onChange={(e) => setNewMessage(e.target.value)}
-                        placeholder="Type your message..."
-                        className="mb-0 flex-1"
-                        autoComplete="off"
-                    />
-                    <Button type="submit" isLoading={sending} disabled={!newMessage.trim()}>
-                        <FaPaperPlane />
-                    </Button>
+            <div className="p-6 border-t border-white/5 bg-white/[0.01]">
+                <form onSubmit={handleSend} className="flex gap-4">
+                    <div className="flex-1 relative">
+                        <input
+                            name="message"
+                            value={newMessage}
+                            onChange={(e) => setNewMessage(e.target.value)}
+                            placeholder="EXECUTE TRANSMISSION..."
+                            className="w-full bg-black/40 border border-white/10 rounded-lg py-3 px-4 text-xs font-mono text-white placeholder:text-slate-700 focus:border-primary/50 focus:outline-none transition-all uppercase"
+                            autoComplete="off"
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        disabled={sending || !newMessage.trim()}
+                        className="bg-primary text-black size-10 flex items-center justify-center rounded-lg hover:bg-white transition-all shadow-[0_0_15px_rgba(255,95,31,0.2)] disabled:opacity-50"
+                    >
+                        {sending ? <span className="material-symbols-outlined animate-spin">refresh</span> : <span className="material-symbols-outlined">send</span>}
+                    </button>
                 </form>
             </div>
         </div>

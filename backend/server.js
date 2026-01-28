@@ -36,6 +36,8 @@ app.use('/api/messages', require('./routes/messageRoutes'));
 app.use('/api/files', require('./routes/fileRoutes'));
 app.use('/api/notifications', require('./routes/notificationRoutes'));
 app.use('/api/testimonials', require('./routes/testimonialRoutes'));
+app.use('/api/upload', require('./routes/uploadRoutes'));
+
 
 // Error Handler
 app.use((err, req, res, next) => {

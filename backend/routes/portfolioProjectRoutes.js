@@ -6,12 +6,15 @@ const {
     createPortfolioProject,
     updatePortfolioProject,
     deletePortfolioProject,
+    getAdminPortfolioProjects
 } = require('../controllers/portfolioProjectController');
 const { protect, authorize } = require('../middleware/auth');
 
 router.route('/')
     .get(getPortfolioProjects)
     .post(protect, authorize('admin'), createPortfolioProject);
+
+router.get('/admin/all', protect, authorize('admin'), getAdminPortfolioProjects);
 
 router.route('/:id')
     .get(getPortfolioProject)

@@ -36,7 +36,8 @@ export const AuthProvider = ({ children }) => {
         try {
             const data = await authService.login(userData);
             if (data.success) {
-                setUser(data.data); // Adjust based on actual response structure
+                // Controller returns flat object for login, wrapped in data for getMe
+                setUser(data.data || data);
                 return data;
             }
         } catch (err) {
@@ -53,7 +54,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const data = await authService.register(userData);
             if (data.success) {
-                setUser(data.data); // Adjust based on actual response structure
+                setUser(data.data || data);
                 return data;
             }
         } catch (err) {
@@ -73,6 +74,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider
             value={{
                 user,
+                setUser,
                 loading,
                 error,
                 login,

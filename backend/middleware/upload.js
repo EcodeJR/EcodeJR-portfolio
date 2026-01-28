@@ -1,27 +1,19 @@
 const multer = require('multer');
 const path = require('path');
 
-// Configure storage
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/');
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-    },
-});
+// Use memory storage instead of disk storage
+const storage = multer.memoryStorage();
 
-// File filter
+// File filter (added webp and svg)
 const fileFilter = (req, file, cb) => {
-    const allowedTypes = /jpeg|jpg|png|gif|pdf|doc|docx|zip/;
+    const allowedTypes = /jpeg|jpg|png|gif|webp|svg|pdf|doc|docx|zip/;
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = allowedTypes.test(file.mimetype);
 
     if (mimetype && extname) {
         return cb(null, true);
     } else {
-        cb(new Error('Invalid file type. Only JPEG, PNG, GIF, PDF, DOC, and ZIP files are allowed.'));
+        cb(new Error('Invalid file type. Only JPEG, PNG, GIF, WEBP, SVG, PDF, DOC, and ZIP files are allowed.'));
     }
 };
 

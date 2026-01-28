@@ -6,14 +6,16 @@ const portfolioProjectSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    briefDescription: {
+    description: {
         type: String,
         required: true,
+    },
+    briefDescription: {
+        type: String,
         maxlength: 200,
     },
     fullDescription: {
         type: String,
-        required: true,
     },
     problemStatement: String,
     solution: String,
@@ -21,18 +23,32 @@ const portfolioProjectSchema = new mongoose.Schema({
         type: String,
         trim: true,
     }],
+    category: {
+        type: String,
+        default: 'Other',
+    },
     projectType: {
         type: String,
         enum: ['E-commerce', 'SaaS', 'Landing Page', 'Portfolio', 'Blog', 'Dashboard', 'Mobile App', 'API', 'Other'],
         default: 'Other',
     },
+    client: String,
     industry: String,
     images: [String],
+    imageUrl: String,
     heroImage: String,
     liveDemoUrl: String,
     githubUrl: String,
+    projectUrl: String,
+    repoUrl: String,
     dateCompleted: Date,
     clientName: String,
+    results: {
+        latency: { type: String, default: '24ms' },
+        fps: { type: String, default: '60fps' },
+        users: { type: String, default: '10k+' },
+        audit: { type: String, default: 'A+' }
+    },
     isFeatured: {
         type: Boolean,
         default: false,

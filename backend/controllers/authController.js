@@ -6,7 +6,7 @@ const generateToken = require('../utils/generateToken');
 // @access  Public
 exports.register = async (req, res) => {
     try {
-        const { name, email, password, phone, company } = req.body;
+        const { name, email, password, phone, company, role } = req.body;
 
         // Check if user exists
         const userExists = await User.findOne({ email });
@@ -21,7 +21,7 @@ exports.register = async (req, res) => {
             password,
             phone,
             company,
-            role: 'client', // Default role
+            role: role || 'client', // Use provided role or default to client
         });
 
         res.status(201).json({
@@ -79,3 +79,52 @@ exports.getMe = async (req, res) => {
         res.status(500).json({ message: error.message || 'Server Error' });
     }
 };
+
+// @desc    Update user details
+// @route   PUT /api/auth/updatedetails
+// @access  Private
+exports.updateDetails = async (req, res) => {
+    try {
+        const fieldsToUpdate = {
+            name: req.body.name,
+            email: req.body.email
+        };
+
+        const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
+            new: true,
+            runValidators: true
+        });
+
+        res.status(200).json({
+            success: true,
+            data: user
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message || 'Server Error' });
+    }
+}
+
+// @desc    Update password
+// @route   PUT /api/auth/updatepassword
+// @access  Private
+exports.updatePassword = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('+password');
+
+        // Check current password
+        if (!(await user.comparePassword(req.body.currentPassword))) {
+            return res.status(401).json({ message: 'Incorrect current password' });
+        }
+
+        user.password = req.body.newPassword;
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            token: generateToken(user._id),
+            message: 'Password updated successfully'
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message || 'Server Error' });
+    }
+}

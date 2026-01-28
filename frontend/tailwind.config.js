@@ -7,24 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#eef2ff',
-          100: '#e0e7ff',
-          200: '#c7d2fe',
-          300: '#a5b4fc',
-          400: '#818cf8',
-          500: '#6366f1',
-          600: '#4f46e5',
-          700: '#4338ca',
-          800: '#3730a3',
-          900: '#312e81',
-          950: '#1e1b4b',
-        },
+        "primary": "#FF5F00", // Electric Orange
+        "background-dark": "#0A0A0A",
+        "surface-dark": "#121212",
+        "border-dark": "#222222",
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        "display": ["Syncopate", "sans-serif"],
+        "body": ["Space Grotesk", "sans-serif"]
       },
     },
   },
+  darkMode: "class",
   plugins: [],
 }
