@@ -80,25 +80,27 @@ const ProjectForm = () => {
 
             // Handle Image Upload
             if (formData.image) {
+                console.log("Starting image upload...");
                 setUploading(true);
                 const uploadData = new FormData();
                 uploadData.append('image', formData.image);
+
                 const uploadRes = await api.post('/upload', uploadData, {
                     headers: { 'Content-Type': 'multipart/form-data' }
                 });
-                imageUrl = import.meta.env.VITE_API_URL.replace('/api', '') + uploadRes.data.filePath; // Construct full URL if needed, or store relative
-                // Usually better to store relative path or full URL depending on implementation. 
-                // server.js serves /uploads statically. 
-                // If VITE_API_URL is http://localhost:5000/api, backend is at port 5000.
-                // file path is /uploads/filename. 
-                // So full URL is http://localhost:5000/uploads/filename
-                // Let's assume we store the relative path or the full URL. 
-                // Ideally, store relative and prepend base URL in frontend. 
-                // But for simplicity, let's prepend the base URL here if we can.
-                const backendUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:5000';
-                imageUrl = `${backendUrl}${uploadRes.data.filePath}`;
+
+                console.log("Upload successful:", uploadRes.data);
+
+                // Safe URL construction
+                const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+                const hostUrl = apiBaseUrl.replace('/api', '');
+                imageUrl = `${hostUrl}${uploadRes.data.filePath}`;
+
+                console.log("Constructed Image URL:", imageUrl);
                 setUploading(false);
             }
+
+            console.log("Preparing payload for save...");
 
             const payload = {
                 ...formData,

@@ -18,7 +18,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-app.use(helmet());
+app.use(helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    contentSecurityPolicy: false, // Disable CSP for development to prevent image blocking
+}));
 
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
@@ -41,6 +44,7 @@ app.use('/api/upload', require('./routes/uploadRoutes'));
 
 // Error Handler
 app.use((err, req, res, next) => {
+    console.error('Server Error:', err);
     const statusCode = err.statusCode || 500;
     res.status(statusCode).json({
         message: err.message || 'Server Error',

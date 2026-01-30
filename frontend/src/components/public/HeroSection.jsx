@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
     return (
-        <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
+        <section className="relative min-h-screen flex items-center pb-20 overflow-hidden">
             <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-4/5 opacity-40 mix-blend-screen hidden lg:block">
                 <div className="w-full h-full bg-cover bg-center rounded-l-[100px] border-l border-y border-white/10" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDB2TCv_UGGn56NwkfuDfv5ZLcUkTI_wpiDp5lPnwjiZ12T2src091mNfe7TXfZqJ-iTULnzPVO38g37TSt63oJKjXGgeBPbvWibEc-WxhdTDeUyTGq3BVpf5b9YDKqOPz-YwCke2P6NtUkljQgJIpdQS1pkt3qlxfa10XhfpJ_WI1vJQh65iE6molpdohGxdiQnDhIPi6cDrqqvgwPApn35IX0fi2VcVd_LNbZl_gII4wbTmM06juuiYAjBxDHSIvLoqAo0AHzFA')" }}></div>
                 <div className="absolute inset-0 bg-gradient-to-r from-background-dark via-transparent to-transparent"></div>
