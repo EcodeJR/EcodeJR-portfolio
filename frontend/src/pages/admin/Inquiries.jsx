@@ -21,6 +21,22 @@ const Inquiries = () => {
         fetchInquiries();
     }, []);
 
+    const handleConvert = async (inquiryId) => {
+        if (!window.confirm('Initialize this inquiry as a live project?')) return;
+        try {
+            await api.post(`/projects/from-inquiry/${inquiryId}`);
+            alert('Project initialized successfully! Client record created.');
+            // Refresh
+            const res = await api.get('/inquiries');
+            setInquiries(res.data.data);
+            const updated = res.data.data.find(i => i._id === inquiryId);
+            if (updated) setSelectedInquiry(updated);
+        } catch (err) {
+            console.error('Conversion failed:', err);
+            alert(err.response?.data?.message || 'Failed to convert inquiry');
+        }
+    };
+
     const getStatusColor = (status) => {
         switch (status) {
             case 'new': return 'text-primary bg-primary/10 border-primary/20';
@@ -141,13 +157,19 @@ const Inquiries = () => {
 
                         {/* Action Buttons */}
                         <div className="flex flex-wrap gap-4 pt-4">
+                            {selectedInquiry.status !== 'converted' && (
+                                <button
+                                    onClick={() => handleConvert(selectedInquiry._id)}
+                                    className="px-10 py-4 bg-[#00F0FF] text-black hover:shadow-[0_0_30px_rgba(0,240,255,0.4)] hover:scale-[1.02] rounded-full text-xs font-black uppercase tracking-widest transition-all flex items-center gap-2"
+                                >
+                                    <span className="material-symbols-outlined text-lg">rocket_launch</span>
+                                    Initialize_Project
+                                </button>
+                            )}
                             <a href={`mailto:${selectedInquiry.email}`} className="px-10 py-4 bg-primary text-black hover:shadow-[0_0_30px_rgba(249,107,6,0.4)] hover:scale-[1.02] rounded-full text-xs font-black uppercase tracking-widest transition-all flex items-center gap-2">
                                 <span className="material-symbols-outlined text-lg">terminal</span>
                                 Establish_Contact
                             </a>
-                            <button className="px-10 py-4 bg-white/5 hover:bg-red-500/10 border border-white/10 hover:border-red-500/30 rounded-full text-xs font-bold uppercase tracking-widest transition-all text-slate-400 hover:text-red-500">
-                                Dismiss_Signal
-                            </button>
                         </div>
                     </div>
                 ) : (

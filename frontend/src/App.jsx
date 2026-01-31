@@ -24,6 +24,7 @@ import AdminDashboard from './pages/admin/Dashboard';
 import AdminInquiries from './pages/admin/Inquiries';
 import AdminProjects from './pages/admin/Projects';
 import AdminProjectForm from './pages/admin/ProjectForm';
+import AdminClientProjects from './pages/admin/AdminClientProjects';
 import ClientMessages from './pages/client/Messages';
 import ClientFiles from './pages/client/Files';
 import Settings from './pages/Settings';
@@ -101,6 +102,14 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={['admin']}>
                   <AdminLayout><AdminProjects /></AdminLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/client-projects"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminLayout><AdminClientProjects /></AdminLayout>
                 </ProtectedRoute>
               }
             />

@@ -73,6 +73,24 @@ const clientProjectSchema = new mongoose.Schema({
         },
         milestonePayments: [paymentMilestoneSchema],
     },
+    files: [
+        {
+            name: String,
+            mediaId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Media'
+            },
+            size: Number,
+            uploadedBy: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            },
+            uploadedAt: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ],
     completedAt: Date,
 }, {
     timestamps: true,

@@ -61,12 +61,14 @@ const ClientDashboard = () => {
                     <div className="flex justify-between items-start">
                         <div className="flex flex-col">
                             <p className="text-slate-500 text-[10px] font-mono font-bold uppercase tracking-widest mb-1">State_Status</p>
-                            <p className="text-white text-2xl font-black uppercase italic group-hover:text-primary transition-colors">Development</p>
+                            <p className="text-white text-2xl font-black uppercase italic group-hover:text-primary transition-colors">
+                                {projects[0]?.status || 'Idle'}
+                            </p>
                         </div>
                         <span className="text-primary material-symbols-outlined text-3xl">precision_manufacturing</span>
                     </div>
                     <div className="flex items-center gap-2 font-mono text-[10px]">
-                        <span className="text-primary font-bold">[RUNNING]</span>
+                        <span className="text-primary font-bold">[{projects[0]?.status === 'in_progress' ? 'RUNNING' : 'STANDBY'}]</span>
                         <span className="text-slate-500">Stability at 99.8%</span>
                     </div>
                 </div>
@@ -74,23 +76,27 @@ const ClientDashboard = () => {
                     <div className="flex justify-between items-start">
                         <div className="flex flex-col">
                             <p className="text-slate-500 text-[10px] font-mono font-bold uppercase tracking-widest mb-1">Compute_Progress</p>
-                            <p className="text-white text-3xl font-black uppercase italic group-hover:text-[#00F0FF] transition-colors">65.00%</p>
+                            <p className="text-white text-3xl font-black uppercase italic group-hover:text-[#00F0FF] transition-colors">
+                                {projects[0]?.progressPercentage || 0}.00%
+                            </p>
                         </div>
                         <span className="text-[#00F0FF] material-symbols-outlined text-3xl">data_exploration</span>
                     </div>
                     <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                        <div className="h-full bg-[#00F0FF] shadow-[0_0_12px_rgba(0,240,255,0.6)] animate-pulse" style={{ width: '65%' }}></div>
+                        <div className="h-full bg-[#00F0FF] shadow-[0_0_12px_rgba(0,240,255,0.6)] animate-pulse" style={{ width: `${projects[0]?.progressPercentage || 0}%` }}></div>
                     </div>
                 </div>
                 <div className="tech-border flex flex-col gap-6 p-6 bg-surface-dark/40 group hover:bg-surface-dark/60 transition-all">
                     <div className="flex justify-between items-start">
                         <div className="flex flex-col">
                             <p className="text-slate-500 text-[10px] font-mono font-bold uppercase tracking-widest mb-1">Next_Threshold</p>
-                            <p className="text-white text-2xl font-black uppercase italic group-hover:text-primary transition-colors">Oct_24_2024</p>
+                            <p className="text-white text-2xl font-black uppercase italic group-hover:text-primary transition-colors">
+                                {projects[0]?.milestones?.find(m => m.status === 'not_started')?.name || 'FINAL_SYNC'}
+                            </p>
                         </div>
                         <span className="text-primary material-symbols-outlined text-3xl">radar</span>
                     </div>
-                    <p className="font-mono text-[10px] text-slate-500 uppercase tracking-wider">Beta_Staging_Deployment</p>
+                    <p className="font-mono text-[10px] text-slate-500 uppercase tracking-wider">Estimated_Deployment</p>
                 </div>
             </div>
 
@@ -102,56 +108,33 @@ const ClientDashboard = () => {
                 <div className="flex items-center justify-between mb-10 border-b border-white/5 pb-4">
                     <h3 className="text-white text-sm font-bold uppercase tracking-[0.4em] font-mono">Mission_Roadmap.exe</h3>
                     <div className="flex items-center gap-4 text-[10px] font-mono">
-                        <span className="text-primary font-bold">PHASE_03</span>
+                        <span className="text-primary font-bold uppercase">{projects[0]?.currentMilestone || 'PHASE_UNKNOWN'}</span>
                         <span className="text-slate-700">/</span>
-                        <span className="text-slate-400 uppercase tracking-widest">In_Transit</span>
+                        <span className="text-slate-400 uppercase tracking-widest">{projects[0]?.status === 'in_progress' ? 'In_Transit' : 'Standby'}</span>
                     </div>
                 </div>
                 <div className="relative pt-8 pb-4 px-2">
                     <div className="absolute top-1/2 left-0 w-full h-[2px] bg-white/5 -translate-y-1/2"></div>
-                    <div className="absolute top-1/2 left-0 w-[60%] h-[2px] linear-path-active -translate-y-1/2"></div>
-                    <div className="grid grid-cols-5 gap-4">
-                        <div className="relative flex flex-col items-center">
-                            <div className="size-4 bg-primary rounded-sm rotate-45 border border-primary shadow-[0_0_10px_#FF5F1F] mb-6 relative z-10 flex items-center justify-center">
-                                <span className="material-symbols-outlined text-[10px] text-black font-bold -rotate-45">check</span>
+                    <div className="absolute top-1/2 left-0 h-[2px] linear-path-active -translate-y-1/2" style={{ width: `${projects[0]?.progressPercentage || 0}%` }}></div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+                        {projects[0]?.milestones?.map((m, idx) => (
+                            <div key={idx} className={`relative flex flex-col items-center ${m.status === 'not_started' ? 'opacity-30' : ''}`}>
+                                <div className={`size-4 rounded-sm rotate-45 border mb-6 relative z-10 flex items-center justify-center ${m.status === 'completed' ? 'bg-primary border-primary shadow-[0_0_10px_#FF5F1F]' :
+                                        m.status === 'in_progress' ? 'bg-black border-2 border-primary shadow-[0_0_15px_#FF5F1F] animate-pulse' :
+                                            'bg-white/5 border-white/20'
+                                    }`}>
+                                    {m.status === 'completed' && <span className="material-symbols-outlined text-[10px] text-black font-bold -rotate-45">check</span>}
+                                    {m.status === 'in_progress' && <div className="size-1.5 bg-primary rounded-full shadow-[0_0_5px_white]"></div>}
+                                </div>
+                                <div className="text-center">
+                                    <p className={`text-[10px] font-bold uppercase tracking-widest ${m.status === 'in_progress' ? 'text-primary' : 'text-white'}`}>{m.name}</p>
+                                    <p className="text-slate-600 font-mono text-[9px] mt-1 uppercase">
+                                        {m.status === 'completed' ? `LOGGED: ${new Date(m.completedDate).toLocaleDateString().replace(/\//g, '.')}` :
+                                            m.status === 'in_progress' ? 'ACTIVE_PROCESS' : 'QUEUED'}
+                                    </p>
+                                </div>
                             </div>
-                            <div className="text-center">
-                                <p className="text-white text-[10px] font-bold uppercase tracking-widest">Discovery</p>
-                                <p className="text-slate-600 font-mono text-[9px] mt-1">LOGGED: 01.10</p>
-                            </div>
-                        </div>
-                        <div className="relative flex flex-col items-center">
-                            <div className="size-4 bg-primary rounded-sm rotate-45 border border-primary shadow-[0_0_10px_#FF5F1F] mb-6 relative z-10 flex items-center justify-center">
-                                <span className="material-symbols-outlined text-[10px] text-black font-bold -rotate-45">check</span>
-                            </div>
-                            <div className="text-center">
-                                <p className="text-white text-[10px] font-bold uppercase tracking-widest">Interface</p>
-                                <p className="text-slate-600 font-mono text-[9px] mt-1">LOGGED: 01.28</p>
-                            </div>
-                        </div>
-                        <div className="relative flex flex-col items-center">
-                            <div className="size-6 bg-black rounded-sm rotate-45 border-2 border-primary shadow-[0_0_15px_#FF5F1F] mb-5 relative z-10 flex items-center justify-center animate-bounce duration-1000">
-                                <div className="size-1.5 bg-primary rounded-full shadow-[0_0_5px_white]"></div>
-                            </div>
-                            <div className="text-center">
-                                <p className="text-primary text-[11px] font-black uppercase tracking-[0.2em] italic">Development</p>
-                                <p className="text-[#00F0FF] font-mono text-[9px] mt-1 animate-pulse">ACTIVE_PROCESS</p>
-                            </div>
-                        </div>
-                        <div className="relative flex flex-col items-center opacity-30">
-                            <div className="size-4 bg-white/5 rounded-sm rotate-45 border border-white/20 mb-6 relative z-10"></div>
-                            <div className="text-center">
-                                <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Testing_QA</p>
-                                <p className="text-slate-600 font-mono text-[9px] mt-1">QUEUED</p>
-                            </div>
-                        </div>
-                        <div className="relative flex flex-col items-center opacity-30">
-                            <div className="size-4 bg-white/5 rounded-sm rotate-45 border border-white/20 mb-6 relative z-10"></div>
-                            <div className="text-center">
-                                <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Deployment</p>
-                                <p className="text-slate-600 font-mono text-[9px] mt-1">EST_MAR_15</p>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -179,10 +162,10 @@ const ClientDashboard = () => {
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <h4 className="font-bold text-xs text-white uppercase tracking-widest mb-1 truncate group-hover:text-primary transition-colors">{p.projectName || 'Project_Node'}</h4>
-                                            <p className="font-mono text-[9px] text-slate-500 flex justify-between uppercase">
-                                                <span>ID: {p._id.substring(0, 8)}</span>
-                                                <span className="text-primary/60">{p.status}</span>
-                                            </p>
+                                            <div className="flex items-center justify-between font-mono text-[9px] uppercase">
+                                                <span className="text-slate-500">ID: {p._id.substring(0, 8)}</span>
+                                                <span className="text-primary font-bold">{p.progressPercentage}%</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </Link>
@@ -208,7 +191,7 @@ const ClientDashboard = () => {
                             <div className="flex flex-col gap-1">
                                 <p className="text-[11px] font-bold text-white uppercase tracking-widest italic">New_Data_Upload</p>
                                 <p className="text-[10px] font-mono text-slate-500">Asset_Staging_v3 // +4 Files</p>
-                                <p className="text-[9px] font-mono text-primary/60 uppercase mt-1">T-Minus 3:00:00</p>
+                                <p className="text-[9px] font-mono text-primary/60 uppercase mt-1">LATEST_SIGNAL</p>
                             </div>
                         </div>
                         <div className="flex gap-4 relative">
@@ -218,17 +201,7 @@ const ClientDashboard = () => {
                             <div className="flex flex-col gap-1">
                                 <p className="text-[11px] font-bold text-white uppercase tracking-widest italic">Ledger_Updated</p>
                                 <p className="text-[10px] font-mono text-slate-500">Inv_#1042 // Settlement_Complete</p>
-                                <p className="text-[9px] font-mono text-slate-600 uppercase mt-1">24H_ELAPSED</p>
-                            </div>
-                        </div>
-                        <div className="flex gap-4 relative">
-                            <div className="size-[15px] rounded-sm bg-white/20 border border-white/40 z-10 flex items-center justify-center rotate-45">
-                                <span className="material-symbols-outlined text-[10px] text-white font-bold -rotate-45">terminal</span>
-                            </div>
-                            <div className="flex flex-col gap-1">
-                                <p className="text-[11px] font-bold text-white uppercase tracking-widest italic">Dev_Comm_Incoming</p>
-                                <p className="text-[10px] font-mono text-slate-500 italic">"Optimized mobile view for checkout..."</p>
-                                <p className="text-[9px] font-mono text-slate-600 uppercase mt-1">48H_ELAPSED</p>
+                                <p className="text-[9px] font-mono text-slate-600 uppercase mt-1">SYNCED</p>
                             </div>
                         </div>
                     </div>

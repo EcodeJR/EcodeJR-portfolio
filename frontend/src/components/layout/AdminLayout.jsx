@@ -46,6 +46,10 @@ const AdminLayout = ({ children }) => {
                             <span className="material-symbols-outlined text-xl">code_blocks</span>
                             <span className="text-sm font-display tracking-tight">PORTFOLIO</span>
                         </NavLink>
+                        <NavLink to="/admin/client-projects" className={({ isActive }) => isActive ? activeItem : normalItem}>
+                            <span className="material-symbols-outlined text-xl">sync</span>
+                            <span className="text-sm font-display tracking-tight">CLIENT_SYNC</span>
+                        </NavLink>
                     </nav>
                 </div>
                 <div className="space-y-6">
