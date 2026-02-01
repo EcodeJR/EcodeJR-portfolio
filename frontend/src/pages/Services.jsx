@@ -151,7 +151,7 @@ const Services = () => {
                                 Initiate your project with us. We are standing by to process your request.
                             </p>
                             <Link to="/contact">
-                                <Button size="lg" className="shadow-[0_0_30px_rgba(249,107,6,0.4)] hover:shadow-[0_0_50px_rgba(249,107,6,0.6)]">
+                                <Button size="lg" className="shadow-[0_0_30px_rgba(249,107,6,0.4)] hover:shadow-[0_0_50px_rgba(249,107,6,0.6)] py-2 px-4">
                                     Start Project Sequence
                                 </Button>
                             </Link>
