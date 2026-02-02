@@ -76,31 +76,31 @@ const Contact = () => {
                             <div className="grid grid-cols-2 gap-3">
                                 <div className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer">
                                     <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">mail</span>
-                                    <div className="flex flex-col">
+                                    <a href="mailto:emmanueldcode@gmail.com" target="_blank" rel="noopener noreferrer" className="flex flex-col">
                                         <h2 className="text-white text-xs font-bold tracking-widest">ENCRYPTED_EMAIL</h2>
-                                        <p className="text-slate-400 text-[10px] font-mono mt-1">contact@ecodejr.com</p>
-                                    </div>
+                                        <p className="text-slate-400 text-[10px] font-mono mt-1">emmanueldcode@gmail.com</p>
+                                    </a>
                                 </div>
                                 <div className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer">
                                     <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">code</span>
-                                    <div className="flex flex-col">
+                                    <a href="https://github.com/EcodeJR" target="_blank" rel="noopener noreferrer" className="flex flex-col">
                                         <h2 className="text-white text-xs font-bold tracking-widest">GITHUB_NODE</h2>
-                                        <p className="text-slate-400 text-[10px] font-mono mt-1">Source_Control</p>
-                                    </div>
+                                        <p className="text-slate-400 text-[10px] font-mono mt-1">EcodeJR</p>
+                                    </a>
                                 </div>
                                 <div className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer">
                                     <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">hub</span>
-                                    <div className="flex flex-col">
+                                    <a href="https://www.linkedin.com/in/emmanuel-dalyop-5b6a1b178?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="flex flex-col">
                                         <h2 className="text-white text-xs font-bold tracking-widest">LINKEDIN_CORE</h2>
-                                        <p className="text-slate-400 text-[10px] font-mono mt-1">Network_Auth</p>
-                                    </div>
+                                        <p className="text-slate-400 text-[10px] font-mono mt-1">Emmanuel Dalyop</p>
+                                    </a>
                                 </div>
                                 <div className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer">
                                     <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">location_on</span>
-                                    <div className="flex flex-col">
+                                    <a href="https://maps.app.goo.gl/pMSxeYsAn3hTuXSx5" target="_blank" rel="noopener noreferrer" className="flex flex-col">
                                         <h2 className="text-white text-xs font-bold tracking-widest">LOC_COORDS</h2>
-                                        <p className="text-slate-400 text-[10px] font-mono mt-1">40.7128 N, 74.0060 W</p>
-                                    </div>
+                                        <p className="text-slate-400 text-[10px] font-mono mt-1">Abuja-Keffi Express Way, Nasarawa State, Nigeria</p>
+                                    </a>
                                 </div>
                             </div>
                         </div>

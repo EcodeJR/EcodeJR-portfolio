@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaWhatsapp, FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import { IoSend } from 'react-icons/io5';
 
 const Footer = () => {
     return (
@@ -12,9 +14,10 @@ const Footer = () => {
                             Architecting high-end digital experiences through the lens of futuristic aesthetics and performance.
                         </p>
                         <div className="flex gap-4">
-                            <a className="size-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all" href="#"><span className="material-symbols-outlined text-lg">terminal</span></a>
-                            <a className="size-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all" href="#"><span className="material-symbols-outlined text-lg">share</span></a>
-                            <a className="size-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all" href="#"><span className="material-symbols-outlined text-lg">alternate_email</span></a>
+                            <a target="_blank" href="https://wa.me/2347051242451" className="size-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all"><FaWhatsapp className="text-lg" /></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/emmanuel-dalyop-5b6a1b178?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" className="size-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all"><FaLinkedin className="text-lg" /></a>
+                            <a target="_blank" href="https://github.com/EcodeJR" className="size-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all"><FaGithub className="text-lg" /></a>
+                            <a target="_blank" href="https://twitter.com/EcodeJR" className="size-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all"><FaTwitter className="text-lg" /></a>
                         </div>
                     </div>
                     <div>
@@ -40,7 +43,7 @@ const Footer = () => {
                         <div className="relative group">
                             <input className="w-full bg-surface-dark border-white/10 focus:border-primary focus:ring-0 rounded-full px-6 py-4 text-sm transition-all pr-14 outline-none" placeholder="USER@TERMINAL" type="email" />
                             <button className="absolute right-2 top-2 size-10 rounded-full bg-primary flex items-center justify-center hover:bg-white transition-colors">
-                                <span className="material-symbols-outlined text-black">send</span>
+                                <IoSend className="text-black" />
                             </button>
                         </div>
                     </div>

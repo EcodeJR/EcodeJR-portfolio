@@ -1,4 +1,5 @@
 import React from 'react';
+import about_profile from '../assets/about_profile.jpeg';
 
 const About = () => {
     return (
@@ -21,12 +22,13 @@ const About = () => {
                     <div className="lg:col-span-3 flex flex-col gap-6">
                         <div className="relative">
                             <div className="glitch-portrait w-full aspect-[4/5] rounded border border-primary/30 bg-[#0f0f0f] relative overflow-hidden shadow-[0_0_20px_rgba(242,108,13,0.2)]">
-                                <img alt="Developer Portrait" className="w-full h-full object-cover opacity-80 mix-blend-luminosity grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9nnIJhVZTA2tNi6gcd6LF2obYk_kSJ05IrP1yGnUsKUOSFSWRG3ZmRTZbwppF7cQjOIxcpXHeIVc2x2gHuX80_YHzfSX_sJqz30-Ms586ZkE9BSmhPMWIdp0ajoVhdnU6qvcWmtdddvlJP7SM3f_AOIvGlcO2Y0MGWA9xWb3dFnJKtbfcygjJoL0IPn-9MQgzAIJHexmgxAvyy51hrwCZzdamKhIk0wMmtcSqJ2yNGu49_2-wr28iYe8n7SsM3R8LMFij_rKVjQ" />
+                                <img alt="Developer Portrait" className="w-full h-full object-cover opacity-80 mix-blend-luminosity grayscale contrast-125" src={about_profile} />
+                                {/* "https://lh3.googleusercontent.com/aida-public/AB6AXuD9nnIJhVZTA2tNi6gcd6LF2obYk_kSJ05IrP1yGnUsKUOSFSWRG3ZmRTZbwppF7cQjOIxcpXHeIVc2x2gHuX80_YHzfSX_sJqz30-Ms586ZkE9BSmhPMWIdp0ajoVhdnU6qvcWmtdddvlJP7SM3f_AOIvGlcO2Y0MGWA9xWb3dFnJKtbfcygjJoL0IPn-9MQgzAIJHexmgxAvyy51hrwCZzdamKhIk0wMmtcSqJ2yNGu49_2-wr28iYe8n7SsM3R8LMFij_rKVjQ" */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
                                 <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNCIgaGVpZ2h0PSI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDBoNHYxSDB6IiBmaWxsPSJyZ2JhKDAsIDAsIDAsIDAuMSkiLz48L3N2Zz4=')] pointer-events-none"></div>
                                 <div className="absolute bottom-4 left-4 right-4">
                                     <p className="text-[10px] font-mono text-primary uppercase tracking-tighter">Bio_Signal: Active</p>
-                                    <h3 className="text-white font-bold tracking-widest">USER_ID: ALEX_HART</h3>
+                                    <h3 className="text-white font-bold tracking-widest">USER_ID: EMMANUEL_DALYOP</h3>
                                 </div>
                             </div>
                             <div className="absolute -top-2 -right-2 bg-primary text-background-dark text-[10px] font-bold px-2 py-1 rotate-12">
@@ -101,12 +103,12 @@ const About = () => {
                                     <div className="bg-white/5 border border-white/10 p-5 rounded hover:shadow-[0_0_15px_rgba(242,108,13,0.4)] hover:border-primary/50 transition-all cursor-crosshair">
                                         <div className="flex justify-between items-start mb-2">
                                             <div>
-                                                <h4 className="text-white text-sm font-bold tracking-widest">LEAD_SYSTEM_ARCHITECT</h4>
-                                                <p className="text-primary text-[10px] font-mono">NEURAL_DYNAMICS_INC</p>
+                                                <h4 className="text-white text-sm font-bold tracking-widest">FREELANCE_SYSTEM_ARCHITECT</h4>
+                                                <p className="text-primary text-[10px] font-mono">ECODEJR</p>
                                             </div>
                                             <span className="text-slate-500 text-[10px] font-mono">2021 — PRESENT</span>
                                         </div>
-                                        <p className="text-slate-400 text-xs leading-relaxed">Pioneered scalable microservices architecture for real-time data visualization. Managed a team of 12 operators across global nodes.</p>
+                                        <p className="text-slate-400 text-xs leading-relaxed">Pioneered scalable microservices architecture for real-time data visualization. Managed a team of 12 operators across different projects.</p>
                                     </div>
                                 </div>
                                 <div className="relative group">
@@ -115,12 +117,12 @@ const About = () => {
                                     <div className="bg-white/5 border border-white/10 p-5 rounded hover:shadow-[0_0_15px_rgba(242,108,13,0.4)] hover:border-primary/50 transition-all cursor-crosshair">
                                         <div className="flex justify-between items-start mb-2">
                                             <div>
-                                                <h4 className="text-white text-sm font-bold tracking-widest">FULL_STACK_INTEGRATOR</h4>
-                                                <p className="text-primary text-[10px] font-mono">CYBER_CORE_SOLUTIONS</p>
+                                                <h4 className="text-white text-sm font-bold tracking-widest">FULL_STACK_INTERN</h4>
+                                                <p className="text-primary text-[10px] font-mono">SPUTNIK_TECH_HUB</p>
                                             </div>
-                                            <span className="text-slate-500 text-[10px] font-mono">2018 — 2021</span>
+                                            <span className="text-slate-500 text-[10px] font-mono">2022 — 2023</span>
                                         </div>
-                                        <p className="text-slate-400 text-xs leading-relaxed">Engineered secure payment gateways and encrypted communication protocols using TypeScript and Rust.</p>
+                                        <p className="text-slate-400 text-xs leading-relaxed">Built interactive UI/UX and  Engineered secure backend systems and communication protocols using TypeScript and Node.js.</p>
                                     </div>
                                 </div>
                                 <div className="relative group">
@@ -129,11 +131,11 @@ const About = () => {
                                         <div className="flex justify-between items-start mb-2">
                                             <div>
                                                 <h4 className="text-white text-sm font-bold tracking-widest">ACADEMIC_DEPLOYMENT</h4>
-                                                <p className="text-primary text-[10px] font-mono">POLYTECHNIC_GRID_UNIV</p>
+                                                <p className="text-primary text-[10px] font-mono">NASARAWA_STATE_UNIVERSITY_KEFFI</p>
                                             </div>
-                                            <span className="text-slate-500 text-[10px] font-mono">2014 — 2018</span>
+                                            <span className="text-slate-500 text-[10px] font-mono">2023 — 2025</span>
                                         </div>
-                                        <p className="text-slate-400 text-xs leading-relaxed">BS in Computer Science. Specialized in High-Performance Computing and Distributed Systems.</p>
+                                        <p className="text-slate-400 text-xs leading-relaxed">BSc in Computer Science. Specialized in High-Performance Computing and Distributed Systems.</p>
                                     </div>
                                 </div>
                             </div>
