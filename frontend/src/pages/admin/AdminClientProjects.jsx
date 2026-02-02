@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../../services/api';
+import ClientMessages from '../../components/client/ClientMessages';
 
 const AdminClientProjects = () => {
     const [projects, setProjects] = useState([]);
@@ -194,13 +195,23 @@ const AdminClientProjects = () => {
                                             </div>
                                         </div>
                                         <a
-                                            href={file.system === 2
-                                                ? `${import.meta.env.VITE_API_URL?.replace('/api', '')}${file.fileUrl}`
-                                                : `${import.meta.env.VITE_API_URL}/upload/raw/${file.mediaId}`}
+                                            href={
+                                                file.system === 2 && file.fileUrl
+                                                    ? `${import.meta.env.VITE_API_URL?.replace('/api', '')}${file.fileUrl}`
+                                                    : file.mediaId
+                                                        ? `${import.meta.env.VITE_API_URL}/upload/raw/${file.mediaId}`
+                                                        : '#'
+                                            }
                                             target="_blank"
                                             rel="noreferrer"
-                                            className="size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-black transition-all"
+                                            className={`size-8 rounded-full ${file.fileUrl || file.mediaId ? 'bg-primary/10 text-primary hover:bg-primary hover:text-black' : 'bg-slate-800 text-slate-600 cursor-not-allowed'} flex items-center justify-center transition-all`}
                                             download={file.name}
+                                            onClick={(e) => {
+                                                if (!file.fileUrl && !file.mediaId) {
+                                                    e.preventDefault();
+                                                    alert('File URL not available. This file may have been uploaded incorrectly.');
+                                                }
+                                            }}
                                         >
                                             <span className="material-symbols-outlined text-sm">download</span>
                                         </a>
@@ -212,6 +223,18 @@ const AdminClientProjects = () => {
                                     </div>
                                 )}
                             </div>
+                        </div>
+
+                        {/* Neural Uplink (Chat) Section */}
+                        <div className="mt-10 border-t border-white/5 pt-10">
+                            <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
+                                <div className="flex items-center gap-3">
+                                    <span className="material-symbols-outlined text-primary">terminal</span>
+                                    <h3 className="text-white text-sm font-bold uppercase tracking-[0.4em] font-mono">Neural_Uplink // Comm_Channel</h3>
+                                </div>
+                                <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest animate-pulse">Secure_Link_Active</span>
+                            </div>
+                            <ClientMessages projectId={selectedProject._id} />
                         </div>
                     </div>
                 )}

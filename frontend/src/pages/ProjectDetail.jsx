@@ -54,16 +54,20 @@ const ProjectDetail = () => {
                                             {project.title}
                                         </h1>
                                         <p className="text-gray-300 text-base md:text-xl font-light leading-relaxed max-w-2xl">
-                                            {project.description}
+                                            {project.briefDescription || project.description}
                                         </p>
                                     </div>
                                     <div className="flex flex-wrap gap-4 relative z-10">
-                                        <button className="flex min-w-[160px] cursor-pointer items-center justify-center rounded h-12 px-6 bg-primary text-white text-base font-bold uppercase tracking-wider hover:scale-105 transition-transform hover:shadow-[0_0_20px_rgba(255,95,0,0.4)]">
-                                            <span className="truncate">Launch Live Demo</span>
-                                        </button>
-                                        <button className="flex min-w-[160px] cursor-pointer items-center justify-center rounded h-12 px-6 bg-transparent border-2 border-primary text-primary text-base font-bold uppercase tracking-wider hover:bg-primary/10 transition-colors">
-                                            <span className="truncate">Source Code</span>
-                                        </button>
+                                        {project.projectUrl && (
+                                            <a href={project.projectUrl} target="_blank" rel="noopener noreferrer" className="flex min-w-[160px] cursor-pointer items-center justify-center rounded h-12 px-6 bg-primary text-white text-base font-bold uppercase tracking-wider hover:scale-105 transition-transform hover:shadow-[0_0_20px_rgba(255,95,0,0.4)]">
+                                                <span className="truncate">Launch Live Demo</span>
+                                            </a>
+                                        )}
+                                        {project.repoUrl && (
+                                            <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="flex min-w-[160px] cursor-pointer items-center justify-center rounded h-12 px-6 bg-transparent border-2 border-primary text-primary text-base font-bold uppercase tracking-wider hover:bg-primary/10 transition-colors">
+                                                <span className="truncate">Source Code</span>
+                                            </a>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -110,10 +114,12 @@ const ProjectDetail = () => {
                                             </div>
                                         </div>
                                         <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
-                                            <button className="flex items-center justify-center gap-2 rounded-lg h-10 w-full bg-white/5 border border-white/10 text-white hover:border-primary transition-colors text-sm font-bold uppercase">
-                                                <span className="material-symbols-outlined text-lg">code</span>
-                                                GitHub Repo
-                                            </button>
+                                            {project.repoUrl && (
+                                                <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 rounded-lg h-10 w-full bg-white/5 border border-white/10 text-white hover:border-primary transition-colors text-sm font-bold uppercase">
+                                                    <span className="material-symbols-outlined text-lg">code</span>
+                                                    GitHub Repo
+                                                </a>
+                                            )}
                                             <div className="flex justify-between items-center text-xs text-gray-500 font-mono">
                                                 <span>STATUS:</span>
                                                 <span className="text-green-500">{project.isPublished ? 'LIVE' : 'DRAFT'}</span>
@@ -131,7 +137,7 @@ const ProjectDetail = () => {
                                         <span className="text-primary text-sm font-mono">[01]</span> The Problem Statement
                                     </h2>
                                     <p className="text-gray-300 text-lg font-light leading-relaxed">
-                                        {project.description}
+                                        {project.problemStatement || project.description}
                                     </p>
                                 </section>
 
@@ -145,7 +151,7 @@ const ProjectDetail = () => {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="flex flex-col gap-4">
                                             <p className="text-gray-400 text-base leading-relaxed">
-                                                To be populated...
+                                                {project.solution || 'Solution details coming soon...'}
                                             </p>
                                             <div className="p-4 bg-black/50 border border-white/10 rounded-lg font-mono text-sm overflow-hidden group">
                                                 <div className="flex justify-between mb-2 text-xs text-gray-600 border-b border-white/10 pb-1">

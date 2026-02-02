@@ -110,11 +110,17 @@ const ClientFiles = ({ projectId }) => {
                                     </div>
                                 </div>
                                 <a
-                                    href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${file.fileUrl}`}
+                                    href={file.fileUrl ? `${import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000'}${file.fileUrl}` : '#'}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="p-2 text-slate-500 hover:text-primary transition-all hover:scale-110"
-                                    title="Download Asset"
+                                    className={`p-2 ${file.fileUrl ? 'text-slate-500 hover:text-primary hover:scale-110' : 'text-slate-800 cursor-not-allowed'} transition-all`}
+                                    title={file.fileUrl ? "Download Asset" : "File URL not available"}
+                                    onClick={(e) => {
+                                        if (!file.fileUrl) {
+                                            e.preventDefault();
+                                            alert('File URL not available. This file may have been uploaded incorrectly.');
+                                        }
+                                    }}
                                 >
                                     <span className="material-symbols-outlined text-xl">download</span>
                                 </a>

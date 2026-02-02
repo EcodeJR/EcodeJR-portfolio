@@ -12,6 +12,24 @@ exports.getPortfolioProjects = async (req, res) => {
     }
 };
 
+// @desc    Get featured portfolio projects
+// @route   GET /api/portfolio/featured
+// @access  Public
+exports.getFeaturedProjects = async (req, res) => {
+    try {
+        const projects = await PortfolioProject.find({
+            isPublished: true,
+            isFeatured: true
+        })
+            .sort({ displayOrder: 1 })
+            .limit(5);
+
+        res.json({ success: true, count: projects.length, data: projects });
+    } catch (error) {
+        res.status(500).json({ message: error.message || 'Server Error' });
+    }
+};
+
 // @desc    Get all portfolio projects (Admin)
 // @route   GET /api/portfolio/admin/all
 // @access  Private/Admin

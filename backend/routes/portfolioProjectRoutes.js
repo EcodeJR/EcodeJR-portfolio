@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {
     getPortfolioProjects,
+    getFeaturedProjects,
     getPortfolioProject,
     createPortfolioProject,
     updatePortfolioProject,
@@ -14,6 +15,7 @@ router.route('/')
     .get(getPortfolioProjects)
     .post(protect, authorize('admin'), createPortfolioProject);
 
+router.get('/featured', getFeaturedProjects);
 router.get('/admin/all', protect, authorize('admin'), getAdminPortfolioProjects);
 
 router.route('/:id')
