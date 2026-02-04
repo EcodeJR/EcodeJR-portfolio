@@ -99,7 +99,11 @@ const ProjectForm = () => {
                 // Safe URL construction
                 const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
                 const hostUrl = apiBaseUrl.replace('/api', '');
-                imageUrl = `${hostUrl}${uploadRes.data.filePath}`;
+
+                // If it's a Cloudinary URL (starts with http), use it as is. 
+                // Otherwise, prefix with hostUrl for legacy local storage.
+                const filePath = uploadRes.data.filePath;
+                imageUrl = filePath.startsWith('http') ? filePath : `${hostUrl}${filePath}`;
 
                 console.log("Constructed Image URL:", imageUrl);
                 setUploading(false);

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import api from '../../services/api';
 import Loader from '../common/Loader';
 import { useNotification } from '../../context/NotificationContext';
+import { getSafeDownloadUrl } from '../../utils/urlHelper';
 
 const ClientFiles = ({ projectId }) => {
     const [files, setFiles] = useState([]);
@@ -110,7 +111,7 @@ const ClientFiles = ({ projectId }) => {
                                     </div>
                                 </div>
                                 <a
-                                    href={file.fileUrl ? `${import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000'}${file.fileUrl}` : '#'}
+                                    href={getSafeDownloadUrl(file.fileUrl, file.fileName || file.name)}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className={`p-2 ${file.fileUrl ? 'text-slate-500 hover:text-primary hover:scale-110' : 'text-slate-800 cursor-not-allowed'} transition-all`}

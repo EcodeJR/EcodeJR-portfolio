@@ -60,10 +60,10 @@ const Services = () => {
                             <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                             <span className="text-xs font-mono text-primary uppercase tracking-widest">System Capabilities Online</span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tight mb-6">
+                        <h1 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight mb-6">
                             Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#00f0ff] glitch-text" data-text="Expertise">Expertise</span>
                         </h1>
-                        <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
                             Deploying advanced digital solutions. We specialize in architecting the future of the web, one line of code at a time.
                         </p>
                     </div>
@@ -140,8 +140,8 @@ const Services = () => {
                 </section>
 
                 {/* CTA Section */}
-                <section className="py-24 px-6 relative">
-                    <div className="max-w-5xl mx-auto p-12 rounded-3xl bg-gradient-to-r from-primary/10 to-transparent border border-primary/20 text-center relative overflow-hidden">
+                <section className="py-20 md:py-24 px-6 relative">
+                    <div className="max-w-5xl mx-auto p-8 md:p-12 rounded-3xl bg-gradient-to-r from-primary/10 to-transparent border border-primary/20 text-center relative overflow-hidden">
                         <div className="absolute top-0 right-0 p-3 opacity-20">
                             <span className="material-symbols-outlined text-9xl text-primary">rocket_launch</span>
                         </div>

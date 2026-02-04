@@ -8,18 +8,18 @@ const TestimonialsSection = () => {
             </div>
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <div className="tech-card bg-surface-dark border border-white/10 p-12 relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-100 transition-opacity">
-                            <span className="material-symbols-outlined text-4xl text-primary">format_quote</span>
+                    <div className="tech-card bg-surface-dark border border-white/10 p-6 sm:p-12 relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 sm:p-6 opacity-10 group-hover:opacity-100 transition-opacity">
+                            <span className="material-symbols-outlined text-3xl sm:text-4xl text-primary">format_quote</span>
                         </div>
-                        <div className="flex text-primary mb-8 gap-1">
+                        <div className="flex text-primary mb-6 sm:mb-8 gap-1">
                             <span className="material-symbols-outlined text-sm">star</span>
                             <span className="material-symbols-outlined text-sm">star</span>
                             <span className="material-symbols-outlined text-sm">star</span>
                             <span className="material-symbols-outlined text-sm">star</span>
                             <span className="material-symbols-outlined text-sm">star</span>
                         </div>
-                        <p className="text-xl font-medium leading-relaxed mb-10 text-zinc-300">
+                        <p className="text-base sm:text-xl font-medium leading-relaxed mb-6 sm:mb-10 text-zinc-300">
                             "The architecture implemented was flawless. We saw a 40% improvement in load times and zero downtime during peaks."
                         </p>
                         <div className="flex items-center gap-4">
@@ -32,18 +32,18 @@ const TestimonialsSection = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="tech-card bg-surface-dark border border-white/10 p-12 relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-100 transition-opacity">
-                            <span className="material-symbols-outlined text-4xl text-primary">format_quote</span>
+                    <div className="tech-card bg-surface-dark border border-white/10 p-6 sm:p-12 relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 sm:p-6 opacity-10 group-hover:opacity-100 transition-opacity">
+                            <span className="material-symbols-outlined text-3xl sm:text-4xl text-primary">format_quote</span>
                         </div>
-                        <div className="flex text-primary mb-8 gap-1">
+                        <div className="flex text-primary mb-6 sm:mb-8 gap-1">
                             <span className="material-symbols-outlined text-sm">star</span>
                             <span className="material-symbols-outlined text-sm">star</span>
                             <span className="material-symbols-outlined text-sm">star</span>
                             <span className="material-symbols-outlined text-sm">star</span>
                             <span className="material-symbols-outlined text-sm">star</span>
                         </div>
-                        <p className="text-xl font-medium leading-relaxed mb-10 text-zinc-300">
+                        <p className="text-base sm:text-xl font-medium leading-relaxed mb-6 sm:mb-10 text-zinc-300">
                             "Incredible attention to detail. Users have consistently praised the dashboard for its intuitiveness and speed."
                         </p>
                         <div className="flex items-center gap-4">

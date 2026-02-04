@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import api from '../services/api';
+import { getSafeUrl } from '../utils/urlHelper';
 import Loader from '../components/common/Loader';
 
 const ProjectDetail = () => {
@@ -39,8 +40,8 @@ const ProjectDetail = () => {
                     <div className="flex flex-1 justify-center z-10 pt-10">
                         <div className="layout-content-container flex flex-col w-full max-w-[1200px] flex-1">
                             <div className="@container px-4 md:px-6">
-                                <div className="flex min-h-[520px] flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-start justify-end px-6 pb-12 md:px-12 relative overflow-hidden group border border-white/10"
-                                    style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(18, 18, 18, 0.9) 100%), url("${project.imageUrl}")` }}>
+                                <div className="flex min-h-[400px] md:min-h-[520px] flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-start justify-end px-6 pb-12 md:px-12 relative overflow-hidden group border border-white/10"
+                                    style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(18, 18, 18, 0.9) 100%), url("${getSafeUrl(project.imageUrl)}")` }}>
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                                     <div className="flex flex-col gap-4 text-left max-w-3xl relative z-10">
                                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-primary/20 border border-primary text-primary text-xs font-bold uppercase tracking-widest">
@@ -50,10 +51,10 @@ const ProjectDetail = () => {
                                             </span>
                                             Project_Live
                                         </div>
-                                        <h1 className="text-white text-5xl md:text-7xl font-black leading-[1] tracking-tighter uppercase">
+                                        <h1 className="text-white text-3xl sm:text-5xl md:text-7xl font-black leading-[1] tracking-tighter uppercase">
                                             {project.title}
                                         </h1>
-                                        <p className="text-gray-300 text-base md:text-xl font-light leading-relaxed max-w-2xl">
+                                        <p className="text-gray-300 text-sm md:text-xl font-light leading-relaxed max-w-2xl">
                                             {project.briefDescription || project.description}
                                         </p>
                                     </div>
@@ -172,7 +173,7 @@ const ProjectDetail = () => {
                                             </div>
                                         </div>
                                         <div className="rounded-xl overflow-hidden border border-white/10 group relative h-64 md:h-auto">
-                                            <img alt="Architecture" className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" src={project.imageUrl} />
+                                            <img alt="Architecture" className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" src={getSafeUrl(project.imageUrl)} />
                                             <div className="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
                                             <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-md p-3 border border-white/10 rounded">
                                                 <p className="text-[10px] font-mono text-primary uppercase">Schema_Visualization_042</p>

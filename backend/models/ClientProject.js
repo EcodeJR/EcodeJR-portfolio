@@ -80,6 +80,7 @@ const clientProjectSchema = new mongoose.Schema({
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Media'
             },
+            fileUrl: String,
             size: Number,
             uploadedBy: {
                 type: mongoose.Schema.Types.ObjectId,

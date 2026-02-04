@@ -75,10 +75,10 @@ const AdminDashboard = () => {
     );
 
     return (
-        <div className="p-10 space-y-10 max-w-[1600px] mx-auto">
+        <div className="p-4 sm:p-6 lg:p-10 space-y-8 lg:space-y-10 max-w-[1600px] mx-auto">
             <header className="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-white/5 pb-10">
                 <div className="flex flex-col gap-2">
-                    <h2 className="text-3xl font-black tracking-tighter text-white uppercase italic">System_Execution // <span className="text-primary">Overview</span></h2>
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tighter text-white uppercase italic">System_Execution // <span className="text-primary">Overview</span></h2>
                     <p className="font-mono text-[11px] text-slate-500 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 bg-primary animate-pulse rounded-full"></span>
                         ROOT_ACCESS: GRANTED // STATUS: OPTIMAL
@@ -177,7 +177,7 @@ const AdminDashboard = () => {
                 <div className="lg:col-span-2 tech-card bg-charcoal/50 border border-white/10 backdrop-blur-sm rounded-2xl relative overflow-hidden">
                     <div className="p-8 border-b border-white/5 flex justify-between items-center">
                         <div>
-                            <h3 className="font-bold text-lg text-white">INQUIRY_LOG</h3>
+                            <h3 className="font-bold text-base md:text-lg text-white">INQUIRY_LOG</h3>
                             <p className="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Live data stream enabled</p>
                         </div>
                         <button className="text-primary text-[10px] font-bold border border-primary/30 px-4 py-1.5 rounded-full hover:bg-primary hover:text-white transition-all uppercase">DUMP_ALL</button>

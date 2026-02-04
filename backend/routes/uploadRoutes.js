@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const upload = require('../middleware/upload');
-const Media = require('../models/Media');
+const { uploadFromBuffer } = require('../utils/cloudinary');
 
-// @desc    Upload image to MongoDB
+// @desc    Upload image to Cloudinary
 // @route   POST /api/upload
 // @access  Private/Admin
 router.post('/', upload.single('image'), async (req, res) => {
@@ -16,38 +16,24 @@ router.post('/', upload.single('image'), async (req, res) => {
 
         console.log("File received:", req.file.originalname, "Size:", req.file.size);
 
-        const media = await Media.create({
-            data: req.file.buffer,
-            contentType: req.file.mimetype,
-            fileName: req.file.originalname
-        });
+        // Upload to Cloudinary
+        const result = await uploadFromBuffer(req.file.buffer, 'portfolio_projects');
 
-        console.log("Media created in DB:", media._id);
+        console.log("Uploaded to Cloudinary:", result.secure_url);
+
+        // We can still create a Media record if we want to track uploads in DB, 
+        // but now we'll store the URL instead of the Buffer.
+        // However, the current Media model expects 'data' (Buffer).
+        // Let's create a new type of record or just return the URL.
+        // For now, I'll return the URL directly to the frontend.
 
         res.json({
             success: true,
-            filePath: `/api/upload/raw/${media._id}`,
+            filePath: result.secure_url,
+            public_id: result.public_id
         });
     } catch (error) {
         console.error("Upload Route Error:", error);
-        res.status(500).json({ message: error.message });
-    }
-});
-
-// @desc    Serve raw image from MongoDB
-// @route   GET /api/upload/raw/:id
-// @access  Public
-router.get('/raw/:id', async (req, res) => {
-    try {
-        const media = await Media.findById(req.params.id);
-
-        if (!media) {
-            return res.status(404).json({ message: 'Media not found' });
-        }
-
-        res.set('Content-Type', media.contentType);
-        res.send(media.data);
-    } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });

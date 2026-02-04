@@ -63,7 +63,7 @@ const Contact = () => {
                         <span className="size-2 rounded-full bg-primary animate-pulse"></span>
                         <p className="text-primary text-xs font-bold tracking-[0.2em] uppercase">Status: Available_for_Inquiry</p>
                     </div>
-                    <h1 className="text-white text-5xl font-black leading-tight tracking-tighter uppercase cursor-default">
+                    <h1 className="text-white text-3xl sm:text-5xl font-black leading-tight tracking-tighter uppercase cursor-default">
                         Initiate_Contact_Sequence
                     </h1>
                     <p className="text-slate-500 text-sm font-medium">BETA_VERSION: 4.0.1 // ESTABLISHING SECURE CONNECTION...</p>
@@ -72,8 +72,8 @@ const Contact = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                     <div className="lg:col-span-5 flex flex-col gap-6">
                         <div className="flex flex-col gap-4">
-                            <h3 className="text-primary text-sm font-bold tracking-widest border-l-2 border-primary pl-3">SYSTEM_CONTACT_LINKS</h3>
-                            <div className="grid grid-cols-2 gap-3">
+                            <h3 className="text-primary text-[10px] sm:text-sm font-bold tracking-widest border-l-2 border-primary pl-3">SYSTEM_CONTACT_LINKS</h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer">
                                     <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">mail</span>
                                     <a href="mailto:emmanueldcode@gmail.com" target="_blank" rel="noopener noreferrer" className="flex flex-col">

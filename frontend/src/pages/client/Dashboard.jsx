@@ -33,22 +33,22 @@ const ClientDashboard = () => {
     );
 
     return (
-        <div className="max-w-[1400px] mx-auto p-8 lg:p-12 relative animate-in fade-in duration-500">
+        <div className="max-w-[1400px] mx-auto p-4 sm:p-8 lg:p-12 relative animate-in fade-in duration-500">
             <header className="flex flex-wrap items-end justify-between gap-6 mb-12 border-b border-white/5 pb-8">
                 <div className="flex flex-col gap-2">
                     <div className="flex items-center gap-2 text-primary">
                         <span className="w-2 h-2 bg-primary rounded-full animate-pulse shadow-[0_0_8px_#FF5F00]"></span>
                         <p className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase">Operational Status: Active</p>
                     </div>
-                    <h2 className="text-white text-4xl lg:text-5xl font-black tracking-tighter uppercase italic glitch-text">User_Identity // <span className="text-slate-500">{user?.name || 'Dashboard'}</span></h2>
+                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tighter uppercase italic glitch-text">User_Identity // <span className="text-slate-500">{user?.name || 'Dashboard'}</span></h2>
                     <p className="font-mono text-xs text-slate-500 uppercase tracking-widest">Connection_Protocol: <span className="text-primary/80 italic">Neural_Link_v3.42</span></p>
                 </div>
-                <div className="flex gap-4">
-                    <button className="flex items-center gap-2 rounded-sm h-11 px-6 border border-white/10 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-white/5 transition-all">
+                <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <button className="flex items-center justify-center gap-2 rounded-sm h-11 px-6 border border-white/10 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-white/5 transition-all w-full sm:w-auto">
                         <span className="material-symbols-outlined text-lg">sensors</span>
                         <span>Sync_Feed</span>
                     </button>
-                    <Link to="/contact" className="flex items-center gap-2 rounded-sm h-11 px-8 bg-primary text-black text-[10px] font-bold uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_20px_rgba(255,95,31,0.3)]">
+                    <Link to="/contact" className="flex items-center justify-center gap-2 rounded-sm h-11 px-8 bg-primary text-black text-[10px] font-bold uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_20px_rgba(255,95,31,0.3)] w-full sm:w-auto">
                         <span className="material-symbols-outlined text-lg">message</span>
                         <span>Communicate</span>
                     </Link>
@@ -116,12 +116,12 @@ const ClientDashboard = () => {
                 <div className="relative pt-8 pb-4 px-2">
                     <div className="absolute top-1/2 left-0 w-full h-[2px] bg-white/5 -translate-y-1/2"></div>
                     <div className="absolute top-1/2 left-0 h-[2px] linear-path-active -translate-y-1/2" style={{ width: `${projects[0]?.progressPercentage || 0}%` }}></div>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8">
                         {projects[0]?.milestones?.map((m, idx) => (
                             <div key={idx} className={`relative flex flex-col items-center ${m.status === 'not_started' ? 'opacity-30' : ''}`}>
                                 <div className={`size-4 rounded-sm rotate-45 border mb-6 relative z-10 flex items-center justify-center ${m.status === 'completed' ? 'bg-primary border-primary shadow-[0_0_10px_#FF5F1F]' :
-                                        m.status === 'in_progress' ? 'bg-black border-2 border-primary shadow-[0_0_15px_#FF5F1F] animate-pulse' :
-                                            'bg-white/5 border-white/20'
+                                    m.status === 'in_progress' ? 'bg-black border-2 border-primary shadow-[0_0_15px_#FF5F1F] animate-pulse' :
+                                        'bg-white/5 border-white/20'
                                     }`}>
                                     {m.status === 'completed' && <span className="material-symbols-outlined text-[10px] text-black font-bold -rotate-45">check</span>}
                                     {m.status === 'in_progress' && <div className="size-1.5 bg-primary rounded-full shadow-[0_0_5px_white]"></div>}

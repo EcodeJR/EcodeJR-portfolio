@@ -16,14 +16,14 @@ const HeroSection = () => {
                         <span className="w-12 h-[1px] bg-primary"></span>
                         Full Stack Architect
                     </div>
-                    <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-none wide-type">
+                    <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-none wide-type">
                         BUILDING<br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">FUTURE</span><br />
                         SOLUTIONS
                     </h1>
                     <div className="flex flex-col md:flex-row items-start md:items-center gap-8 mt-4">
-                        <p className="text-zinc-500 max-w-sm text-lg leading-relaxed border-l-2 border-primary/30 pl-6">
-                            From concept to code to customers - building products that ship and scale. <br /> let's build the future one project at a time
+                        <p className="text-zinc-500 max-w-sm text-base md:text-lg leading-relaxed border-l-2 border-primary/30 pl-6">
+                            From concept to code to customers - building products that ship and scale. <br className="hidden sm:block" /> let's build the future one project at a time
                         </p>
                         <div className="flex gap-4">
                             <Link to="/contact" className="size-20 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group">

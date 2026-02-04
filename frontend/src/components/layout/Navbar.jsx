@@ -22,7 +22,7 @@ const Navbar = () => {
     return (
         <div className="fixed top-4 md:top-8 left-0 w-full z-50 px-4 md:px-6">
             <div className="max-w-7xl mx-auto flex items-center justify-between bg-black/20 backdrop-blur-md rounded-full px-4 py-2 border border-white/5">
-                <Link to="/" onClick={closeMenu} className="flex items-center gap-3 bg-white text-black px-4 md:px-6 py-2 md:py-3 rounded-full font-display font-bold text-xs md:text-sm tracking-widest hover:bg-primary transition-colors">
+                <Link to="/" onClick={closeMenu} className="flex items-center gap-2 sm:gap-3 bg-white text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full font-display font-bold text-[10px] sm:text-xs md:text-sm tracking-widest hover:bg-primary transition-colors">
                     ECODEJR
                 </Link>
 
@@ -69,10 +69,10 @@ const Navbar = () => {
             {/* Mobile Drawer */}
             <div className={`fixed inset-0 bg-background-dark/95 backdrop-blur-xl z-[-1] transition-transform duration-500 md:hidden ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
                 <div className="flex flex-col items-center justify-center h-full gap-8 p-10">
-                    <NavLink onClick={closeMenu} className={({ isActive }) => `text-4xl font-black italic tracking-tighter transition-colors uppercase ${isActive ? 'text-primary' : 'hover:text-primary'}`} to="/about">About Me</NavLink>
-                    <NavLink onClick={closeMenu} className={({ isActive }) => `text-4xl font-black italic tracking-tighter transition-colors uppercase ${isActive ? 'text-primary' : 'hover:text-primary'}`} to="/projects">Projects</NavLink>
-                    <NavLink onClick={closeMenu} className={({ isActive }) => `text-4xl font-black italic tracking-tighter transition-colors uppercase ${isActive ? 'text-primary' : 'hover:text-primary'}`} to="/services">Services</NavLink>
-                    <NavLink onClick={closeMenu} className={({ isActive }) => `text-4xl font-black italic tracking-tighter transition-colors uppercase ${isActive ? 'text-primary' : 'hover:text-primary'}`} to="/contact">Contact</NavLink>
+                    <NavLink onClick={closeMenu} className={({ isActive }) => `text-3xl sm:text-4xl font-black italic tracking-tighter transition-colors uppercase ${isActive ? 'text-primary' : 'hover:text-primary'}`} to="/about">About Me</NavLink>
+                    <NavLink onClick={closeMenu} className={({ isActive }) => `text-3xl sm:text-4xl font-black italic tracking-tighter transition-colors uppercase ${isActive ? 'text-primary' : 'hover:text-primary'}`} to="/projects">Projects</NavLink>
+                    <NavLink onClick={closeMenu} className={({ isActive }) => `text-3xl sm:text-4xl font-black italic tracking-tighter transition-colors uppercase ${isActive ? 'text-primary' : 'hover:text-primary'}`} to="/services">Services</NavLink>
+                    <NavLink onClick={closeMenu} className={({ isActive }) => `text-3xl sm:text-4xl font-black italic tracking-tighter transition-colors uppercase ${isActive ? 'text-primary' : 'hover:text-primary'}`} to="/contact">Contact</NavLink>
 
                     <div className="w-full h-px bg-white/10 my-4"></div>
 

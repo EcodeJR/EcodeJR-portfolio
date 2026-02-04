@@ -1,5 +1,6 @@
 const File = require('../models/File');
 const ClientProject = require('../models/ClientProject');
+const { uploadFromBuffer } = require('../utils/cloudinary');
 
 // @desc    Upload file(s)
 // @route   POST /api/files/:projectId
@@ -21,12 +22,16 @@ exports.uploadFile = async (req, res) => {
             return res.status(400).json({ message: 'Please upload a file' });
         }
 
+        // Upload to Cloudinary
+        // Use "auto" to let Cloudinary determine the best bucket (images, raw, etc.)
+        const result = await uploadFromBuffer(req.file.buffer, 'client_assets', 'auto', req.file.originalname);
+
         const file = await File.create({
             projectId: req.params.projectId,
             uploadedBy: req.user.id,
             uploaderRole: req.user.role,
             fileName: req.file.originalname,
-            fileUrl: `/uploads/${req.file.filename}`,
+            fileUrl: result.secure_url,
             fileType: req.file.mimetype,
             fileSize: req.file.size,
             category: req.body.category || 'other',

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import api from '../services/api';
+import { getSafeUrl } from '../utils/urlHelper';
 
 const ProjectsGallery = () => {
     const [projects, setProjects] = useState([]);
@@ -107,7 +108,7 @@ const ProjectsGallery = () => {
                     <div className="flex flex-col lg:flex-row justify-between items-end gap-6 border-b border-white/10 pb-8">
                         <div className="flex flex-col gap-2">
                             <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary font-bold">Directory_v2.0</span>
-                            <h2 className="text-5xl font-black uppercase tracking-tighter italic">PROJECTS_GALLERY</h2>
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter italic">PROJECTS_GALLERY</h2>
                             <p className="font-mono text-[11px] text-slate-500 flex items-center gap-2">
                                 <span className="w-1.5 h-1.5 bg-primary animate-pulse rounded-full"></span>
                                 STATUS: 24_OBJECTS_SYNCED
@@ -115,7 +116,7 @@ const ProjectsGallery = () => {
                         </div>
                         <div className="flex items-center gap-3">
                             <div className="relative">
-                                <select className="appearance-none bg-background-dark border border-white/10 text-[10px] font-mono uppercase tracking-[0.2em] text-white rounded-xl px-6 py-3 pr-12 focus:ring-1 focus:ring-primary focus:border-primary w-56">
+                                <select className="appearance-none bg-background-dark border border-white/10 text-[10px] font-mono uppercase tracking-[0.2em] text-white rounded-xl px-6 py-3 pr-12 focus:ring-1 focus:ring-primary focus:border-primary w-full sm:w-56">
                                     <option>SORT:NEWEST_FIRST</option>
                                     <option>SORT:OLDEST_FIRST</option>
                                     <option>SORT:POPULARITY</option>
@@ -130,7 +131,7 @@ const ProjectsGallery = () => {
                             <Link to={`/projects/${project._id}`} key={project._id} className="group bg-module-bg border border-white/10 rounded-2xl overflow-hidden flex flex-col transition-all hover:shadow-[0_0_30px_rgba(255,95,0,0.1)] hover:border-primary/50 cursor-pointer">
 
                                 <div className="aspect-video w-full overflow-hidden relative border-b border-white/10">
-                                    <div className="absolute inset-0 bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700" style={{ backgroundImage: `url('${project.imageUrl}')` }}></div>
+                                    <div className="absolute inset-0 bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700" style={{ backgroundImage: `url('${getSafeUrl(project.imageUrl)}')` }}></div>
                                     <div className="absolute inset-0 bg-primary/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                     <div className={`absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full border ${project.isPublished ? 'border-primary/30' : 'border-white/10'}`}>
                                         <span className={`text-[10px] font-mono uppercase tracking-[0.2em] ${project.isPublished ? 'text-primary' : 'text-slate-400'}`}>{project.isPublished ? 'LIVE_NODE' : 'OFFLINE'}</span>

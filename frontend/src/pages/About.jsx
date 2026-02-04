@@ -12,7 +12,7 @@ const About = () => {
                         <span className="size-2 rounded-full bg-primary animate-pulse"></span>
                         <p className="text-primary text-xs font-bold tracking-[0.2em] uppercase">Status: Core_Extraction_Running</p>
                     </div>
-                    <h1 className="text-white text-5xl font-black leading-tight tracking-tighter uppercase cursor-default">
+                    <h1 className="text-white text-3xl sm:text-5xl font-black leading-tight tracking-tighter uppercase cursor-default">
                         System_Profile_Deep_Scan
                     </h1>
                     <p className="text-slate-500 text-sm font-medium">INDEX: 001 // SOURCE: HUMAN_MODULE_V4 // ACCESS: PUBLIC</p>
@@ -108,7 +108,7 @@ const About = () => {
                                             </div>
                                             <span className="text-slate-500 text-[10px] font-mono">2021 — PRESENT</span>
                                         </div>
-                                        <p className="text-slate-400 text-xs leading-relaxed">Pioneered scalable microservices architecture for real-time data visualization. Managed a team of 12 operators across different projects.</p>
+                                        <p className="text-slate-400 text-xs leading-relaxed">Pioneered scalable microservices architecture for real-time data visualization. Developed Full-Stack applications, Backend APIs, and Web Socket systems. Managed a team of 1 - 2 operators across different projects.</p>
                                     </div>
                                 </div>
                                 <div className="relative group">
@@ -164,7 +164,7 @@ const About = () => {
                                 <div className="flex flex-col gap-4">
                                     <h5 className="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Auxiliary_Tools</h5>
                                     <div className="flex flex-wrap gap-2">
-                                        {['DOCKER', 'REDIS', 'GRAPHQL', 'NEXT.JS', 'POSTGRES'].map((tool) => (
+                                        {['DOCKER', 'REDIS', 'GRAPHQL', 'NEXT.JS', 'TAILWINDCSS', 'POSTGRES'].map((tool) => (
                                             <span key={tool} className="px-2 py-1 bg-white/5 border border-white/10 text-[9px] text-slate-400 font-mono">{tool}</span>
                                         ))}
                                     </div>

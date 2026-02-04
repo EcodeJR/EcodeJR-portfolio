@@ -262,17 +262,14 @@ exports.uploadProjectFile = async (req, res) => {
             return res.status(400).json({ message: 'No file uploaded' });
         }
 
-        // Save to Media
-        const media = await Media.create({
-            data: req.file.buffer,
-            contentType: req.file.mimetype,
-            fileName: req.file.originalname
-        });
+        // Upload to Cloudinary
+        // Use "auto" to let Cloudinary determine the best bucket (images, raw, etc.)
+        const result = await uploadFromBuffer(req.file.buffer, 'client_assets', 'auto', req.file.originalname);
 
         // Add to project files
         project.files.push({
             name: req.file.originalname,
-            mediaId: media._id,
+            fileUrl: result.secure_url,
             size: req.file.size,
             uploadedBy: req.user.id
         });

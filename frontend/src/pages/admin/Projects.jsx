@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
+import { getSafeUrl } from '../../utils/urlHelper';
 
 const AdminProjects = () => {
     const [projects, setProjects] = useState([]);
@@ -60,7 +61,7 @@ const AdminProjects = () => {
                             <div key={project._id} className="bg-charcoal/50 border border-white/10 p-4 lg:p-6 rounded-2xl flex items-center justify-between hover:border-primary/50 transition-all group backdrop-blur-sm">
                                 <div className="flex items-center gap-6">
                                     <div className="w-20 h-20 rounded-xl bg-black/50 overflow-hidden border border-white/10 relative">
-                                        {project.imageUrl && <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover" />}
+                                        {project.imageUrl && <img src={getSafeUrl(project.imageUrl)} alt={project.title} className="w-full h-full object-cover" />}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                     </div>
                                     <div>
