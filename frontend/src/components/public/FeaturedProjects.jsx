@@ -28,7 +28,7 @@ const FeaturedProjects = () => {
                 <div className="max-w-7xl mx-auto px-6 lg:px-12">
                     <div className="mb-20">
                         <h2 className="text-primary font-bold text-xs tracking-[0.5em] uppercase mb-6 text-center">Case_Studies</h2>
-                        <h3 className="text-3xl md:text-5xl lg:text-7xl font-display font-bold tracking-tighter uppercase text-center leading-none">Deployment<br />Archive</h3>
+                        <h3 className="text-2xl md:text-5xl lg:text-7xl font-display font-bold tracking-tighter uppercase text-center leading-none">Deployment<br />Archive</h3>
                     </div>
                     <div className="flex justify-center items-center h-64">
                         <div className="text-primary text-sm font-mono uppercase tracking-widest">Loading_Projects...</div>
@@ -51,7 +51,7 @@ const FeaturedProjects = () => {
             <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <div className="mb-20">
                     <h2 className="text-primary font-bold text-xs tracking-[0.5em] uppercase mb-6 text-center">Case_Studies</h2>
-                    <h3 className="text-5xl md:text-7xl font-display font-bold tracking-tighter uppercase text-center leading-none">Deployment<br />Archive</h3>
+                    <h3 className="text-2xl md:text-7xl font-display font-bold tracking-tighter uppercase text-center leading-none">Deployment<br />Archive</h3>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                     {/* Main Featured Project */}
