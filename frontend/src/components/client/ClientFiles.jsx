@@ -3,12 +3,14 @@ import api from '../../services/api';
 import Loader from '../common/Loader';
 import { useNotification } from '../../context/NotificationContext';
 import { getSafeDownloadUrl } from '../../utils/urlHelper';
+import { useAuth } from '../../context/AuthContext';
 
 const ClientFiles = ({ projectId }) => {
     const [files, setFiles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
     const { showSuccess, showError } = useNotification();
+    const { user } = useAuth();
 
     const fetchFiles = async () => {
         try {
@@ -49,6 +51,18 @@ const ClientFiles = ({ projectId }) => {
             showError(err.response?.data?.message || 'Ingestion Failed');
         } finally {
             setUploading(false);
+        }
+    };
+
+    const handleDeleteFile = async (fileId, fileName) => {
+        if (!window.confirm(`Delete "${fileName}"?`)) return;
+
+        try {
+            await api.delete(`/files/${fileId}`);
+            showSuccess('ASSET PURGED');
+            fetchFiles();
+        } catch (err) {
+            showError(err.response?.data?.message || 'Purge Failed');
         }
     };
 
@@ -110,21 +124,32 @@ const ClientFiles = ({ projectId }) => {
                                         </p>
                                     </div>
                                 </div>
-                                <a
-                                    href={getSafeDownloadUrl(file.fileUrl, file.fileName || file.name)}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={`p-2 ${file.fileUrl ? 'text-slate-500 hover:text-primary hover:scale-110' : 'text-slate-800 cursor-not-allowed'} transition-all`}
-                                    title={file.fileUrl ? "Download Asset" : "File URL not available"}
-                                    onClick={(e) => {
-                                        if (!file.fileUrl) {
-                                            e.preventDefault();
-                                            alert('File URL not available. This file may have been uploaded incorrectly.');
-                                        }
-                                    }}
-                                >
-                                    <span className="material-symbols-outlined text-xl">download</span>
-                                </a>
+                                <div className="flex items-center gap-2">
+                                    {(user?.role === 'admin' || file.uploadedBy === user?._id) && (
+                                        <button
+                                            onClick={() => handleDeleteFile(file._id, file.fileName)}
+                                            className="p-2 text-red-500/50 hover:text-red-500 transition-colors"
+                                            title="Delete Asset"
+                                        >
+                                            <span className="material-symbols-outlined text-xl">delete</span>
+                                        </button>
+                                    )}
+                                    <a
+                                        href={getSafeDownloadUrl(file.fileUrl, file.fileName || file.name)}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`p-2 ${file.fileUrl ? 'text-slate-500 hover:text-primary hover:scale-110' : 'text-slate-800 cursor-not-allowed'} transition-all`}
+                                        title={file.fileUrl ? "Download Asset" : "File URL not available"}
+                                        onClick={(e) => {
+                                            if (!file.fileUrl) {
+                                                e.preventDefault();
+                                                alert('File URL not available. This file may have been uploaded incorrectly.');
+                                            }
+                                        }}
+                                    >
+                                        <span className="material-symbols-outlined text-xl">download</span>
+                                    </a>
+                                </div>
                             </div>
                         ))}
                     </div>

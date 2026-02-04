@@ -100,12 +100,12 @@ const AdminLayout = ({ children }) => {
                         <Link to="/admin/inquiries" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Inquiries</Link>
                         <Link to="/admin/projects" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Portfolio</Link>
                         <Link to="/admin/client-projects" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Client_Sync</Link>
-                        <Link to="/settings" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Protocol_Settings</Link>
+                        <Link to="/settings" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Settings</Link>
                     </nav>
                     <div className="mt-auto border-t border-white/5 pt-8">
                         <button onClick={handleLogout} className="flex items-center gap-4 text-red-500 font-bold tracking-widest uppercase italic bg-red-500/10 w-full p-4 rounded-xl">
                             <span className="material-symbols-outlined">power_settings_new</span>
-                            <span>Terminate_Session</span>
+                            <span>Logout</span>
                         </button>
                     </div>
                 </div>

@@ -282,6 +282,36 @@ exports.uploadProjectFile = async (req, res) => {
     }
 };
 
+// @desc    Delete project asset (System 1)
+// @route   DELETE /api/projects/:id/files/:fileId
+// @access  Private
+exports.deleteProjectFile = async (req, res) => {
+    try {
+        const project = await ClientProject.findById(req.params.id);
+        if (!project) return res.status(404).json({ message: 'Project not found' });
+
+        // Check access
+        if (req.user.role !== 'admin' && project.clientId.toString() !== req.user.id) {
+            return res.status(403).json({ message: 'Not authorized' });
+        }
+
+        const fileIndex = project.files.findIndex(f => f._id.toString() === req.params.fileId);
+        if (fileIndex === -1) return res.status(404).json({ message: 'File not found' });
+
+        // Check if uploader or admin
+        if (req.user.role !== 'admin' && project.files[fileIndex].uploadedBy.toString() !== req.user.id) {
+            return res.status(403).json({ message: 'Not authorized to delete this file' });
+        }
+
+        project.files.splice(fileIndex, 1);
+        await project.save();
+
+        res.json({ success: true, data: {} });
+    } catch (error) {
+        res.status(500).json({ message: error.message || 'Server Error' });
+    }
+};
+
 // @desc    Delete client project
 // @route   DELETE /api/projects/:id
 // @access  Private/Admin

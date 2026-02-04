@@ -8,7 +8,8 @@ const {
     updateMilestone,
     deleteClientProject,
     createProjectFromInquiry,
-    uploadProjectFile
+    uploadProjectFile,
+    deleteProjectFile
 } = require('../controllers/clientProjectController');
 const { protect, authorize } = require('../middleware/auth');
 const upload = require('../middleware/upload');
@@ -16,6 +17,7 @@ const upload = require('../middleware/upload');
 router.use(protect);
 
 router.post('/:id/files', upload.single('file'), uploadProjectFile);
+router.delete('/:id/files/:fileId', deleteProjectFile);
 
 router.route('/')
     .get(getClientProjects)

@@ -71,6 +71,28 @@ const Files = () => {
         }
     };
 
+    const handleDeleteFile = async (file) => {
+        if (!window.confirm(`Are you sure you want to delete "${file.name}"? This action cannot be undone.`)) return;
+
+        try {
+            if (file.system === 2) {
+                // System 2 - Standalone File document
+                await api.delete(`/files/${file._id}`);
+            } else {
+                // System 1 - Embedded in ClientProject
+                await api.delete(`/projects/${project._id}/files/${file._id}`);
+            }
+
+            // Refresh project data
+            const res = await api.get(`/projects/${project._id}`);
+            setProject(res.data.data);
+            alert('File deleted successfully.');
+        } catch (err) {
+            console.error('Deletion failed:', err);
+            alert(err.response?.data?.message || 'Failed to delete asset');
+        }
+    };
+
     if (loading) return <div className="p-20 text-center font-mono text-primary animate-pulse">VAULT_SYNCHRONIZING...</div>;
 
     return (
@@ -160,7 +182,16 @@ const Files = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {project?.files?.map((file, i) => (
                         <div key={file._id} className="group tech-border p-6 bg-surface-dark/30 hover:bg-primary/5 transition-all cursor-crosshair relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100">
+                            <div className="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-all flex items-center gap-2">
+                                {(user?.role === 'admin' || file.uploadedBy === user?._id) && (
+                                    <button
+                                        onClick={() => handleDeleteFile(file)}
+                                        className="size-8 rounded-full bg-red-500 text-white flex items-center justify-center shadow-lg hover:bg-white hover:text-red-500 transition-colors"
+                                        title="Delete Asset"
+                                    >
+                                        <span className="material-symbols-outlined text-sm">delete</span>
+                                    </button>
+                                )}
                                 <a
                                     href={file.system === 2
                                         ? `${import.meta.env.VITE_API_URL?.replace('/api', '')}${file.fileUrl}`
