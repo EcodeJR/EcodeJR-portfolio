@@ -33,10 +33,10 @@ const AdminProjects = () => {
     };
 
     return (
-        <div className="p-10 space-y-10 max-w-[1600px] mx-auto relative h-full flex flex-col">
+        <div className="p-4 sm:p-10 space-y-8 md:space-y-10 max-w-[1600px] mx-auto relative h-full flex flex-col">
             <header className="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-white/5 pb-10">
                 <div className="flex flex-col gap-2">
-                    <h2 className="text-3xl font-black tracking-tighter text-white uppercase italic">Project_Database // <span className="text-primary">Portfolio</span></h2>
+                    <h2 className="text-2xl sm:text-3xl font-black tracking-tighter text-white uppercase italic">Project_Database // <span className="text-primary">Portfolio</span></h2>
                     <p className="font-mono text-[11px] text-slate-500 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 bg-primary animate-pulse rounded-full"></span>
                         LOCAL_STORAGE: SYNCED // STATUS: STANDBY
@@ -58,26 +58,26 @@ const AdminProjects = () => {
                 ) : (
                     <div className="grid gap-4">
                         {projects.map(project => (
-                            <div key={project._id} className="bg-charcoal/50 border border-white/10 p-4 lg:p-6 rounded-2xl flex items-center justify-between hover:border-primary/50 transition-all group backdrop-blur-sm">
-                                <div className="flex items-center gap-6">
-                                    <div className="w-20 h-20 rounded-xl bg-black/50 overflow-hidden border border-white/10 relative">
+                            <div key={project._id} className="bg-charcoal/50 border border-white/10 p-4 lg:p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:border-primary/50 transition-all group backdrop-blur-sm">
+                                <div className="flex items-center gap-4 sm:gap-6 w-full sm:w-auto">
+                                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-black/50 overflow-hidden border border-white/10 relative shrink-0">
                                         {project.imageUrl && <img src={getSafeUrl(project.imageUrl)} alt={project.title} className="w-full h-full object-cover" />}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                     </div>
-                                    <div>
-                                        <h3 className="font-bold text-xl text-white tracking-tight">{project.title}</h3>
-                                        <div className="flex items-center gap-4 mt-2">
-                                            <p className="text-[10px] text-slate-400 font-mono uppercase tracking-widest bg-white/5 px-2 py-0.5 rounded">{project.category || project.projectType}</p>
+                                    <div className="min-w-0 flex-1">
+                                        <h3 className="font-bold text-lg sm:text-xl text-white tracking-tight truncate">{project.title}</h3>
+                                        <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-1 sm:mt-2">
+                                            <p className="text-[9px] sm:text-[10px] text-slate-400 font-mono uppercase tracking-widest bg-white/5 px-2 py-0.5 rounded truncate max-w-[150px]">{project.category || project.projectType}</p>
                                             <div className="flex items-center gap-2">
                                                 <span className={`size-1.5 rounded-full ${project.isPublished ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]' : 'bg-red-500 shadow-[0_0_8px_rgba(239,44,44,0.5)]'}`}></span>
-                                                <span className="text-[10px] font-bold uppercase tracking-tighter text-slate-500">
+                                                <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-tighter text-slate-500 whitespace-nowrap">
                                                     {project.isPublished ? 'SYNCED' : 'OFFLINE'}
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-all translate-x-4 group-hover:translate-x-0">
+                                <div className="flex gap-3 w-full sm:w-auto justify-end border-t sm:border-t-0 border-white/5 pt-4 sm:pt-0 md:opacity-0 md:group-hover:opacity-100 transition-all md:translate-x-4 md:group-hover:translate-x-0">
                                     <Link to={`/admin/projects/edit/${project._id}`} className="size-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-black transition-all">
                                         <span className="material-symbols-outlined text-lg">edit</span>
                                     </Link>

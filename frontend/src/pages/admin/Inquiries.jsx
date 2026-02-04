@@ -54,9 +54,9 @@ const Inquiries = () => {
     );
 
     return (
-        <div className="flex-1 flex overflow-hidden h-full">
+        <div className="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden h-full">
             {/* List */}
-            <div className="w-full md:w-[400px] border-r border-white/5 flex flex-col bg-background-dark/30 backdrop-blur-sm">
+            <div className="w-full md:w-[400px] border-b md:border-b-0 md:border-r border-white/5 flex flex-col bg-background-dark/30 backdrop-blur-sm shrink-0 h-[400px] md:h-auto">
                 {/* Header */}
                 <div className="h-16 border-b border-white/5 flex items-center px-6 shrink-0">
                     <h2 className="text-xl font-black tracking-tighter uppercase">Inquiry_Inbox</h2>

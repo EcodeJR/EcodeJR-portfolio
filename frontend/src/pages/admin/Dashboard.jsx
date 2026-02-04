@@ -175,42 +175,42 @@ const AdminDashboard = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Inquiry Log table */}
                 <div className="lg:col-span-2 tech-card bg-charcoal/50 border border-white/10 backdrop-blur-sm rounded-2xl relative overflow-hidden">
-                    <div className="p-8 border-b border-white/5 flex justify-between items-center">
+                    <div className="p-6 md:p-8 border-b border-white/5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <div>
-                            <h3 className="font-bold text-base md:text-lg text-white">INQUIRY_LOG</h3>
+                            <h3 className="font-bold text-base md:text-lg text-white uppercase tracking-tight">INQUIRY_LOG</h3>
                             <p className="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Live data stream enabled</p>
                         </div>
-                        <button className="text-primary text-[10px] font-bold border border-primary/30 px-4 py-1.5 rounded-full hover:bg-primary hover:text-white transition-all uppercase">DUMP_ALL</button>
+                        <button className="text-primary text-[10px] font-bold border border-primary/30 px-4 py-1.5 rounded-full hover:bg-primary hover:text-white transition-all uppercase whitespace-nowrap">DUMP_ALL</button>
                     </div>
                     <div className="overflow-x-auto p-4">
                         <table className="w-full text-left border-separate border-spacing-y-2">
                             <thead className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
                                 <tr>
-                                    <th className="px-6 py-3">ORIGIN_ID</th>
-                                    <th className="px-6 py-3">SUBJECT_PARAMS</th>
-                                    <th className="px-6 py-3">TIMESTAMP</th>
-                                    <th className="px-6 py-3">STATUS_BIT</th>
-                                    <th className="px-6 py-3"></th>
+                                    <th className="px-4 md:px-6 py-3">ORIGIN</th>
+                                    <th className="px-6 py-3 hidden md:table-cell">SUBJECT_PARAMS</th>
+                                    <th className="px-4 md:px-6 py-3">TIMESTAMP</th>
+                                    <th className="px-4 md:px-6 py-3">STATUS</th>
+                                    <th className="px-4 md:px-6 py-3"></th>
                                 </tr>
                             </thead>
                             <tbody className="text-xs">
                                 {recentInquiries.length > 0 ? (
                                     recentInquiries.map((inquiry) => (
                                         <tr key={inquiry._id} className="bg-white/[0.02] hover:bg-white/[0.05] transition-colors group">
-                                            <td className="px-6 py-4">
+                                            <td className="px-4 md:px-6 py-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="size-8 rounded bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold text-[10px]">
+                                                    <div className="size-8 rounded bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold text-[10px] shrink-0">
                                                         {inquiry.name.charAt(0)}
                                                     </div>
-                                                    <span className="text-slate-200 uppercase tracking-tight">{inquiry.name}</span>
+                                                    <span className="text-slate-200 uppercase tracking-tight truncate max-w-[100px] sm:max-w-none">{inquiry.name}</span>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 text-slate-400">{inquiry.serviceInterested}</td>
-                                            <td className="px-6 py-4 text-slate-500">{getRelativeTime(inquiry.createdAt || new Date())}</td>
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-4 text-slate-400 hidden md:table-cell">{inquiry.serviceInterested}</td>
+                                            <td className="px-4 md:px-6 py-4 text-slate-500 whitespace-nowrap">{getRelativeTime(inquiry.createdAt || new Date())}</td>
+                                            <td className="px-4 md:px-6 py-4">
                                                 <div className="flex items-center gap-2">
-                                                    <span className={`size-1.5 rounded-full shadow-[0_0_8px_currentColor] ${inquiry.status === 'new' ? 'bg-primary' : 'bg-slate-500'}`}></span>
-                                                    <span className={`font-bold uppercase ${getStatusColor(inquiry.status)}`}>{inquiry.status}</span>
+                                                    <span className={`size-1.5 rounded-full shadow-[0_0_8px_currentColor] hidden sm:inline-block ${inquiry.status === 'new' ? 'bg-primary' : 'bg-slate-500'}`}></span>
+                                                    <span className={`font-bold uppercase text-[10px] ${getStatusColor(inquiry.status)}`}>{inquiry.status}</span>
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 text-right">
