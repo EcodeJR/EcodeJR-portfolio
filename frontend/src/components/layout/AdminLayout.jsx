@@ -56,11 +56,11 @@ const AdminLayout = ({ children }) => {
                     <div className="px-2 space-y-3">
                         <Link to="/settings" className="flex items-center gap-4 text-slate-500 hover:text-primary transition-colors text-xs font-display">
                             <span className="material-symbols-outlined text-lg">settings_input_component</span>
-                            <span>PROTOCOL_SETTINGS</span>
+                            <span>SETTINGS</span>
                         </Link>
                         <button onClick={handleLogout} className="flex items-center gap-4 text-red-500/70 hover:text-red-500 transition-colors text-xs font-display w-full text-left">
                             <span className="material-symbols-outlined text-lg">power_settings_new</span>
-                            <span>TERMINATE_SESSION</span>
+                            <span>LOGOUT</span>
                         </button>
                     </div>
                     <div className="p-4 bg-charcoal/80 border border-white/5 rounded-2xl flex items-center gap-4">

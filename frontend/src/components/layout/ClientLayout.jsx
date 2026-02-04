@@ -41,7 +41,7 @@ const ClientLayout = ({ children }) => {
                 <nav className="flex flex-col gap-4 p-4 flex-1 overflow-y-auto">
                     <NavLink to="/client/dashboard" className={({ isActive }) => isActive ? activeItem : normalItem}>
                         <span className="material-symbols-outlined text-[20px]">grid_view</span>
-                        <p className="text-xs font-bold uppercase tracking-widest hidden lg:block">System_Root</p>
+                        <p className="text-xs font-bold uppercase tracking-widest hidden lg:block">Dashboard</p>
                     </NavLink>
                     <NavLink to="/client/messages" className={({ isActive }) => isActive ? activeItem : normalItem}>
                         <span className="material-symbols-outlined text-[20px]">terminal</span>
@@ -82,7 +82,7 @@ const ClientLayout = ({ children }) => {
                 <div className="flex flex-col h-full p-10 pt-24 gap-8">
                     <p className="text-[10px] uppercase font-bold text-slate-500 font-mono tracking-[0.3em] border-b border-white/5 pb-4">Nexus_Navigation</p>
                     <nav className="flex flex-col gap-6">
-                        <Link to="/client/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">System_Root</Link>
+                        <Link to="/client/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Dashboard</Link>
                         <Link to="/client/messages" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Messages</Link>
                         <Link to="/client/files" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Archives</Link>
                         <Link to="/settings" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Settings</Link>
