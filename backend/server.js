@@ -14,9 +14,39 @@ connectDB();
 
 const app = express();
 
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+const hpp = require('hpp');
+const { globalLimiter } = require('./middleware/rateLimiter');
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Rate Limiting
+app.use('/api', globalLimiter);
+
+// Express 5 compatibility fix for express-mongo-sanitize
+// Express 5 redefined req.query as a getter, making it immutable.
+// This middleware makes it mutable again so sanitization can work.
+app.use((req, res, next) => {
+    Object.defineProperty(req, 'query', {
+        value: { ...req.query },
+        writable: true,
+        enumerable: true,
+        configurable: true
+    });
+    next();
+});
+
+// Data Sanitization against NoSQL query injection
+app.use(mongoSanitize());
+
+// Data Sanitization against XSS
+app.use(xss());
+
+// Prevent HTTP Parameter Pollution
+app.use(hpp());
 
 // CORS Configuration
 const corsOptions = {
@@ -36,7 +66,7 @@ const corsOptions = {
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'], // Added X-Requested-With for extra security
     exposedHeaders: ['Content-Range', 'X-Content-Range'],
     maxAge: 86400 // 24 hours
 };
@@ -44,7 +74,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" },
-    contentSecurityPolicy: false, // Disable CSP for development to prevent image blocking
+    contentSecurityPolicy: process.env.NODE_ENV === 'production' ? undefined : false,
 }));
 
 if (process.env.NODE_ENV === 'development') {

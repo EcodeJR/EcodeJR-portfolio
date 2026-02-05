@@ -8,8 +8,9 @@ const {
     deleteInquiry,
 } = require('../controllers/inquiryController');
 const { protect, authorize } = require('../middleware/auth');
+const { inquiryLimiter } = require('../middleware/rateLimiter');
 
-router.post('/', createInquiry);
+router.post('/', inquiryLimiter, createInquiry);
 
 router.use(protect, authorize('admin'));
 

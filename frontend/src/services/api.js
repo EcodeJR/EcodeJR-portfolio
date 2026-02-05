@@ -29,6 +29,12 @@ api.interceptors.response.use(
             // Optional: Redirect to login page
             // window.location.href = '/login';
         }
+
+        if (error.response && error.response.status === 429) {
+            // Handle rate limiting
+            console.error('Rate limit exceeded:', error.response.data.message);
+            // You could trigger a toast notification here if a toast library is available
+        }
         return Promise.reject(error);
     }
 );
