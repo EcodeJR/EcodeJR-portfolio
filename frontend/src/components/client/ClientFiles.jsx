@@ -110,21 +110,21 @@ const ClientFiles = ({ projectId }) => {
                 {files.length > 0 ? (
                     <div className="space-y-4">
                         {files.map((file) => (
-                            <div key={file._id} className="group flex items-center justify-between p-4 bg-surface-dark/40 border border-white/5 hover:border-primary/20 transition-all rounded-sm">
-                                <div className="flex items-center gap-4">
+                            <div key={file._id} className="group flex items-center justify-between p-4 bg-surface-dark/40 border border-white/5 hover:border-primary/20 transition-all rounded-sm gap-3">
+                                <div className="flex items-center gap-4 min-w-0 flex-1">
                                     <div className="size-10 bg-black/40 border border-white/5 flex items-center justify-center text-slate-600 group-hover:text-primary transition-colors">
                                         <span className="material-symbols-outlined">description</span>
                                     </div>
-                                    <div className="min-w-0">
-                                        <p className="text-xs font-bold text-white uppercase tracking-widest truncate max-w-[150px] lg:max-w-none">{file.fileName}</p>
+                                    <div className="min-w-0 flex-1">
+                                        <p className="text-xs font-bold text-white uppercase tracking-widest truncate" title={file.fileName}>{file.fileName}</p>
                                         <p className="text-[9px] font-mono text-slate-500 uppercase flex gap-2 items-center mt-1">
                                             <span>{(file.fileSize / 1024).toFixed(1)} KB</span>
                                             <span className="size-0.5 bg-slate-700 rounded-full"></span>
-                                            <span>{new Date(file.createdAt).toLocaleDateString()}</span>
+                                            <span className="truncate">{new Date(file.createdAt).toLocaleDateString()}</span>
                                         </p>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 shrink-0 ml-3">
                                     {(user?.role === 'admin' || file.uploadedBy === user?._id) && (
                                         <button
                                             onClick={() => handleDeleteFile(file._id, file.fileName)}

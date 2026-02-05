@@ -63,7 +63,7 @@ const Register = () => {
                 <div className="p-8 border-b border-white/5 bg-white/[0.02]">
                     <div className="flex justify-between items-end mb-8">
                         <div>
-                            <h2 className="text-white text-lg font-bold tracking-widest uppercase">REGISTER_NEW_NODE</h2>
+                            <h2 className="text-white text-lg font-bold tracking-wide uppercase">REGISTER</h2>
                             <p className="text-slate-500 text-[10px] font-mono mt-1">ESTABLISHING SECURE HANDSHAKE...</p>
                         </div>
                         <div className="text-right">

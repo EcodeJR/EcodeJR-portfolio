@@ -63,10 +63,10 @@ const Contact = () => {
                         <span className="size-2 rounded-full bg-primary animate-pulse"></span>
                         <p className="text-primary text-xs font-bold tracking-[0.2em] uppercase">Status: Available_for_Inquiry</p>
                     </div>
-                    <h1 className="text-white text-3xl sm:text-5xl font-black leading-tight tracking-tighter uppercase cursor-default">
-                        Initiate_Contact_Sequence
+                    <h1 className="text-white text-2xl sm:text-5xl font-black leading-tight tracking-tighter uppercase cursor-default">
+                        Initiate_Contact
                     </h1>
-                    <p className="text-slate-500 text-sm font-medium">BETA_VERSION: 4.0.1 // ESTABLISHING SECURE CONNECTION...</p>
+                    <p className="text-slate-500 text-sm font-medium">ESTABLISHING SECURE CONNECTION...</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -153,8 +153,8 @@ const Contact = () => {
 
                         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
                             <div className="flex flex-col gap-4">
-                                <label className="text-white text-xs font-black tracking-widest uppercase flex items-center gap-2">
-                                    <span className="material-symbols-outlined text-sm">settings_input_component</span>
+                                <label className="text-white text-xs font-black tracking-widest uppercase flex flex-col md:flex-row item-start md:items-center gap-2">
+                                    <span className="material-symbols-outlined text-sm">project_type</span>
                                     Select_Mission_Type
                                 </label>
                                 <div className="flex flex-wrap gap-2">
@@ -248,7 +248,7 @@ const Contact = () => {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="group relative w-full overflow-hidden bg-primary text-white py-4 rounded font-black tracking-[0.4em] uppercase hover:shadow-[0_0_30px_rgba(242,108,13,0.5)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="group relative w-full overflow-hidden bg-primary text-sm md:text-2xl text-white py-4 rounded font-black tracking-[0.4em] uppercase hover:shadow-[0_0_30px_rgba(242,108,13,0.5)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     <span className="relative z-10 flex items-center justify-center gap-3">
                                         <span className={`material-symbols-outlined ${loading ? 'animate-spin' : 'animate-pulse'}`}>

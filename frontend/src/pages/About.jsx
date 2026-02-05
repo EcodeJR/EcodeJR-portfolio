@@ -10,12 +10,12 @@ const About = () => {
                 <div className="flex flex-col gap-2">
                     <div className="flex items-center gap-2">
                         <span className="size-2 rounded-full bg-primary animate-pulse"></span>
-                        <p className="text-primary text-xs font-bold tracking-[0.2em] uppercase">Status: Core_Extraction_Running</p>
+                        <p className="text-primary text-xs font-bold tracking-[0.2em] uppercase">Hello 👋, <br /> And Welcome</p>
                     </div>
                     <h1 className="text-white text-3xl sm:text-5xl font-black leading-tight tracking-tighter uppercase cursor-default">
-                        System_Profile_Deep_Scan
+                        System_Profile
                     </h1>
-                    <p className="text-slate-500 text-sm font-medium">INDEX: 001 // SOURCE: HUMAN_MODULE_V4 // ACCESS: PUBLIC</p>
+                    <p className="text-slate-500 text-sm font-medium">INDEX: 001 || SOURCE: HUMAN_MODULE || ACCESS: PUBLIC</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -103,7 +103,7 @@ const About = () => {
                                     <div className="bg-white/5 border border-white/10 p-5 rounded hover:shadow-[0_0_15px_rgba(242,108,13,0.4)] hover:border-primary/50 transition-all cursor-crosshair">
                                         <div className="flex justify-between items-start mb-2">
                                             <div>
-                                                <h4 className="text-white text-sm font-bold tracking-widest">FREELANCE_SYSTEM_ARCHITECT</h4>
+                                                <h4 className="text-white text-sm font-bold tracking-widest">FREELANCER</h4>
                                                 <p className="text-primary text-[10px] font-mono">ECODEJR</p>
                                             </div>
                                             <span className="text-slate-500 text-[10px] font-mono">2021 — PRESENT</span>
@@ -122,7 +122,7 @@ const About = () => {
                                             </div>
                                             <span className="text-slate-500 text-[10px] font-mono">2022 — 2023</span>
                                         </div>
-                                        <p className="text-slate-400 text-xs leading-relaxed">Built interactive UI/UX and  Engineered secure backend systems and communication protocols using TypeScript and Node.js.</p>
+                                        <p className="text-slate-400 text-xs leading-relaxed">Built interactive UI/UX and  Engineered secure backend systems and communication protocols using JavaScript and Node.js.</p>
                                     </div>
                                 </div>
                                 <div className="relative group">
@@ -135,7 +135,7 @@ const About = () => {
                                             </div>
                                             <span className="text-slate-500 text-[10px] font-mono">2023 — 2025</span>
                                         </div>
-                                        <p className="text-slate-400 text-xs leading-relaxed">BSc in Computer Science. Specialized in High-Performance Computing and Distributed Systems.</p>
+                                        <p className="text-slate-400 text-xs leading-relaxed">BSc in Computer Science. Studied High-Performance Computing, Distributed Systems and Web Development.</p>
                                     </div>
                                 </div>
                             </div>

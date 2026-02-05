@@ -32,9 +32,9 @@ const ServicesSection = () => {
         <section className="py-32 border-t border-white/5" id="services">
             <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-                    <div className="max-w-xl">
+                    <div className="w-full md:max-w-xl">
                         <h2 className="text-primary font-bold text-xs tracking-[0.5em] uppercase mb-6">Capabilities_</h2>
-                        <h3 className="text-3xl md:text-4xl lg:text-6xl font-display font-bold tracking-tighter uppercase leading-none">High-Tech<br />Implementations</h3>
+                        <h3 className="text-2xl md:text-4xl lg:text-6xl font-display font-bold tracking-tighter uppercase leading-none">High-Tech<br />Implementations</h3>
                     </div>
                     <p className="text-zinc-500 text-sm max-w-xs font-medium uppercase tracking-wider">
                         Modular systems designed for speed, security, and absolute visual precision.

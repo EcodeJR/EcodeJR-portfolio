@@ -211,14 +211,14 @@ const Files = () => {
                                             file.name.endsWith('zip') ? 'folder_zip' : 'description'}
                                 </span>
                             </div>
-                            <div>
-                                <h4 className="text-white text-xs font-bold truncate tracking-widest uppercase mb-2 group-hover:text-primary transition-colors">{file.name}</h4>
-                                <div className="flex justify-between items-center">
-                                    <p className="text-slate-500 text-[9px] font-mono tracking-tighter uppercase">
+                            <div className="min-w-0 flex-1">
+                                <h4 className="text-white text-xs font-bold truncate tracking-widest uppercase mb-2 group-hover:text-primary transition-colors" title={file.name}>{file.name}</h4>
+                                <div className="flex justify-between items-center whitespace-nowrap overflow-hidden">
+                                    <p className="text-slate-500 text-[9px] font-mono tracking-tighter uppercase truncate">
                                         {(file.size / 1024).toFixed(1)} KB // {new Date(file.uploadedAt).toLocaleDateString().replace(/\//g, '.')}
                                         {file.system === 2 && <span className="ml-2 text-cyan-500/50">[LEGACY]</span>}
                                     </p>
-                                    <span className="text-[8px] font-mono text-primary/60 border border-primary/20 px-1 rounded uppercase">Stored</span>
+                                    <span className="text-[8px] font-mono text-primary/60 border border-primary/20 px-1 rounded uppercase shrink-0">Stored</span>
                                 </div>
                             </div>
                         </div>

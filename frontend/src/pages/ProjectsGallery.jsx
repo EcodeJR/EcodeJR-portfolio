@@ -105,13 +105,13 @@ const ProjectsGallery = () => {
                 </aside>
 
                 <div className="flex-1 flex flex-col gap-8">
-                    <div className="flex flex-col lg:flex-row justify-between items-end gap-6 border-b border-white/10 pb-8">
+                    <div className="flex flex-col lg:flex-row justify-between items-start gap-6 border-b border-white/10 pb-8">
                         <div className="flex flex-col gap-2">
-                            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary font-bold">Directory_v2.0</span>
-                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter italic">PROJECTS_GALLERY</h2>
+                            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary font-bold">Directory</span>
+                            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter italic">PROJECTS_GALLERY</h2>
                             <p className="font-mono text-[11px] text-slate-500 flex items-center gap-2">
                                 <span className="w-1.5 h-1.5 bg-primary animate-pulse rounded-full"></span>
-                                STATUS: 24_OBJECTS_SYNCED
+                                STATUS: OBJECTS_SYNCED
                             </p>
                         </div>
                         <div className="flex items-center gap-3">

@@ -61,6 +61,34 @@ const AdminClientProjects = () => {
         }
     };
 
+    const handleDeleteFile = async (file) => {
+        if (!selectedProject) return;
+        if (!window.confirm(`Are you sure you want to delete "${file.name}"? This action cannot be undone.`)) return;
+
+        try {
+            if (file.system === 2) {
+                // System 2 - Standalone File document
+                await api.delete(`/files/${file._id}`);
+            } else {
+                // System 1 - Embedded in ClientProject
+                await api.delete(`/projects/${selectedProject._id}/files/${file._id}`);
+            }
+
+            // Refresh project data
+            const res = await api.get(`/projects/${selectedProject._id}`);
+            setSelectedProject(res.data.data);
+
+            // Also update main projects list for counts
+            const listRes = await api.get('/projects');
+            setProjects(listRes.data.data);
+
+            alert('File deleted successfully.');
+        } catch (err) {
+            console.error('Deletion failed:', err);
+            alert(err.response?.data?.message || 'Failed to delete asset');
+        }
+    };
+
     if (loading) return <div className="p-12 text-center text-primary font-mono animate-pulse">Scanning Neural Databanks...</div>;
 
     return (
@@ -219,26 +247,36 @@ const AdminClientProjects = () => {
                                     </div>
                                     <div className="space-y-4">
                                         {selectedProject.files?.map((file) => (
-                                            <div key={file._id} className="p-4 bg-black/40 border border-white/5 hover:border-primary/30 transition-all rounded-sm flex items-center justify-between gap-4 group">
-                                                <div className="flex items-center gap-3 min-w-0">
-                                                    <span className="material-symbols-outlined text-slate-600 group-hover:text-primary transition-colors text-lg">
+                                            <div key={file._id} className="p-4 bg-black/40 border border-white/5 hover:border-primary/30 transition-all rounded-sm flex items-center justify-between gap-3 group">
+                                                <div className="flex items-center gap-3 min-w-0 flex-1">
+                                                    <span className="material-symbols-outlined text-slate-600 group-hover:text-primary transition-colors text-lg shrink-0">
                                                         {file.name?.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? 'image' : 'description'}
                                                     </span>
-                                                    <div className="truncate">
+                                                    <div className="min-w-0 flex-1">
                                                         <p className="text-[10px] font-bold text-white uppercase tracking-wider truncate" title={file.name}>{file.name}</p>
-                                                        <p className="text-[8px] font-mono text-slate-600 uppercase">
+                                                        <p className="text-[8px] font-mono text-slate-600 uppercase whitespace-nowrap">
                                                             {(file.size / 1024).toFixed(0)}KB // {file.system === 2 ? 'EXT' : 'CORE'}
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <a
-                                                    href={getSafeDownloadUrl(file.fileUrl || `${import.meta.env.VITE_API_URL}/upload/raw/${file.mediaId}`, file.name)}
-                                                    target="_blank"
-                                                    rel="noreferrer"
-                                                    className="size-8 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-black flex items-center justify-center transition-all shrink-0"
-                                                >
-                                                    <span className="material-symbols-outlined text-base">download</span>
-                                                </a>
+                                                <div className="flex items-center gap-1.5 shrink-0">
+                                                    <button
+                                                        onClick={() => handleDeleteFile(file)}
+                                                        className="size-8 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
+                                                        title="Delete Asset"
+                                                    >
+                                                        <span className="material-symbols-outlined text-base">delete</span>
+                                                    </button>
+                                                    <a
+                                                        href={getSafeDownloadUrl(file.fileUrl || `${import.meta.env.VITE_API_URL}/upload/raw/${file.mediaId}`, file.name)}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className="size-8 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-black flex items-center justify-center transition-all"
+                                                        title="Download Asset"
+                                                    >
+                                                        <span className="material-symbols-outlined text-base">download</span>
+                                                    </a>
+                                                </div>
                                             </div>
                                         ))}
                                         {(!selectedProject.files || selectedProject.files.length === 0) && (
