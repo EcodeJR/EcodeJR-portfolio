@@ -29,9 +29,16 @@ import ClientMessages from './pages/client/Messages';
 import ClientFiles from './pages/client/Files';
 import Settings from './pages/Settings';
 
+import AnalyticsTracker from './components/AnalyticsTracker';
+import { initGA } from './utils/analytics';
+
+// Initialize GA4
+initGA();
+
 function App() {
   return (
     <div className="min-h-screen bg-background-dark text-white">
+      <AnalyticsTracker />
       <NotificationProvider>
         <AuthProvider>
           <Routes>
