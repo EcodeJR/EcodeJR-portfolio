@@ -207,7 +207,99 @@ const ClientDashboard = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Review Submission Section */}
+            <div className="tech-border bg-surface-dark/20 p-8 mb-12 relative overflow-hidden">
+                <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
+                    <h3 className="text-white text-xs font-bold uppercase tracking-[0.4em] font-mono">Submit_Performance_Review.exe</h3>
+                    <div className="flex items-center gap-2">
+                        <span className="size-2 rounded-full bg-primary animate-pulse"></span>
+                        <span className="text-[10px] font-mono text-slate-500 uppercase">Status: Awaiting_Feedback</span>
+                    </div>
+                </div>
+
+                <ReviewForm />
+            </div>
         </div>
+    );
+};
+
+const ReviewForm = () => {
+    const [rating, setRating] = useState(5);
+    const [review, setReview] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            await api.post('/testimonials', { rating, review });
+            setSubmitted(true);
+        } catch (err) {
+            console.error('Error submitting review:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (submitted) {
+        return (
+            <div className="py-12 text-center flex flex-col items-center gap-4 animate-in fade-in slide-in-from-bottom-4">
+                <div className="size-16 rounded-full bg-primary/20 border border-primary flex items-center justify-center text-primary mb-2">
+                    <span className="material-symbols-outlined text-3xl">verified</span>
+                </div>
+                <h4 className="text-white font-bold uppercase tracking-widest italic">Review_Logged_Successfully</h4>
+                <p className="text-slate-500 font-mono text-xs uppercase tracking-wider max-w-md mx-auto">Your feedback has been encrypted and sent to Central Command for validation. It will be visible once approved.</p>
+                <button
+                    onClick={() => setSubmitted(false)}
+                    className="text-primary font-mono text-[10px] uppercase tracking-widest mt-4 hover:underline"
+                >
+                    Submit_Another_Entry
+                </button>
+            </div>
+        );
+    }
+
+    return (
+        <form onSubmit={handleSubmit} className="space-y-8 max-w-2xl">
+            <div className="space-y-4">
+                <label className="block text-[10px] font-mono tracking-widest text-slate-500 uppercase">Performance_Rating (1-5)</label>
+                <div className="flex gap-4">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                            key={star}
+                            type="button"
+                            onClick={() => setRating(star)}
+                            className={`size-10 border transition-all flex items-center justify-center ${rating >= star
+                                    ? 'bg-primary border-primary text-black shadow-[0_0_15px_rgba(255,95,31,0.4)]'
+                                    : 'bg-transparent border-white/10 text-slate-600 hover:border-primary/50'
+                                }`}
+                        >
+                            <span className="material-symbols-outlined text-xl">star</span>
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            <div className="space-y-4">
+                <label className="block text-[10px] font-mono tracking-widest text-slate-500 uppercase">Review_Data_String</label>
+                <textarea
+                    required
+                    value={review}
+                    onChange={(e) => setReview(e.target.value)}
+                    placeholder="ENTER_FEEDBACK_TEXT_HERE..."
+                    className="w-full h-32 bg-black/40 border border-white/10 p-4 text-xs font-mono text-white placeholder:text-slate-700 focus:border-primary/50 focus:outline-none transition-all resize-none"
+                />
+            </div>
+
+            <button
+                disabled={loading}
+                className="flex items-center justify-center gap-2 h-12 px-10 bg-primary text-black text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white transition-all shadow-[0_0_30px_rgba(255,95,31,0.2)] disabled:opacity-50"
+            >
+                {loading ? 'UPLOADING...' : 'TRANSMIT_REVIEW'}
+            </button>
+        </form>
     );
 };
 

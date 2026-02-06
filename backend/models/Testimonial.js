@@ -8,6 +8,10 @@ const testimonialSchema = new mongoose.Schema({
     },
     clientRole: String,
     clientCompany: String,
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+    },
     clientPhoto: String,
     rating: {
         type: Number,

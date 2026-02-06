@@ -27,6 +27,7 @@ import AdminInquiries from './pages/admin/Inquiries';
 import AdminProjects from './pages/admin/Projects';
 import AdminProjectForm from './pages/admin/ProjectForm';
 import AdminClientProjects from './pages/admin/AdminClientProjects';
+import AdminTestimonials from './pages/admin/AdminTestimonials';
 import ClientMessages from './pages/client/Messages';
 import ClientFiles from './pages/client/Files';
 import Settings from './pages/Settings';
@@ -121,6 +122,14 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={['admin']}>
                   <AdminLayout><AdminClientProjects /></AdminLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/testimonials"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminLayout><AdminTestimonials /></AdminLayout>
                 </ProtectedRoute>
               }
             />

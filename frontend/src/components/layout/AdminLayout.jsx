@@ -50,6 +50,10 @@ const AdminLayout = ({ children }) => {
                             <span className="material-symbols-outlined text-xl">sync</span>
                             <span className="text-sm font-display tracking-tight">CLIENT_SYNC</span>
                         </NavLink>
+                        <NavLink to="/admin/testimonials" className={({ isActive }) => isActive ? activeItem : normalItem}>
+                            <span className="material-symbols-outlined text-xl">format_quote</span>
+                            <span className="text-sm font-display tracking-tight">REVIEWS</span>
+                        </NavLink>
                     </nav>
                 </div>
                 <div className="space-y-6">
@@ -100,6 +104,7 @@ const AdminLayout = ({ children }) => {
                         <Link to="/admin/inquiries" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Inquiries</Link>
                         <Link to="/admin/projects" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Portfolio</Link>
                         <Link to="/admin/client-projects" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Client_Sync</Link>
+                        <Link to="/admin/testimonials" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Reviews</Link>
                         <Link to="/settings" onClick={() => setIsMobileMenuOpen(false)} className="text-3xl font-black italic tracking-tighter hover:text-primary transition-colors uppercase">Settings</Link>
                     </nav>
                     <div className="mt-auto border-t border-white/5 pt-8">
