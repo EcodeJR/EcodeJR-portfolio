@@ -54,3 +54,18 @@ export const getSafeDownloadUrl = (path, fileName = '') => {
 
     return url;
 };
+
+/**
+ * Ensures a URL is absolute by prefixing it with https:// if it lacks a protocol.
+ * This prevents links from being treated as relative to the current site.
+ * 
+ * @param {string} url - The URL to check
+ * @returns {string} - The absolute URL
+ */
+export const ensureAbsoluteUrl = (url) => {
+    if (!url) return '';
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('mailto:') || url.startsWith('tel:')) {
+        return url;
+    }
+    return `https://${url}`;
+};

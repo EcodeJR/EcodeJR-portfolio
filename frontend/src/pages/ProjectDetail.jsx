@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import api from '../services/api';
-import { getSafeUrl } from '../utils/urlHelper';
+import { getSafeUrl, ensureAbsoluteUrl } from '../utils/urlHelper';
 import Loader from '../components/common/Loader';
 
 const ProjectDetail = () => {
@@ -15,6 +15,7 @@ const ProjectDetail = () => {
             try {
                 const res = await api.get(`/portfolio/${id}`);
                 setProject(res.data.data);
+                console.log(res.data.data);
             } catch (err) {
                 console.error("Failed to load project", err);
             } finally {
@@ -60,12 +61,12 @@ const ProjectDetail = () => {
                                     </div>
                                     <div className="flex flex-wrap gap-4 relative z-10">
                                         {project.projectUrl && (
-                                            <a href={project.projectUrl} target="_blank" rel="noopener noreferrer" className="flex min-w-[160px] cursor-pointer items-center justify-center rounded h-12 px-6 bg-primary text-white text-base font-bold uppercase tracking-wider hover:scale-105 transition-transform hover:shadow-[0_0_20px_rgba(255,95,0,0.4)]">
+                                            <a href={ensureAbsoluteUrl(project.projectUrl)} target="_blank" rel="noopener noreferrer" className="flex min-w-[160px] cursor-pointer items-center justify-center rounded h-12 px-6 bg-primary text-white text-base font-bold uppercase tracking-wider hover:scale-105 transition-transform hover:shadow-[0_0_20px_rgba(255,95,0,0.4)]">
                                                 <span className="truncate">Launch Live Demo</span>
                                             </a>
                                         )}
                                         {project.repoUrl && (
-                                            <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="flex min-w-[160px] cursor-pointer items-center justify-center rounded h-12 px-6 bg-transparent border-2 border-primary text-primary text-base font-bold uppercase tracking-wider hover:bg-primary/10 transition-colors">
+                                            <a href={ensureAbsoluteUrl(project.repoUrl)} target="_blank" rel="noopener noreferrer" className="flex min-w-[160px] cursor-pointer items-center justify-center rounded h-12 px-6 bg-transparent border-2 border-primary text-primary text-base font-bold uppercase tracking-wider hover:bg-primary/10 transition-colors">
                                                 <span className="truncate">Source Code</span>
                                             </a>
                                         )}
@@ -116,7 +117,7 @@ const ProjectDetail = () => {
                                         </div>
                                         <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
                                             {project.repoUrl && (
-                                                <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 rounded-lg h-10 w-full bg-white/5 border border-white/10 text-white hover:border-primary transition-colors text-sm font-bold uppercase">
+                                                <a href={ensureAbsoluteUrl(project.repoUrl)} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 rounded-lg h-10 w-full bg-white/5 border border-white/10 text-white hover:border-primary transition-colors text-sm font-bold uppercase">
                                                     <span className="material-symbols-outlined text-lg">code</span>
                                                     GitHub Repo
                                                 </a>
@@ -160,16 +161,16 @@ const ProjectDetail = () => {
                                                     <span className="text-primary">CORE_SYSTEM</span>
                                                 </div>
                                                 <pre className="text-primary/80 overflow-x-auto custom-scrollbar"><code>{`const initRenderer = () => {
-  const gpu = new WebGL2({
-    antiAlias: true,
-    precision: 'highp'
-  });
-  
-  // Glitch vertex shader
-  gpu.inject(glitchShader);
-  
-  return gpu.mount('#canvas-root');
-}`}</code></pre>
+                                                const gpu = new WebGL2({
+                                                    antiAlias: true,
+                                                    precision: 'highp'
+                                                });
+                                                
+                                                // Glitch vertex shader
+                                                gpu.inject(glitchShader);
+                                                
+                                                return gpu.mount('#canvas-root');
+                                                }`}</code></pre>
                                             </div>
                                         </div>
                                         <div className="rounded-xl overflow-hidden border border-white/10 group relative h-64 md:h-auto">
