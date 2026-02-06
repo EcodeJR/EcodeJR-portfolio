@@ -109,9 +109,9 @@ const Login = () => {
                         </button>
 
                         <div className="flex items-center justify-between pt-4">
-                            <a className="text-[9px] font-mono tracking-widest text-slate-500 hover:text-primary transition-colors uppercase" href="#">
+                            <Link className="text-[9px] font-mono tracking-widest text-slate-500 hover:text-primary transition-colors uppercase" to="/forgot-password">
                                 &gt; FORGOT_KEY?
-                            </a>
+                            </Link>
                             <Link to="/register" className="text-[9px] font-mono tracking-widest text-slate-500 hover:text-primary transition-colors uppercase">
                                 &gt; CREATE_ID
                             </Link>

@@ -12,6 +12,8 @@ import SettingsLayoutWrapper from './components/layout/SettingsLayoutWrapper';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import ProjectsGallery from './pages/ProjectsGallery';
 import ProjectDetail from './pages/ProjectDetail';
 import Contact from './pages/Contact';
@@ -46,6 +48,8 @@ function App() {
             <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
             <Route path="/login" element={<PublicLayout><Login /></PublicLayout>} />
             <Route path="/register" element={<PublicLayout><Register /></PublicLayout>} />
+            <Route path="/forgot-password" element={<PublicLayout><ForgotPassword /></PublicLayout>} />
+            <Route path="/reset-password/:token" element={<PublicLayout><ResetPassword /></PublicLayout>} />
             <Route path="/projects" element={<PublicLayout><ProjectsGallery /></PublicLayout>} />
             <Route path="/projects/:id" element={<PublicLayout><ProjectDetail /></PublicLayout>} />
             <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
