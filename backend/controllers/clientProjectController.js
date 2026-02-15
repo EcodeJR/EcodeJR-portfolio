@@ -209,6 +209,7 @@ exports.createProjectFromInquiry = async (req, res) => {
                 email: inquiry.email.toLowerCase(),
                 password: tempPassword,
                 role: 'client',
+                isVerified: false,
                 phone: inquiry.phone,
                 company: inquiry.company
             });
@@ -263,7 +264,7 @@ exports.uploadProjectFile = async (req, res) => {
         }
 
         // Upload to Cloudinary
-        // Use "auto" to let Cloudinary determine the best bucket (images, raw, etc.)
+        // Used "auto" to let Cloudinary determine the best bucket (images, raw, etc.)
         const result = await uploadFromBuffer(req.file.buffer, 'client_assets', 'auto', req.file.originalname);
 
         // Add to project files

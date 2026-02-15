@@ -12,20 +12,32 @@ exports.register = async (req, res) => {
         const { name, email, password, phone, company, role } = req.body;
 
         // Check if user exists
-        const userExists = await User.findOne({ email });
-        if (userExists) {
-            return res.status(400).json({ message: 'User already exists' });
-        }
+        let user = await User.findOne({ email });
 
-        // Create user
-        const user = await User.create({
-            name,
-            email,
-            password,
-            phone,
-            company,
-            role: role || 'client', // Use provided role or default to client
-        });
+        if (user) {
+            if (user.isVerified) {
+                return res.status(400).json({ message: 'User already exists' });
+            } else {
+                // Claim the unverified/shadow account
+                user.name = name;
+                user.password = password;
+                user.phone = phone || user.phone;
+                user.company = company || user.company;
+                user.isVerified = true;
+                await user.save();
+            }
+        } else {
+            // Create user
+            user = await User.create({
+                name,
+                email,
+                password,
+                phone,
+                company,
+                role: role || 'client',
+                isVerified: true,
+            });
+        }
 
         res.status(201).json({
             success: true,

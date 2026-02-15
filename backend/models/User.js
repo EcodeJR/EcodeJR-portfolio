@@ -29,6 +29,10 @@ const userSchema = new mongoose.Schema({
     phone: String,
     company: String,
     lastLogin: Date,
+    isVerified: {
+        type: Boolean,
+        default: true,
+    },
     passwordResetToken: String,
     passwordResetExpires: Date,
 }, {
