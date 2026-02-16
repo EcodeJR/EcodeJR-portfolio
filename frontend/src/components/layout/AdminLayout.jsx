@@ -68,14 +68,14 @@ const AdminLayout = ({ children }) => {
                         </button>
                     </div>
                     <div className="p-4 bg-charcoal/80 border border-white/5 rounded-2xl flex items-center gap-4">
-                        <div className="relative">
+                        <div className="relative shrink-0">
                             <div className="size-10 rounded-full border border-primary/50 bg-white/10 flex items-center justify-center">
                                 <span className="material-symbols-outlined">person</span>
                             </div>
                             <div className="absolute -bottom-1 -right-1 size-3 bg-primary rounded-full border-2 border-charcoal"></div>
                         </div>
-                        <div className="overflow-hidden">
-                            <p className="text-xs font-bold text-white tracking-tight uppercase truncate">{user?.name || 'Admin'}</p>
+                        <div className="min-w-0 flex-1">
+                            <p className="text-xs font-bold text-white tracking-tight uppercase truncate" title={user?.name}>{user?.name || 'Admin'}</p>
                             <p className="text-[9px] text-slate-500 truncate">NEURAL_ARCHITECT v4.2</p>
                         </div>
                     </div>
@@ -83,16 +83,24 @@ const AdminLayout = ({ children }) => {
             </aside>
 
             {/* Mobile Navigation */}
-            <div className="md:hidden fixed top-6 left-6 right-6 z-[60] flex items-center justify-between">
-                <Link to="/" className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white shadow-lg">
-                    <span className="material-symbols-outlined text-xl">terminal</span>
+            <div className="md:hidden fixed top-0 left-0 right-0 z-[60] flex items-center justify-between p-6 bg-background-dark/80 backdrop-blur-lg border-b border-white/5">
+                <Link to="/" className="relative group shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white rotate-3 group-hover:rotate-0 transition-transform">
+                        <span className="material-symbols-outlined text-xl">terminal</span>
+                    </div>
                 </Link>
-                <button
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="p-3 bg-black/40 backdrop-blur-md border border-white/10 rounded-full text-white shadow-lg"
-                >
-                    <span className="material-symbols-outlined">{isMobileMenuOpen ? 'close' : 'menu'}</span>
-                </button>
+                <div className="flex items-center gap-3">
+                    <div className="text-right hidden sm:block">
+                        <p className="text-[9px] font-bold text-white uppercase tracking-tighter truncate max-w-[100px]">{user?.name || 'Admin'}</p>
+                        <p className="text-[8px] text-primary tracking-widest leading-none">ROOT_ACCESS</p>
+                    </div>
+                    <button
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        className="p-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-white transition-all active:scale-95"
+                    >
+                        <span className="material-symbols-outlined text-xl">{isMobileMenuOpen ? 'close' : 'menu'}</span>
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Drawer */}

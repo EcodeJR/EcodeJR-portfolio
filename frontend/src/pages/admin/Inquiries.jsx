@@ -54,9 +54,9 @@ const Inquiries = () => {
     );
 
     return (
-        <div className="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden h-full">
+        <div className="flex-1 flex flex-col md:flex-row md:overflow-hidden md:h-full">
             {/* List */}
-            <div className="w-full md:w-[400px] border-b md:border-b-0 md:border-r border-white/5 flex flex-col bg-background-dark/30 backdrop-blur-sm shrink-0 h-[400px] md:h-auto">
+            <div className="w-full md:w-[350px] lg:w-[400px] border-b md:border-b-0 md:border-r border-white/5 flex flex-col bg-background-dark/30 backdrop-blur-sm shrink-0 md:h-auto">
                 {/* Header */}
                 <div className="h-16 border-b border-white/5 flex items-center px-6 shrink-0">
                     <h2 className="text-xl font-black tracking-tighter uppercase">Inquiry_Inbox</h2>
@@ -66,17 +66,22 @@ const Inquiries = () => {
                     <button className="px-4 py-4 text-xs font-bold border-b-2 border-primary text-primary tracking-widest uppercase">All_Signals</button>
                 </div>
                 {/* Items */}
-                <div className="flex-1 overflow-y-auto custom-scrollbar p-4 flex flex-col gap-3">
+                <div className="h-auto md:flex-1 md:overflow-y-auto custom-scrollbar p-4 flex flex-col gap-4">
                     {inquiries.map(inquiry => (
                         <div
                             key={inquiry._id}
                             onClick={() => setSelectedInquiry(inquiry)}
-                            className={`p-4 rounded-xl relative overflow-hidden group hover:border-primary/50 cursor-pointer transition-all border ${selectedInquiry?._id === inquiry._id ? 'bg-white/10 border-primary shadow-[0_0_20px_rgba(249,107,6,0.1)]' : 'bg-white/5 border-white/10'}`}
+                            className={`p-5 sm:p-6 rounded-2xl relative overflow-hidden group hover:border-primary/50 cursor-pointer transition-all border min-h-[140px] flex flex-col justify-between ${selectedInquiry?._id === inquiry._id ? 'bg-white/10 border-primary shadow-[0_0_20px_rgba(249,107,6,0.1)]' : 'bg-white/5 border-white/10'}`}
                         >
                             <div className="flex flex-col gap-2">
                                 <p className="text-[10px] text-slate-500 font-mono tracking-tighter">ID: {inquiry._id.substring(0, 8)}</p>
                                 <h3 className="text-sm font-bold text-white group-hover:text-primary transition-colors uppercase truncate">{inquiry.subject || inquiry.name}</h3>
-                                <p className="text-[10px] text-slate-400 uppercase tracking-widest">{inquiry.serviceInterested}</p>
+                                <div className="flex items-center gap-2 overflow-hidden">
+                                    <span className={`text-[8px] font-black px-2 py-0.5 rounded-full border shrink-0 ${inquiry.inquiryType === 'urgent' ? 'text-red-400 border-red-400/30 bg-red-400/10' : inquiry.inquiryType === 'consultation' ? 'text-blue-400 border-blue-400/30 bg-blue-400/10' : 'text-primary border-primary/30 bg-primary/10'}`}>
+                                        {inquiry.inquiryType?.toUpperCase() || 'PROJECT'}
+                                    </span>
+                                    <p className="text-[10px] text-slate-400 uppercase tracking-widest truncate">{inquiry.serviceInterested || inquiry.subject || 'GENERAL'}</p>
+                                </div>
                                 <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/5">
                                     <span className="text-[10px] text-slate-500 font-mono">{new Date(inquiry.createdAt).toLocaleDateString()}</span>
                                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase border ${getStatusColor(inquiry.status)}`}>{inquiry.status}</span>
@@ -89,84 +94,114 @@ const Inquiries = () => {
             </div>
 
             {/* Detail View */}
-            <div className="flex-1 bg-background-dark/10 overflow-y-auto relative custom-scrollbar p-8 lg:p-12">
+            <div className="flex-1 bg-background-dark/10 overflow-y-auto relative custom-scrollbar p-4 sm:p-8 lg:p-12">
                 {selectedInquiry ? (
-                    <div className="max-w-4xl mx-auto flex flex-col gap-10">
+                    <div className="max-w-4xl mx-auto flex flex-col gap-6 sm:gap-10">
                         {/* Summary */}
-                        <div className="flex flex-col gap-6">
-                            <div className="flex items-center gap-3">
+                        <div className="flex flex-col gap-4 sm:gap-6">
+                            <div className="flex flex-wrap items-center gap-3">
                                 <span className="bg-primary/20 text-primary px-3 py-1 text-[10px] font-bold rounded-full uppercase tracking-wider border border-primary/30">Active_Signal</span>
                                 <span className="text-[10px] text-slate-500 font-mono">T-STAMP: {new Date(selectedInquiry.createdAt).toISOString()}</span>
                             </div>
-                            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-white leading-none">{selectedInquiry.subject || 'INQUIRY_RECEIVED'}</h2>
+                            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-tight break-words">{selectedInquiry.subject || selectedInquiry.name || 'INQUIRY_RECEIVED'}</h2>
                         </div>
 
                         {/* Metadata Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="tech-card p-8 rounded-2xl bg-charcoal/50 border border-white/10 flex flex-col gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+                            <div className="tech-card p-6 sm:p-8 rounded-2xl bg-charcoal/50 border border-white/10 flex flex-col gap-6">
                                 <div className="flex items-center gap-3 border-b border-white/5 pb-4">
                                     <span className="material-symbols-outlined text-primary">person_search</span>
                                     <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Identity_Parameters</h4>
                                 </div>
                                 <div className="space-y-4">
-                                    <div className="flex flex-col gap-1">
+                                    <div className="flex flex-col gap-1 min-w-0">
                                         <span className="text-[9px] text-slate-500 uppercase font-black">Full_Name</span>
-                                        <span className="text-lg font-bold text-white">{selectedInquiry.name}</span>
+                                        <span className="text-base sm:text-lg font-bold text-white truncate" title={selectedInquiry.name}>{selectedInquiry.name}</span>
                                     </div>
-                                    <div className="flex flex-col gap-1">
+                                    <div className="flex flex-col gap-1 min-w-0">
                                         <span className="text-[9px] text-slate-500 uppercase font-black">Email_Endpoint</span>
-                                        <span className="text-sm font-bold font-mono text-primary truncate">{selectedInquiry.email}</span>
+                                        <span className="text-sm font-bold font-mono text-primary truncate" title={selectedInquiry.email}>{selectedInquiry.email}</span>
                                     </div>
                                     {selectedInquiry.phone && (
-                                        <div className="flex flex-col gap-1">
+                                        <div className="flex flex-col gap-1 min-w-0">
                                             <span className="text-[9px] text-slate-500 uppercase font-black">Comm_Line</span>
-                                            <span className="text-sm font-bold text-white">{selectedInquiry.phone}</span>
+                                            <span className="text-sm font-bold text-white truncate">{selectedInquiry.phone}</span>
                                         </div>
                                     )}
                                 </div>
                             </div>
 
-                            <div className="tech-card p-8 rounded-2xl bg-charcoal/50 border border-white/10 flex flex-col gap-6">
+                            <div className="tech-card p-6 sm:p-8 rounded-2xl bg-charcoal/50 border border-white/10 flex flex-col gap-6">
                                 <div className="flex items-center gap-3 border-b border-white/5 pb-4">
                                     <span className="material-symbols-outlined text-primary">analytics</span>
                                     <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Project_Context</h4>
                                 </div>
                                 <div className="space-y-4">
-                                    <div className="flex flex-col gap-1">
-                                        <span className="text-[9px] text-slate-500 uppercase font-black">Target_Service</span>
-                                        <span className="text-sm font-bold text-white uppercase">{selectedInquiry.serviceInterested}</span>
+                                    <div className="flex flex-col gap-1 min-w-0">
+                                        <span className="text-[9px] text-slate-500 uppercase font-black">Inquiry_Type</span>
+                                        <span className="text-sm font-bold text-white uppercase">{selectedInquiry.inquiryType || 'PROJECT'}</span>
                                     </div>
-                                    <div className="flex flex-col gap-1">
-                                        <span className="text-[9px] text-slate-500 uppercase font-black">Fiscal_Projection</span>
-                                        <span className="text-xl font-black text-primary">{selectedInquiry.budgetRange || selectedInquiry.budget || 'UNDETERMINED'}</span>
-                                    </div>
+                                    {selectedInquiry.inquiryType === 'project' || !selectedInquiry.inquiryType ? (
+                                        <>
+                                            <div className="flex flex-col gap-1 min-w-0">
+                                                <span className="text-[9px] text-slate-500 uppercase font-black">Target_Service</span>
+                                                <span className="text-sm font-bold text-white uppercase truncate" title={selectedInquiry.serviceInterested}>{selectedInquiry.serviceInterested}</span>
+                                            </div>
+                                            <div className="flex flex-col gap-1 min-w-0">
+                                                <span className="text-[9px] text-slate-500 uppercase font-black">Fiscal_Projection</span>
+                                                <span className="text-xl font-black text-primary truncate">{selectedInquiry.budgetRange || selectedInquiry.budget || 'UNDETERMINED'}</span>
+                                            </div>
+                                        </>
+                                    ) : selectedInquiry.inquiryType === 'consultation' ? (
+                                        <>
+                                            <div className="flex flex-col gap-1 min-w-0">
+                                                <span className="text-[9px] text-slate-500 uppercase font-black">Preferred_Window</span>
+                                                <span className="text-sm font-bold text-white uppercase truncate">{selectedInquiry.preferredDateTime}</span>
+                                            </div>
+                                            <div className="flex flex-col gap-1 min-w-0">
+                                                <span className="text-[9px] text-slate-500 uppercase font-black">Subject</span>
+                                                <span className="text-sm font-bold text-white uppercase truncate" title={selectedInquiry.subject}>{selectedInquiry.subject}</span>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div className="flex flex-col gap-1 min-w-0">
+                                                <span className="text-[9px] text-slate-500 uppercase font-black">Urgency_Level</span>
+                                                <span className={`text-sm font-bold uppercase ${selectedInquiry.urgencyLevel === 'critical' ? 'text-red-500' : 'text-orange-500'}`}>{selectedInquiry.urgencyLevel}</span>
+                                            </div>
+                                            <div className="flex flex-col gap-1 min-w-0">
+                                                <span className="text-[9px] text-slate-500 uppercase font-black">Override_Title</span>
+                                                <span className="text-sm font-bold text-white uppercase truncate" title={selectedInquiry.subject}>{selectedInquiry.subject}</span>
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </div>
 
                         {/* Message Content */}
-                        <div className="tech-card p-8 rounded-2xl bg-charcoal/50 border border-white/10 flex flex-col gap-6">
+                        <div className="tech-card p-6 sm:p-8 rounded-2xl bg-charcoal/50 border border-white/10 flex flex-col gap-6">
                             <div className="flex items-center gap-3 border-b border-white/5 pb-4">
                                 <span className="material-symbols-outlined text-primary">description</span>
                                 <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Transmission_Payload</h4>
                             </div>
-                            <div className="bg-black/40 p-8 rounded-xl border border-white/5 text-slate-300 leading-relaxed text-sm font-mono relative min-h-[150px]">
-                                <p className="whitespace-pre-wrap">{selectedInquiry.description || selectedInquiry.message}</p>
+                            <div className="bg-black/40 p-4 sm:p-8 rounded-xl border border-white/5 text-slate-300 leading-relaxed text-sm font-mono relative min-h-[150px]">
+                                <p className="whitespace-pre-wrap break-words">{selectedInquiry.description || selectedInquiry.message}</p>
                             </div>
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="flex flex-wrap gap-4 pt-4">
+                        <div className="flex flex-wrap gap-4 pt-4 mb-20 md:mb-0">
                             {selectedInquiry.status !== 'converted' && (
                                 <button
                                     onClick={() => handleConvert(selectedInquiry._id)}
-                                    className="px-10 py-4 bg-[#00F0FF] text-black hover:shadow-[0_0_30px_rgba(0,240,255,0.4)] hover:scale-[1.02] rounded-full text-xs font-black uppercase tracking-widest transition-all flex items-center gap-2"
+                                    className="flex-1 sm:flex-none px-6 sm:px-10 py-4 bg-[#00F0FF] text-black hover:shadow-[0_0_30px_rgba(0,240,255,0.4)] hover:scale-[1.02] rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2"
                                 >
                                     <span className="material-symbols-outlined text-lg">rocket_launch</span>
                                     Initialize_Project
                                 </button>
                             )}
-                            <a href={`mailto:${selectedInquiry.email}`} className="px-10 py-4 bg-primary text-black hover:shadow-[0_0_30px_rgba(249,107,6,0.4)] hover:scale-[1.02] rounded-full text-xs font-black uppercase tracking-widest transition-all flex items-center gap-2">
+                            <a href={`mailto:${selectedInquiry.email}`} className="flex-1 sm:flex-none px-6 sm:px-10 py-4 bg-primary text-black hover:shadow-[0_0_30px_rgba(249,107,6,0.4)] hover:scale-[1.02] rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2">
                                 <span className="material-symbols-outlined text-lg">terminal</span>
                                 Establish_Contact
                             </a>

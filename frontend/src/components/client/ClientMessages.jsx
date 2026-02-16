@@ -10,6 +10,7 @@ const ClientMessages = ({ projectId }) => {
     const [newMessage, setNewMessage] = useState('');
     const [sending, setSending] = useState(false);
     const messagesEndRef = useRef(null);
+    const scrollContainerRef = useRef(null);
 
     const fetchMessages = async () => {
         try {
@@ -29,7 +30,13 @@ const ClientMessages = ({ projectId }) => {
     }, [projectId]);
 
     useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        if (scrollContainerRef.current) {
+            const { scrollHeight, clientHeight } = scrollContainerRef.current;
+            scrollContainerRef.current.scrollTo({
+                top: scrollHeight - clientHeight,
+                behavior: 'smooth'
+            });
+        }
     }, [messages]);
 
     const handleSend = async (e) => {
@@ -64,7 +71,10 @@ const ClientMessages = ({ projectId }) => {
                 <span className="text-[8px] font-mono text-slate-700">AES-256 Enabled</span>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
+            <div
+                ref={scrollContainerRef}
+                className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar"
+            >
                 {messages.length > 0 ? (
                     messages.map((msg) => {
                         const isMe = msg.senderId._id === user._id || msg.senderId === user._id;

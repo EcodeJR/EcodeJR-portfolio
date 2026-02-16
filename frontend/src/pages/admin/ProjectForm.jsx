@@ -135,16 +135,16 @@ const ProjectForm = () => {
     };
 
     return (
-        <div className="min-h-screen bg-background-dark text-white font-display flex items-center justify-center p-6 relative">
+        <div className="min-h-screen bg-background-dark text-white font-display flex items-center justify-center p-4 sm:p-6 relative">
             <div className="absolute inset-0 pointer-events-none opacity-20 digital-grid"></div>
 
-            <div className="w-full max-w-4xl bg-[#0f0f0f] border border-white/10 rounded-xl overflow-hidden relative z-10">
-                <div className="p-6 border-b border-white/10 flex justify-between items-center bg-white/5">
-                    <h2 className="text-xl font-bold uppercase tracking-widest">{isEditMode ? 'Edit_Node' : 'Initialize_Node'}</h2>
-                    <Link to="/admin/projects" className="text-slate-400 hover:text-white"><span className="material-symbols-outlined">close</span></Link>
+            <div className="w-full max-w-4xl bg-[#0f0f0f] border border-white/10 rounded-xl overflow-hidden relative z-10 my-8">
+                <div className="p-4 sm:p-6 border-b border-white/10 flex justify-between items-center bg-white/5">
+                    <h2 className="text-lg sm:text-xl font-bold uppercase tracking-widest truncate mr-4">{isEditMode ? 'Edit_Node' : 'Initialize_Node'}</h2>
+                    <Link to="/admin/projects" className="text-slate-400 hover:text-white shrink-0"><span className="material-symbols-outlined">close</span></Link>
                 </div>
 
-                <form onSubmit={handleSubmit} className="p-8 space-y-8">
+                <form onSubmit={handleSubmit} className="p-5 sm:p-8 space-y-8">
                     {/* Basic Information */}
                     <div className="space-y-4">
                         <h3 className="text-xs font-mono text-primary uppercase tracking-[0.3em] border-b border-white/10 pb-2">Basic_Information</h3>
@@ -255,10 +255,10 @@ const ProjectForm = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex justify-end gap-4 pt-6 border-t border-white/10">
-                        <Link to="/admin/projects" className="px-6 py-3 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white">Cancel</Link>
-                        <button type="submit" disabled={loading || uploading} className="px-8 py-3 bg-primary text-black font-black uppercase tracking-widest hover:bg-white transition-colors disabled:opacity-50">
-                            {uploading ? 'Uploading...' : loading ? 'Saving...' : 'Execute_Save'}
+                    <div className="flex flex-col sm:flex-row justify-end gap-4 pt-6 border-t border-white/10">
+                        <Link to="/admin/projects" className="px-6 py-3 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white text-center sm:text-left">Cancel_Operation</Link>
+                        <button type="submit" disabled={loading || uploading} className="px-8 py-4 sm:py-3 bg-primary text-black font-black uppercase tracking-widest hover:bg-white transition-colors disabled:opacity-50 w-full sm:w-auto">
+                            {uploading ? 'UPLOADING...' : loading ? 'SAVING...' : 'EXECUTE_SAVE'}
                         </button>
                     </div>
                 </form>

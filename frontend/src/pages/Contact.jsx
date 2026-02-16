@@ -12,7 +12,10 @@ const Contact = () => {
         budget: '',
         deadline: 'IMMEDIATE_EXECUTION',
         description: '',
-        services: []
+        services: [],
+        subject: '',
+        preferredDateTime: '',
+        urgencyLevel: 'medium'
     });
 
     const handleServiceToggle = (service) => {
@@ -33,10 +36,26 @@ const Contact = () => {
         if (loading) return;
         setLoading(true);
         try {
-            await api.post('/inquiries', {
-                ...formData,
-                serviceInterested: formData.services.join(', ') || 'General Inquiry'
-            });
+            const payload = {
+                inquiryType: activeTab,
+                name: formData.name,
+                email: formData.email,
+                description: formData.description
+            };
+
+            if (activeTab === 'project') {
+                payload.serviceInterested = formData.services.join(', ') || 'General Project';
+                payload.budgetRange = formData.budget;
+                payload.preferredTimeline = formData.deadline;
+            } else if (activeTab === 'consultation') {
+                payload.subject = formData.subject;
+                payload.preferredDateTime = formData.preferredDateTime;
+            } else if (activeTab === 'urgent') {
+                payload.subject = formData.subject;
+                payload.urgencyLevel = formData.urgencyLevel;
+            }
+
+            await api.post('/inquiries', payload);
             showSuccess('Transmission Sent: Packet ID 88AF-091C');
             setFormData({
                 name: '',
@@ -44,7 +63,10 @@ const Contact = () => {
                 budget: '',
                 deadline: 'IMMEDIATE_EXECUTION',
                 description: '',
-                services: []
+                services: [],
+                subject: '',
+                preferredDateTime: '',
+                urgencyLevel: 'medium'
             });
         } catch (err) {
             showError('Transmission Failed: Security Layer Reject');
@@ -137,42 +159,65 @@ const Contact = () => {
 
                     <div className="lg:col-span-7 bg-white/5 border border-white/10 rounded-lg p-8 relative">
                         <div className="flex border-b border-white/10 mb-8 overflow-x-auto">
-                            {['PROJECT_UPLINK', 'CONSULTATION_MODULE', 'URGENT_OVERRIDE'].map((tab) => (
+                            {[
+                                { id: 'project', label: 'PROJECT_UPLINK' },
+                                { id: 'consultation', label: 'CONSULTATION_MODULE' },
+                                { id: 'urgent', label: 'URGENT_OVERRIDE' }
+                            ].map((tab) => (
                                 <button
-                                    key={tab}
-                                    onClick={() => setActiveTab(tab.toLowerCase())}
-                                    className={`px-6 py-3 border-b-2 text-xs font-bold tracking-widest whitespace-nowrap transition-colors ${activeTab === tab.toLowerCase()
-                                        ? 'border-primary text-white'
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`px-6 py-3 border-b-2 text-xs font-bold tracking-widest whitespace-nowrap transition-colors ${activeTab === tab.id
+                                        ? 'border-primary text-white bg-primary/5'
                                         : 'border-transparent text-slate-500 hover:text-slate-300'
                                         }`}
                                 >
-                                    {tab}
+                                    {tab.label}
                                 </button>
                             ))}
                         </div>
 
                         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-                            <div className="flex flex-col gap-4">
-                                <label className="text-white text-xs font-black tracking-widest uppercase flex flex-col md:flex-row item-start md:items-center gap-2">
-                                    <span className="material-symbols-outlined text-sm">project_type</span>
-                                    Select_Mission_Type
-                                </label>
-                                <div className="flex flex-wrap gap-2">
-                                    {['FULL_STACK_DEV', 'UI_ARCHITECTURE', 'API_ORCHESTRATION', 'CYBER_SECURITY_AUDIT'].map((service) => (
-                                        <label key={service} className="cursor-pointer group">
-                                            <input
-                                                type="checkbox"
-                                                className="hidden peer"
-                                                checked={formData.services.includes(service)}
-                                                onChange={() => handleServiceToggle(service)}
-                                            />
-                                            <div className="px-4 py-2 rounded border border-white/10 bg-white/5 text-[10px] font-bold tracking-widest text-slate-400 peer-checked:border-primary peer-checked:text-primary peer-checked:bg-primary/10 transition-all group-hover:border-white/30">
-                                                {service}
-                                            </div>
-                                        </label>
-                                    ))}
+                            {activeTab === 'project' && (
+                                <div className="flex flex-col gap-4 animate-in fade-in duration-300">
+                                    <label className="text-white text-xs font-black tracking-widest uppercase flex flex-col md:flex-row item-start md:items-center gap-2">
+                                        <span className="material-symbols-outlined text-sm">project_type</span>
+                                        Select_Mission_Type
+                                    </label>
+                                    <div className="flex flex-wrap gap-2">
+                                        {['FULL_STACK_DEV', 'UI_ARCHITECTURE', 'API_ORCHESTRATION', 'CYBER_SECURITY_AUDIT'].map((service) => (
+                                            <label key={service} className="cursor-pointer group">
+                                                <input
+                                                    type="checkbox"
+                                                    className="hidden peer"
+                                                    checked={formData.services.includes(service)}
+                                                    onChange={() => handleServiceToggle(service)}
+                                                />
+                                                <div className="px-4 py-2 rounded border border-white/10 bg-white/5 text-[10px] font-bold tracking-widest text-slate-400 peer-checked:border-primary peer-checked:text-primary peer-checked:bg-primary/10 transition-all group-hover:border-white/30">
+                                                    {service}
+                                                </div>
+                                            </label>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
+
+                            {(activeTab === 'consultation' || activeTab === 'urgent') && (
+                                <div className="flex flex-col gap-2 animate-in fade-in duration-300">
+                                    <label className="text-slate-500 text-[10px] font-bold tracking-widest uppercase">
+                                        {activeTab === 'consultation' ? 'Consultation_Subject' : 'Urgent_Override_Title'}
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="subject"
+                                        value={formData.subject}
+                                        onChange={handleChange}
+                                        className="w-full bg-transparent border border-white/10 rounded px-4 py-3 text-sm text-white focus:border-primary focus:ring-0 placeholder:text-slate-700 transition-colors"
+                                        placeholder={activeTab === 'consultation' ? 'E.G., ARCHITECTURE_REVIEW' : 'E.G., CRITICAL_SYSTEM_FAILURE'}
+                                        required
+                                    />
+                                </div>
+                            )}
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="flex flex-col gap-2">
@@ -201,44 +246,80 @@ const Contact = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="flex flex-col gap-2">
-                                    <label className="text-slate-500 text-[10px] font-bold tracking-widest uppercase">Resource_Allocation (USD)</label>
-                                    <div className="relative">
-                                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-primary font-bold text-xs">$</span>
-                                        <input
-                                            type="number"
-                                            name="budget"
-                                            value={formData.budget}
+                            {activeTab === 'project' && (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in duration-300">
+                                    <div className="flex flex-col gap-2">
+                                        <label className="text-slate-500 text-[10px] font-bold tracking-widest uppercase">Resource_Allocation (USD)</label>
+                                        <div className="relative">
+                                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-primary font-bold text-xs">$</span>
+                                            <input
+                                                type="number"
+                                                name="budget"
+                                                value={formData.budget}
+                                                onChange={handleChange}
+                                                className="w-full bg-transparent border border-white/10 rounded pl-8 pr-4 py-3 text-sm text-white focus:border-primary focus:ring-0 placeholder:text-slate-700 transition-colors"
+                                                placeholder="5,000+"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col gap-2">
+                                        <label className="text-slate-500 text-[10px] font-bold tracking-widest uppercase">Project_Deadline</label>
+                                        <select
+                                            name="deadline"
+                                            value={formData.deadline}
                                             onChange={handleChange}
-                                            className="w-full bg-transparent border border-white/10 rounded pl-8 pr-4 py-3 text-sm text-white focus:border-primary focus:ring-0 placeholder:text-slate-700 transition-colors"
-                                            placeholder="5,000+"
-                                        />
+                                            className="w-full bg-background-dark border border-white/10 rounded px-4 py-3 text-sm text-white focus:border-primary focus:ring-0 transition-colors cursor-pointer"
+                                        >
+                                            <option value="IMMEDIATE_EXECUTION">IMMEDIATE_EXECUTION</option>
+                                            <option value="1-3_MONTHS">1-3_MONTHS</option>
+                                            <option value="LONG_TERM_ORBIT">LONG_TERM_ORBIT</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div className="flex flex-col gap-2">
-                                    <label className="text-slate-500 text-[10px] font-bold tracking-widest uppercase">Project_Deadline</label>
+                            )}
+
+                            {activeTab === 'consultation' && (
+                                <div className="flex flex-col gap-2 animate-in fade-in duration-300">
+                                    <label className="text-slate-500 text-[10px] font-bold tracking-widest uppercase">Preferred_Consultation_Window</label>
+                                    <input
+                                        type="text"
+                                        name="preferredDateTime"
+                                        value={formData.preferredDateTime}
+                                        onChange={handleChange}
+                                        className="w-full bg-transparent border border-white/10 rounded px-4 py-3 text-sm text-white focus:border-primary focus:ring-0 placeholder:text-slate-700 transition-colors"
+                                        placeholder="E.G., MONDAY, 2PM UTC"
+                                        required={activeTab === 'consultation'}
+                                    />
+                                </div>
+                            )}
+
+                            {activeTab === 'urgent' && (
+                                <div className="flex flex-col gap-2 animate-in fade-in duration-300">
+                                    <label className="text-slate-500 text-[10px] font-bold tracking-widest uppercase">Urgency_Level_Calibration</label>
                                     <select
-                                        name="deadline"
-                                        value={formData.deadline}
+                                        name="urgencyLevel"
+                                        value={formData.urgencyLevel}
                                         onChange={handleChange}
                                         className="w-full bg-background-dark border border-white/10 rounded px-4 py-3 text-sm text-white focus:border-primary focus:ring-0 transition-colors cursor-pointer"
                                     >
-                                        <option value="IMMEDIATE_EXECUTION">IMMEDIATE_EXECUTION</option>
-                                        <option value="1-3_MONTHS">1-3_MONTHS</option>
-                                        <option value="LONG_TERM_ORBIT">LONG_TERM_ORBIT</option>
+                                        <option value="low">LOW_PRIORITY</option>
+                                        <option value="medium">MEDIUM_STABILITY</option>
+                                        <option value="high">HIGH_ALTITUDE_URGENCY</option>
+                                        <option value="critical">CRITICAL_SYSTEM_FAILURE</option>
                                     </select>
                                 </div>
-                            </div>
+                            )}
 
                             <div className="flex flex-col gap-2">
-                                <label className="text-slate-500 text-[10px] font-bold tracking-widest uppercase">Mission_Description</label>
+                                <label className="text-slate-500 text-[10px] font-bold tracking-widest uppercase">
+                                    {activeTab === 'project' ? 'Mission_Description' : activeTab === 'consultation' ? 'Consultation_Context' : 'Override_Payload_Summary'}
+                                </label>
                                 <textarea
                                     name="description"
                                     value={formData.description}
                                     onChange={handleChange}
                                     className="w-full bg-transparent border border-white/10 rounded px-4 py-3 text-sm text-white focus:border-primary focus:ring-0 placeholder:text-slate-700 transition-colors resize-none"
-                                    placeholder="DESCRIBE_PROJECT_GOALS_AND_TECHNICAL_REQUIREMENTS..."
+                                    placeholder={activeTab === 'project' ? 'DESCRIBE_PROJECT_GOALS_AND_TECHNICAL_REQUIREMENTS...' : activeTab === 'consultation' ? 'DETAIL_THE_TOPICS_YOU_WISH_TO_DISCUSS...' : 'SPECIFY_THE_URGENT_PROBLEM_AND_REQUIRED_REMEDIATION...'}
                                     rows="4"
                                     required
                                 ></textarea>

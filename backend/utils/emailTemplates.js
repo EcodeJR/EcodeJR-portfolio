@@ -26,12 +26,37 @@ exports.newMessageEmail = (recipientName, senderName, projectName) => {
   `;
 };
 
-exports.newInquiryEmail = (adminName, inquiryName, service) => {
+exports.newInquiryEmail = (adminName, inquiryName, service, inquiryType) => {
   return `
-    <h1>New Project Inquiry</h1>
+    <h1>New ${inquiryType?.toUpperCase() || 'PROJECT'} Inquiry</h1>
     <p>Hi ${adminName},</p>
-    <p>New inquiry from <strong>${inquiryName}</strong> for service: <strong>${service}</strong></p>
+    <p>New inquiry from <strong>${inquiryName}</strong> for ${inquiryType === 'project' ? 'service' : 'topic'}: <strong>${service}</strong></p>
     <p><a href="${process.env.CLIENT_URL}/admin/inquiries">View Inquiry</a></p>
+  `;
+};
+
+exports.userInquiryConfirmationEmail = (name, inquiryType) => {
+  const isProject = inquiryType === 'project';
+  return `
+    <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+        <h2 style="color: #f26c0d;">INQUIRY RECEIVED</h2>
+        <p>Hi ${name},</p>
+        <p>Thank you for reaching out. Your <strong>${inquiryType}</strong> inquiry has been successfully transmitted to our system.</p>
+        <p>Our team will review the details and get back to you as soon as possible.</p>
+        
+        ${isProject ? `
+        <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #f26c0d;">
+            <p style="margin-top: 0;"><strong>Next Step:</strong> To track your project progress and manage assets, please create an account on our platform using this email address.</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <a href="${process.env.CLIENT_URL}/register" style="background-color: #f26c0d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px;">CREATE ACCOUNT</a>
+            </div>
+        </div>
+        ` : ''}
+        
+        <p>Best regards,<br>EcodeJR Support</p>
+        <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+        <p style="font-size: 0.8em; color: #777;">System: EcodeJR-Portfolio_Gateway_v4.2</p>
+    </div>
   `;
 };
 

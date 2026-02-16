@@ -13,14 +13,26 @@ const inquirySchema = new mongoose.Schema({
     },
     phone: String,
     company: String,
+    inquiryType: {
+        type: String,
+        enum: ['project', 'consultation', 'urgent'],
+        default: 'project',
+    },
     serviceInterested: {
         type: String,
-        required: true,
+        // Only required for project inquiries
+        required: function () { return this.inquiryType === 'project'; },
     },
     budgetRange: String,
     description: {
         type: String,
         required: true,
+    },
+    subject: String, // For consultation topic or urgent summary
+    preferredDateTime: String, // For consultations
+    urgencyLevel: {
+        type: String,
+        enum: ['low', 'medium', 'high', 'critical'],
     },
     preferredTimeline: String,
     source: String,

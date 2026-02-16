@@ -95,17 +95,17 @@ const AdminClientProjects = () => {
         <div className="flex-1 flex flex-col h-full overflow-hidden p-4 sm:p-8 lg:p-12 animate-in fade-in duration-500">
             <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-10">
                 <div className="flex flex-col gap-2">
-                    <h2 className="text-2xl sm:text-4xl font-black tracking-tighter text-white uppercase italic glitch-text flex flex-wrap gap-x-3">
+                    <h2 className="text-xl sm:text-2xl lg:text-4xl font-black tracking-tighter text-white uppercase italic glitch-text flex flex-wrap gap-x-3">
                         Active_Deployments // <span className="text-primary">Client_Sync</span>
                     </h2>
-                    <p className="font-mono text-[10px] text-slate-500 uppercase tracking-widest leading-relaxed">
+                    <p className="font-mono text-[9px] sm:text-[10px] text-slate-500 uppercase tracking-widest leading-relaxed">
                         Real-time Project Synchronization Status // Node_Count: {projects.length}
                     </p>
                 </div>
                 <button
                     onClick={fetchProjects}
                     disabled={isSyncing}
-                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2 bg-primary/10 border border-primary/20 text-primary hover:bg-primary hover:text-black transition-all rounded-sm font-mono text-[10px] uppercase font-bold disabled:opacity-50"
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-primary/10 border border-primary/20 text-primary hover:bg-primary hover:text-black transition-all rounded-sm font-mono text-[10px] uppercase font-bold disabled:opacity-50"
                 >
                     <span className={`material-symbols-outlined text-sm ${isSyncing ? 'animate-spin' : ''}`}>sync</span>
                     {isSyncing ? 'SYNCING...' : 'Sync_Neural_Data'}
@@ -114,45 +114,47 @@ const AdminClientProjects = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-10 flex-1 overflow-hidden">
                 {/* Project Selector - Sidebar on Desktop, Top Scroll on Mobile */}
-                <div className="lg:col-span-1 flex flex-col gap-4 overflow-y-auto custom-scrollbar pr-2 min-h-0">
+                <div className="lg:col-span-1 flex flex-col gap-4 overflow-y-auto custom-scrollbar pr-2 min-h-0 md:max-h-none max-h-[30vh]">
                     <p className="text-[10px] font-mono font-bold text-slate-600 uppercase tracking-widest mb-2 px-1">Active_Nodes</p>
-                    {projects.map(p => (
-                        <div
-                            key={p._id}
-                            onClick={() => handleProjectSelect(p)}
-                            className={`p-5 tech-border cursor-pointer transition-all shrink-0 ${selectedProject?._id === p._id ? 'bg-primary/10 border-primary shadow-[0_0_15px_rgba(255,95,31,0.1)]' : 'bg-surface-dark/40 border-white/5 hover:border-white/20'}`}
-                        >
-                            <div className="flex justify-between items-start mb-4">
-                                <h3 className="text-white font-bold text-[10px] uppercase tracking-widest truncate">{p.projectName}</h3>
-                                <span className="text-[10px] font-mono text-primary font-bold">{p.progressPercentage}%</span>
+                    <div className="flex flex-col gap-4">
+                        {projects.map(p => (
+                            <div
+                                key={p._id}
+                                onClick={() => handleProjectSelect(p)}
+                                className={`p-5 tech-border cursor-pointer transition-all shrink-0 ${selectedProject?._id === p._id ? 'bg-primary/10 border-primary shadow-[0_0_15px_rgba(255,95,31,0.1)]' : 'bg-surface-dark/40 border-white/5 hover:border-white/20'}`}
+                            >
+                                <div className="flex justify-between items-start mb-4 gap-2">
+                                    <h3 className="text-white font-bold text-[10px] uppercase tracking-widest truncate flex-1" title={p.projectName}>{p.projectName}</h3>
+                                    <span className="text-[10px] font-mono text-primary font-bold shrink-0">{p.progressPercentage}%</span>
+                                </div>
+                                <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                                    <div className="h-full bg-primary" style={{ width: `${p.progressPercentage}%` }}></div>
+                                </div>
+                                <div className="flex justify-between items-end mt-4 gap-2">
+                                    <p className="text-[9px] text-zinc-500 font-mono uppercase truncate max-w-[120px]">{p.clientId?.name || 'Unknown'}</p>
+                                    {p.totalFiles > 0 && (
+                                        <span className="text-[8px] font-mono text-cyan-400">[{p.totalFiles}_F]</span>
+                                    )}
+                                </div>
                             </div>
-                            <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                                <div className="h-full bg-primary" style={{ width: `${p.progressPercentage}%` }}></div>
-                            </div>
-                            <div className="flex justify-between items-end mt-4">
-                                <p className="text-[9px] text-zinc-500 font-mono uppercase truncate max-w-[120px]">{p.clientId?.name || 'Unknown'}</p>
-                                {p.totalFiles > 0 && (
-                                    <span className="text-[8px] font-mono text-cyan-400">[{p.totalFiles}_F]</span>
-                                )}
-                            </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
 
                 {/* Unified Detail Context */}
                 {selectedProject && (
-                    <div className="lg:col-span-3 flex flex-col gap-8 overflow-y-auto custom-scrollbar pr-2">
+                    <div className="lg:col-span-3 flex flex-col gap-8 overflow-y-auto custom-scrollbar pr-2 pb-20 md:pb-0">
                         {/* Status Matrix Header */}
-                        <div className="tech-border bg-surface-dark/20 p-6 sm:p-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
-                            <div>
+                        <div className="tech-border bg-surface-dark/20 p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                            <div className="min-w-0 flex-1 w-full">
                                 <div className="flex items-center gap-3 text-primary mb-2">
                                     <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
                                     <p className="text-[10px] font-mono font-bold tracking-widest uppercase">Synchronization_Active</p>
                                 </div>
-                                <h3 className="text-2xl sm:text-3xl font-black uppercase italic text-white leading-tight">Node // <span className="text-slate-500">{selectedProject.projectName}</span></h3>
+                                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black uppercase italic text-white leading-tight break-words">Node // <span className="text-slate-500">{selectedProject.projectName}</span></h3>
                                 <p className="text-[9px] font-mono text-slate-500 mt-2 uppercase tracking-tighter truncate max-w-full">GLOBAL_ID: {selectedProject._id}</p>
                             </div>
-                            <div className="text-left sm:text-right border-l-2 sm:border-l-0 sm:border-r-2 border-primary/30 pl-4 sm:pl-0 sm:pr-4 py-1">
+                            <div className="text-left md:text-right border-l-2 md:border-l-0 md:border-r-2 border-primary/30 pl-4 md:pl-0 md:pr-4 py-1 shrink-0">
                                 <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Inferred_Phase</p>
                                 <p className="text-primary font-black uppercase italic text-xl">{selectedProject.currentMilestone || 'INITIALIZING'}</p>
                             </div>
@@ -171,9 +173,9 @@ const AdminClientProjects = () => {
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                                         {selectedProject.milestones.map((m) => (
                                             <div key={m._id} className="p-5 bg-black/40 border border-white/5 rounded-xl flex flex-col gap-4 hover:border-white/10 transition-all group">
-                                                <div className="flex justify-between items-start text-[10px]">
-                                                    <h4 className="text-white font-bold uppercase tracking-wider">{m.name}</h4>
-                                                    <div className={`size-2 rounded-full shadow-[0_0_8px] ${m.status === 'completed' ? 'bg-green-500 shadow-green-500/50' :
+                                                <div className="flex justify-between items-start text-[10px] gap-2">
+                                                    <h4 className="text-white font-bold uppercase tracking-wider truncate" title={m.name}>{m.name}</h4>
+                                                    <div className={`size-2 rounded-full shadow-[0_0_8px] shrink-0 ${m.status === 'completed' ? 'bg-green-500 shadow-green-500/50' :
                                                         m.status === 'in_progress' ? 'bg-primary shadow-primary/50 animate-pulse' :
                                                             'bg-slate-700'
                                                         }`} />
@@ -181,7 +183,7 @@ const AdminClientProjects = () => {
                                                 <select
                                                     value={m.status}
                                                     onChange={(e) => updateMilestone(selectedProject._id, m._id, e.target.value)}
-                                                    className="bg-surface-dark border border-white/10 text-slate-300 text-[10px] font-mono uppercase p-2 focus:border-primary outline-none cursor-pointer hover:bg-surface-dark/80 transition-colors"
+                                                    className="bg-surface-dark border border-white/10 text-slate-300 text-[10px] font-mono uppercase p-2 focus:border-primary outline-none cursor-pointer hover:bg-surface-dark/80 transition-colors w-full"
                                                 >
                                                     <option value="not_started">Status: Standby</option>
                                                     <option value="in_progress">Status: Processing</option>
@@ -207,7 +209,9 @@ const AdminClientProjects = () => {
                                         </div>
                                         <span className="text-[8px] font-mono text-slate-600 uppercase tracking-widest hidden sm:inline-block">Comm_Channel_Active</span>
                                     </div>
-                                    <ClientMessages projectId={selectedProject._id} />
+                                    <div className="overflow-x-hidden">
+                                        <ClientMessages projectId={selectedProject._id} />
+                                    </div>
                                 </div>
                             </div>
 
@@ -221,17 +225,17 @@ const AdminClientProjects = () => {
                                         <h2 className="text-xs font-black text-white uppercase tracking-[0.3em]">Project_Intelligence</h2>
                                     </div>
                                     <div className="space-y-6">
-                                        <div className="bg-black/40 p-5 border border-white/5 rounded-sm">
+                                        <div className="bg-black/40 p-5 border border-white/5 rounded-sm overflow-hidden">
                                             <p className="text-[9px] text-slate-500 font-mono uppercase tracking-[0.2em] mb-2 font-bold">Inferred_Allocation</p>
-                                            <p className="text-xl font-black text-white italic">{selectedProject.budget || 'N/A'}</p>
+                                            <p className="text-xl font-black text-white italic truncate">{selectedProject.budget || 'N/A'}</p>
                                         </div>
-                                        <div className="bg-black/40 p-5 border border-white/5 rounded-sm">
+                                        <div className="bg-black/40 p-5 border border-white/5 rounded-sm overflow-hidden">
                                             <p className="text-[9px] text-slate-500 font-mono uppercase tracking-[0.2em] mb-2 font-bold">Temporal_Bounds</p>
-                                            <p className="text-lg font-bold text-white uppercase tracking-tight">{selectedProject.timeline || 'N/A'}</p>
+                                            <p className="text-lg font-bold text-white uppercase tracking-tight truncate">{selectedProject.timeline || 'N/A'}</p>
                                         </div>
                                         <div className="bg-primary/5 p-5 border border-primary/20 rounded-sm">
                                             <p className="text-[9px] text-primary font-mono uppercase tracking-[0.2em] mb-2 font-black">Submission_Brief</p>
-                                            <p className="text-[11px] text-slate-400 leading-relaxed font-mono line-clamp-6">{selectedProject.description}</p>
+                                            <p className="text-[11px] text-slate-400 leading-relaxed font-mono break-words">{selectedProject.description}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -239,15 +243,15 @@ const AdminClientProjects = () => {
                                 {/* Shared Registry (Files) */}
                                 <div className="tech-border p-6 sm:p-8 bg-surface-dark/30">
                                     <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
-                                        <div className="flex items-center gap-3">
-                                            <span className="material-symbols-outlined text-primary">folder_managed</span>
-                                            <h2 className="text-xs font-black text-white uppercase tracking-[0.3em]">Asset_Registry</h2>
+                                        <div className="flex items-center gap-3 min-w-0">
+                                            <span className="material-symbols-outlined text-primary shrink-0">folder_managed</span>
+                                            <h2 className="text-xs font-black text-white uppercase tracking-[0.3em] truncate">Asset_Registry</h2>
                                         </div>
-                                        <span className="text-[8px] font-mono text-cyan-400">[{selectedProject.files?.length || 0}_FILES]</span>
+                                        <span className="text-[8px] font-mono text-cyan-400 shrink-0">[{selectedProject.files?.length || 0}_FILES]</span>
                                     </div>
                                     <div className="space-y-4">
                                         {selectedProject.files?.map((file) => (
-                                            <div key={file._id} className="p-4 bg-black/40 border border-white/5 hover:border-primary/30 transition-all rounded-sm flex items-center justify-between gap-3 group">
+                                            <div key={file._id} className="p-4 bg-black/40 border border-white/5 hover:border-primary/30 transition-all rounded-sm flex items-center justify-between gap-3 group overflow-hidden">
                                                 <div className="flex items-center gap-3 min-w-0 flex-1">
                                                     <span className="material-symbols-outlined text-slate-600 group-hover:text-primary transition-colors text-lg shrink-0">
                                                         {file.name?.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? 'image' : 'description'}
@@ -262,7 +266,7 @@ const AdminClientProjects = () => {
                                                 <div className="flex items-center gap-1.5 shrink-0">
                                                     <button
                                                         onClick={() => handleDeleteFile(file)}
-                                                        className="size-8 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
+                                                        className="size-8 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white flex items-center justify-center transition-all md:opacity-0 md:group-hover:opacity-100"
                                                         title="Delete Asset"
                                                     >
                                                         <span className="material-symbols-outlined text-base">delete</span>

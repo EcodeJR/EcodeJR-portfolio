@@ -96,77 +96,85 @@ const AdminDashboard = () => {
             </header>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="tech-card p-6 group bg-charcoal/50 border border-white/10 backdrop-blur-sm rounded-2xl relative overflow-hidden">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <div className="tech-card p-5 sm:p-6 group bg-charcoal/50 border border-white/10 backdrop-blur-sm rounded-2xl relative overflow-hidden flex flex-col justify-between">
                     <div className="scanner-line"></div>
-                    <div className="flex justify-between items-start mb-6">
-                        <div className="w-10 h-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary rounded-lg">
+                    <div className="flex justify-between items-start mb-6 gap-2">
+                        <div className="w-10 h-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary rounded-lg shrink-0">
                             <span className="material-symbols-outlined">precision_manufacturing</span>
                         </div>
-                        <div className="text-right">
-                            <span className="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">+18% SYN</span>
+                        <div className="text-right shrink-0">
+                            <span className="text-[9px] sm:text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">+18% SYN</span>
                         </div>
                     </div>
-                    <p className="text-slate-500 text-[10px] uppercase tracking-[0.2em] mb-1">Active Projects</p>
-                    <div className="flex items-end gap-3">
-                        <h3 className="text-4xl font-extrabold text-white">{stats.projects}</h3>
-                        <div className="flex gap-1 mb-2">
-                            <div className="w-1 h-3 bg-primary"></div>
-                            <div className="w-1 h-3 bg-primary"></div>
-                            <div className="w-1 h-3 bg-primary/20"></div>
+                    <div>
+                        <p className="text-slate-500 text-[10px] uppercase tracking-[0.2em] mb-1">Active Projects</p>
+                        <div className="flex items-end gap-3">
+                            <h3 className="text-3xl sm:text-4xl font-extrabold text-white">{stats.projects}</h3>
+                            <div className="flex gap-1 mb-2">
+                                <div className="w-1 h-3 bg-primary"></div>
+                                <div className="w-1 h-3 bg-primary"></div>
+                                <div className="w-1 h-3 bg-primary/20"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="tech-card p-6 group bg-charcoal/50 border border-white/10 backdrop-blur-sm rounded-2xl relative overflow-hidden">
+                <div className="tech-card p-5 sm:p-6 group bg-charcoal/50 border border-white/10 backdrop-blur-sm rounded-2xl relative overflow-hidden flex flex-col justify-between">
                     <div className="scanner-line"></div>
-                    <div className="flex justify-between items-start mb-6">
-                        <div className="w-10 h-10 bg-[#00f0ff]/10 border border-[#00f0ff]/20 flex items-center justify-center text-[#00f0ff] rounded-lg">
+                    <div className="flex justify-between items-start mb-6 gap-2">
+                        <div className="w-10 h-10 bg-[#00f0ff]/10 border border-[#00f0ff]/20 flex items-center justify-center text-[#00f0ff] rounded-lg shrink-0">
                             <span className="material-symbols-outlined">hub</span>
                         </div>
-                        <span className="text-[10px] text-[#00f0ff] bg-[#00f0ff]/10 px-2 py-0.5 rounded border border-[#00f0ff]/20">URGENT</span>
+                        <span className="text-[9px] sm:text-[10px] text-[#00f0ff] bg-[#00f0ff]/10 px-2 py-0.5 rounded border border-[#00f0ff]/20 shrink-0">URGENT</span>
                     </div>
-                    <p className="text-slate-500 text-[10px] uppercase tracking-[0.2em] mb-1">Pending Inquiries</p>
-                    <h3 className="text-4xl font-extrabold text-white">{stats.pendingInquiries}</h3>
-                    <div className="mt-8 space-y-1">
-                        <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                            <div className="h-full bg-[#00f0ff] w-2/3"></div>
+                    <div>
+                        <p className="text-slate-500 text-[10px] uppercase tracking-[0.2em] mb-1">Pending Inquiries</p>
+                        <h3 className="text-3xl sm:text-4xl font-extrabold text-white">{stats.pendingInquiries}</h3>
+                        <div className="mt-8 space-y-1">
+                            <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                                <div className="h-full bg-[#00f0ff] w-2/3"></div>
+                            </div>
+                            <p className="text-[9px] text-slate-500">QUEUE LOAD: 65%</p>
                         </div>
-                        <p className="text-[9px] text-slate-500">QUEUE LOAD: 65%</p>
                     </div>
                 </div>
 
-                <div className="tech-card p-6 group bg-charcoal/50 border border-white/10 backdrop-blur-sm rounded-2xl relative overflow-hidden">
+                <div className="tech-card p-5 sm:p-6 group bg-charcoal/50 border border-white/10 backdrop-blur-sm rounded-2xl relative overflow-hidden flex flex-col justify-between">
                     <div className="scanner-line"></div>
-                    <div className="flex justify-between items-start mb-6">
-                        <div className="w-10 h-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary rounded-lg">
+                    <div className="flex justify-between items-start mb-6 gap-2">
+                        <div className="w-10 h-10 bg-primary/10 border border-primary/20 flex items-center justify-center text-primary rounded-lg shrink-0">
                             <span className="material-symbols-outlined">currency_exchange</span>
                         </div>
-                        <span className="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">+$2.4k</span>
+                        <span className="text-[9px] sm:text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20 shrink-0">+$2.4k</span>
                     </div>
-                    <p className="text-slate-500 text-[10px] uppercase tracking-[0.2em] mb-1">Total Inquiries</p>
-                    <h3 className="text-4xl font-extrabold text-white">{stats.inquiries}</h3>
-                    <div className="mt-4 flex items-center gap-4">
-                        <div className="size-12 rounded-full border-4 border-white/5 border-t-primary rotate-45"></div>
-                        <span className="text-[10px] text-slate-400">YIELD_TARGET: 82%</span>
+                    <div>
+                        <p className="text-slate-500 text-[10px] uppercase tracking-[0.2em] mb-1">Total Inquiries</p>
+                        <h3 className="text-3xl sm:text-4xl font-extrabold text-white">{stats.inquiries}</h3>
+                        <div className="mt-4 flex items-center gap-4">
+                            <div className="size-10 sm:size-12 rounded-full border-4 border-white/5 border-t-primary rotate-45 shrink-0"></div>
+                            <span className="text-[10px] text-slate-400">YIELD_TARGET: 82%</span>
+                        </div>
                     </div>
                 </div>
 
-                <div className="tech-card p-6 group bg-charcoal/50 border border-white/10 backdrop-blur-sm rounded-2xl relative overflow-hidden">
+                <div className="tech-card p-5 sm:p-6 group bg-charcoal/50 border border-white/10 backdrop-blur-sm rounded-2xl relative overflow-hidden flex flex-col justify-between">
                     <div className="scanner-line"></div>
-                    <div className="flex justify-between items-start mb-6">
-                        <div className="w-10 h-10 bg-slate-100/5 border border-white/10 flex items-center justify-center text-white rounded-lg">
+                    <div className="flex justify-between items-start mb-6 gap-2">
+                        <div className="w-10 h-10 bg-slate-100/5 border border-white/10 flex items-center justify-center text-white rounded-lg shrink-0">
                             <span className="material-symbols-outlined">visibility</span>
                         </div>
-                        <span className="text-[10px] text-white/50 bg-white/5 px-2 py-0.5 rounded border border-white/10">+8.4%</span>
+                        <span className="text-[9px] sm:text-[10px] text-white/50 bg-white/5 px-2 py-0.5 rounded border border-white/10 shrink-0">+8.4%</span>
                     </div>
-                    <p className="text-slate-500 text-[10px] uppercase tracking-[0.2em] mb-1">Portfolio Items</p>
-                    <h3 className="text-4xl font-extrabold text-white">{stats.portfolio}</h3>
-                    <div className="mt-6 flex items-center gap-1 opacity-50">
-                        <div className="h-1 flex-1 bg-white/10"></div>
-                        <div className="h-1 flex-1 bg-white/10"></div>
-                        <div className="h-1 flex-1 bg-white/10"></div>
-                        <div className="h-1 flex-1 bg-primary"></div>
+                    <div>
+                        <p className="text-slate-500 text-[10px] uppercase tracking-[0.2em] mb-1">Portfolio Items</p>
+                        <h3 className="text-3xl sm:text-4xl font-extrabold text-white">{stats.portfolio}</h3>
+                        <div className="mt-6 flex items-center gap-1 opacity-50">
+                            <div className="h-1 flex-1 bg-white/10"></div>
+                            <div className="h-1 flex-1 bg-white/10"></div>
+                            <div className="h-1 flex-1 bg-white/10"></div>
+                            <div className="h-1 flex-1 bg-primary"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -198,19 +206,19 @@ const AdminDashboard = () => {
                                     recentInquiries.map((inquiry) => (
                                         <tr key={inquiry._id} className="bg-white/[0.02] hover:bg-white/[0.05] transition-colors group">
                                             <td className="px-4 md:px-6 py-4">
-                                                <div className="flex items-center gap-3">
+                                                <div className="flex items-center gap-3 min-w-0">
                                                     <div className="size-8 rounded bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold text-[10px] shrink-0">
                                                         {inquiry.name.charAt(0)}
                                                     </div>
-                                                    <span className="text-slate-200 uppercase tracking-tight truncate max-w-[100px] sm:max-w-none">{inquiry.name}</span>
+                                                    <span className="text-slate-200 uppercase tracking-tight truncate max-w-[80px] sm:max-w-[150px] lg:max-w-none">{inquiry.name}</span>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 text-slate-400 hidden md:table-cell">{inquiry.serviceInterested}</td>
-                                            <td className="px-4 md:px-6 py-4 text-slate-500 whitespace-nowrap">{getRelativeTime(inquiry.createdAt || new Date())}</td>
+                                            <td className="px-6 py-4 text-slate-400 hidden md:table-cell truncate max-w-[200px]">{inquiry.serviceInterested}</td>
+                                            <td className="px-4 md:px-6 py-4 text-slate-500 whitespace-nowrap text-[10px]">{getRelativeTime(inquiry.createdAt || new Date())}</td>
                                             <td className="px-4 md:px-6 py-4">
                                                 <div className="flex items-center gap-2">
-                                                    <span className={`size-1.5 rounded-full shadow-[0_0_8px_currentColor] hidden sm:inline-block ${inquiry.status === 'new' ? 'bg-primary' : 'bg-slate-500'}`}></span>
-                                                    <span className={`font-bold uppercase text-[10px] ${getStatusColor(inquiry.status)}`}>{inquiry.status}</span>
+                                                    <span className={`size-1.5 rounded-full shadow-[0_0_8px_currentColor] hidden lg:inline-block ${inquiry.status === 'new' ? 'bg-primary' : 'bg-slate-500'}`}></span>
+                                                    <span className={`font-bold uppercase text-[9px] sm:text-[10px] ${getStatusColor(inquiry.status)}`}>{inquiry.status}</span>
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 text-right">

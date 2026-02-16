@@ -1,13 +1,15 @@
 const Inquiry = require('../models/Inquiry');
 const sendEmail = require('../utils/sendEmail');
-const { newInquiryEmail } = require('../utils/emailTemplates');
+const { newInquiryEmail, userInquiryConfirmationEmail } = require('../utils/emailTemplates');
 
 // @desc    Create new inquiry
 // @route   POST /api/inquiries
 // @access  Public
 exports.createInquiry = async (req, res) => {
     try {
-        const { email, description } = req.body;
+        console.log('--- New Inquiry Attempt ---');
+        console.log('Payload:', req.body);
+        const { email, description, inquiryType } = req.body;
 
         // Check for duplicate inquiry in the last 30 seconds
         const duplicateInquiry = await Inquiry.findOne({
@@ -17,24 +19,50 @@ exports.createInquiry = async (req, res) => {
         });
 
         if (duplicateInquiry) {
+            console.log('Duplicate inquiry detected');
             return res.status(400).json({ message: 'Duplicate inquiry detected. Please wait a moment.' });
         }
 
+        console.log('Creating inquiry in DB...');
         const inquiry = await Inquiry.create(req.body);
+        console.log('Inquiry created:', inquiry._id);
 
-        // Send email to admin
-        try {
-            await sendEmail({
-                email: process.env.EMAIL_USER, // Admin email
-                subject: 'New Project Inquiry',
-                html: newInquiryEmail('Admin', inquiry.name, inquiry.serviceInterested)
-            });
-        } catch (err) {
-            console.error('Email sending failed:', err);
-        }
+        // Send emails in the background (fire and forget) to avoid blocking or timeouts
+        const sendEmails = async () => {
+            // Admin notification
+            try {
+                const serviceOrSubject = inquiry.serviceInterested || inquiry.subject || 'General Inquiry';
+                console.log('Sending admin email...');
+                await sendEmail({
+                    email: process.env.EMAIL_USER,
+                    subject: `New ${inquiry.inquiryType?.toUpperCase() || 'PROJECT'} Inquiry`,
+                    html: newInquiryEmail('Admin', inquiry.name, serviceOrSubject, inquiry.inquiryType || 'project')
+                });
+                console.log('Admin email sent');
+            } catch (err) {
+                console.error('Admin email failed:', err.message);
+            }
+
+            // User confirmation
+            try {
+                console.log('Sending user confirmation email...');
+                await sendEmail({
+                    email: inquiry.email,
+                    subject: 'Inquiry Received - EcodeJR',
+                    html: userInquiryConfirmationEmail(inquiry.name, inquiry.inquiryType || 'project')
+                });
+                console.log('User email sent');
+            } catch (err) {
+                console.error('User confirmation email failed:', err.message);
+            }
+        };
+
+        // Trigger emails without awaiting
+        sendEmails().catch(err => console.error('Background email task error:', err));
 
         res.status(201).json({ success: true, data: inquiry });
     } catch (error) {
+        console.error('Inquiry controller error:', error);
         res.status(500).json({ message: error.message || 'Server Error' });
     }
 };
