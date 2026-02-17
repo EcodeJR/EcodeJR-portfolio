@@ -111,7 +111,7 @@ const Inquiries = () => {
                             <div className="tech-card p-6 sm:p-8 rounded-2xl bg-charcoal/50 border border-white/10 flex flex-col gap-6">
                                 <div className="flex items-center gap-3 border-b border-white/5 pb-4">
                                     <span className="material-symbols-outlined text-primary">person_search</span>
-                                    <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Identity_Parameters</h4>
+                                    <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 break-words">Identity Parameters</h4>
                                 </div>
                                 <div className="space-y-4">
                                     <div className="flex flex-col gap-1 min-w-0">
@@ -134,7 +134,7 @@ const Inquiries = () => {
                             <div className="tech-card p-6 sm:p-8 rounded-2xl bg-charcoal/50 border border-white/10 flex flex-col gap-6">
                                 <div className="flex items-center gap-3 border-b border-white/5 pb-4">
                                     <span className="material-symbols-outlined text-primary">analytics</span>
-                                    <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Project_Context</h4>
+                                    <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 break-words">Project Context</h4>
                                 </div>
                                 <div className="space-y-4">
                                     <div className="flex flex-col gap-1 min-w-0">
