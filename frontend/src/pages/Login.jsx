@@ -61,19 +61,19 @@ const Login = () => {
                     <div className="bg-primary/10 border-b border-primary/30 p-6 flex flex-col gap-1">
                         <div className="flex items-center gap-2">
                             <span className="size-2 rounded-full bg-primary animate-pulse"></span>
-                            <span className="text-[10px] font-bold tracking-[0.3em] text-primary uppercase">Identity_Verification</span>
+                            <span className="text-[10px] font-bold tracking-[0.3em] text-primary uppercase">Login</span>
                         </div>
-                        <h1 className="text-primary text-2xl font-black tracking-[0.1em] md:tracking-[0.4em] uppercase">ACCESS_PORTAL</h1>
+                        <h1 className="text-primary text-2xl font-black tracking-[0.1em] md:tracking-[0.4em] uppercase">CLIENT ACCOUNT</h1>
                     </div>
 
                     <form className="p-8 space-y-8" onSubmit={handleSubmit}>
                         <div className="space-y-6">
                             <div className="space-y-2">
-                                <label className="block text-[10px] font-mono tracking-widest text-slate-500 uppercase">USER_IDENTIFIER (Email)</label>
+                                <label className="block text-[10px] font-mono tracking-widest text-slate-500 uppercase">EMAIL</label>
                                 <div className="relative">
                                     <input
                                         className="w-full bg-black/40 border border-primary/40 rounded py-3 px-4 text-sm font-mono text-white placeholder:text-slate-700 focus:border-primary focus:outline-none focus:shadow-[0_0_10px_rgba(242,108,13,0.4)] transition-all uppercase tracking-wider"
-                                        placeholder="ENTER_ID_STRING"
+                                        placeholder="ENTER_EMAIL"
                                         type="email"
                                         name="email"
                                         value={formData.email}
@@ -84,7 +84,7 @@ const Login = () => {
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <label className="block text-[10px] font-mono tracking-widest text-slate-500 uppercase">SECURE_KEY (Password)</label>
+                                <label className="block text-[10px] font-mono tracking-widest text-slate-500 uppercase">PASSWORD</label>
                                 <div className="relative">
                                     <input
                                         className="w-full bg-black/40 border border-primary/40 rounded py-3 px-4 text-sm font-mono text-white placeholder:text-slate-700 focus:border-primary focus:outline-none focus:shadow-[0_0_10px_rgba(242,108,13,0.4)] transition-all tracking-widest"
@@ -105,23 +105,23 @@ const Login = () => {
                             type="submit"
                             disabled={loading}
                         >
-                            {loading ? 'AUTHENTICATING...' : 'INITIATE_SESSION'}
+                            {loading ? 'AUTHENTICATING...' : 'LOGIN'}
                         </button>
 
                         <div className="flex items-center justify-between pt-4">
                             <Link className="text-[9px] font-mono tracking-widest text-slate-500 hover:text-primary transition-colors uppercase" to="/forgot-password">
-                                &gt; FORGOT_KEY?
+                                &gt; FORGOT PASSWORD?
                             </Link>
                             <Link to="/register" className="text-[9px] font-mono tracking-widest text-slate-500 hover:text-primary transition-colors uppercase">
-                                &gt; CREATE_ID
+                                &gt; CREATE ACCOUNT
                             </Link>
                         </div>
                     </form>
 
-                    <div className="px-8 pb-4 flex justify-between items-center opacity-30">
+                    {/* <div className="px-8 pb-4 flex justify-between items-center opacity-30">
                         <div className="text-[8px] font-mono text-slate-400">ENCRYPTION: AES-256</div>
                         <div className="text-[8px] font-mono text-slate-400 uppercase">System: Ready_For_Handshake</div>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="absolute -top-4 -left-4 size-8 border-t-2 border-l-2 border-primary/20"></div>

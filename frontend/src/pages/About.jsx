@@ -10,7 +10,7 @@ const About = () => {
                 <div className="flex flex-col gap-2">
                     <div className="flex items-center gap-2">
                         <span className="size-2 rounded-full bg-primary animate-pulse"></span>
-                        <p className="text-primary text-xs font-bold tracking-[0.2em] uppercase">Hello 👋, <br /> And Welcome</p>
+                        <p className="text-primary text-xs font-bold tracking-[0.2em] uppercase">Hello 👋, <br /> And Welcome to my</p>
                     </div>
                     <h1 className="text-white text-3xl sm:text-5xl font-black leading-tight tracking-tighter uppercase cursor-default">
                         Developer Profile
