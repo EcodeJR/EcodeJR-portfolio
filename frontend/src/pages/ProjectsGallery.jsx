@@ -140,12 +140,12 @@ const ProjectsGallery = () => {
                 <aside className="w-full md:w-72 flex-shrink-0 flex flex-col gap-6 h-fit md:sticky md:top-32">
                     <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden p-6">
                         <div className="flex flex-col gap-1 mb-6">
-                            <h1 className="text-xs font-bold uppercase tracking-[0.3em] text-primary font-mono">Filtering_Module</h1>
+                            <h1 className="text-xs font-bold uppercase tracking-[0.3em] text-primary font-mono">Filter</h1>
                             <div className="h-px w-12 bg-primary/50 mt-1"></div>
                         </div>
                         <div className="flex flex-col gap-6">
                             <div>
-                                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-500 mb-4 block">Tech_Stack</span>
+                                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-500 mb-4 block">Tech Stack</span>
                                 <div className="flex flex-col gap-2 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
                                     {availableTech.map(tech => (
                                         <label key={tech} className="flex items-center justify-between p-2 rounded-lg bg-white/5 border border-white/5 cursor-pointer group hover:border-primary/30 transition-all">
@@ -193,8 +193,8 @@ const ProjectsGallery = () => {
                                             key={year}
                                             onClick={() => setFilters(prev => ({ ...prev, timeline: prev.timeline === year ? null : year }))}
                                             className={`text-[10px] font-mono uppercase tracking-[0.2em] px-3 py-1.5 rounded-md transition-all ${filters.timeline === year
-                                                    ? 'border border-primary text-primary bg-primary/5'
-                                                    : 'border border-white/10 text-slate-500 hover:border-white/30'
+                                                ? 'border border-primary text-primary bg-primary/5'
+                                                : 'border border-white/10 text-slate-500 hover:border-white/30'
                                                 }`}
                                         >
                                             {year}
@@ -207,7 +207,7 @@ const ProjectsGallery = () => {
                             onClick={resetFilters}
                             className="w-full mt-10 text-[10px] font-mono uppercase tracking-[0.2em] py-3 border border-white/10 hover:border-primary hover:text-primary transition-all rounded-xl"
                         >
-                            RESET_FILTERS
+                            RESET FILTERS
                         </button>
                     </div>
                 </aside>
@@ -216,10 +216,10 @@ const ProjectsGallery = () => {
                     <div className="flex flex-col lg:flex-row justify-between items-start gap-6 border-b border-white/10 pb-8">
                         <div className="flex flex-col gap-2">
                             <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary font-bold">Directory</span>
-                            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter italic">PROJECTS_GALLERY</h2>
+                            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter italic">PROJECTS GALLERY</h2>
                             <p className="font-mono text-[11px] text-slate-500 flex items-center gap-2">
                                 <span className="w-1.5 h-1.5 bg-primary animate-pulse rounded-full"></span>
-                                STATUS: {loading ? 'LOADING_OBJECTS' : 'OBJECTS_SYNCED'} ({filteredProjects.length})
+                                STATUS: {loading ? 'LOADING_PROJECTS' : 'PROJECTS FOUND'} ({filteredProjects.length})
                             </p>
                         </div>
                         <div className="flex items-center gap-3">
@@ -229,8 +229,8 @@ const ProjectsGallery = () => {
                                     onChange={(e) => setFilters(prev => ({ ...prev, sortBy: e.target.value }))}
                                     className="appearance-none bg-background-dark border border-white/10 text-[10px] font-mono uppercase tracking-[0.2em] text-white rounded-xl px-6 py-3 pr-12 focus:ring-1 focus:ring-primary focus:border-primary w-full sm:w-56"
                                 >
-                                    <option value="NEWEST_FIRST">SORT:NEWEST_FIRST</option>
-                                    <option value="OLDEST_FIRST">SORT:OLDEST_FIRST</option>
+                                    <option value="NEWEST_FIRST">SORT:NEWEST FIRST</option>
+                                    <option value="OLDEST_FIRST">SORT:OLDEST FIRST</option>
                                     <option value="POPULARITY">SORT:POPULARITY</option>
                                 </select>
                                 <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-primary text-lg">unfold_more</span>

@@ -13,9 +13,9 @@ const About = () => {
                         <p className="text-primary text-xs font-bold tracking-[0.2em] uppercase">Hello 👋, <br /> And Welcome</p>
                     </div>
                     <h1 className="text-white text-3xl sm:text-5xl font-black leading-tight tracking-tighter uppercase cursor-default">
-                        System_Profile
+                        Developer Profile
                     </h1>
-                    <p className="text-slate-500 text-sm font-medium">INDEX: 001 || SOURCE: HUMAN_MODULE || ACCESS: PUBLIC</p>
+                    {/* <p className="text-slate-500 text-sm font-medium">INDEX: 001 || SOURCE: HUMAN_MODULE || ACCESS: PUBLIC</p> */}
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -28,22 +28,22 @@ const About = () => {
                                 <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNCIgaGVpZ2h0PSI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDBoNHYxSDB6IiBmaWxsPSJyZ2JhKDAsIDAsIDAsIDAuMSkiLz48L3N2Zz4=')] pointer-events-none"></div>
                                 <div className="absolute bottom-4 left-4 right-4">
                                     <p className="text-[10px] font-mono text-primary uppercase tracking-tighter">Bio_Signal: Active</p>
-                                    <h3 className="text-white font-bold tracking-widest">USER_ID: EMMANUEL_DALYOP</h3>
+                                    <h3 className="text-white font-bold tracking-widest">NAME: EMMANUEL DALYOP</h3>
                                 </div>
                             </div>
                             <div className="absolute -top-2 -right-2 bg-primary text-background-dark text-[10px] font-bold px-2 py-1 rotate-12">
-                                VERIFIED_CORE
+                                VERIFIED DEV
                             </div>
                         </div>
                         <div className="bg-white/5 border border-white/10 p-5 rounded">
                             <h4 className="text-primary text-xs font-black tracking-[0.2em] mb-4 uppercase flex items-center gap-2">
                                 <span className="material-symbols-outlined text-sm">fingerprint</span>
-                                SYSTEM_PROFILE
+                                PROFILE
                             </h4>
                             <p className="text-slate-400 text-xs font-mono leading-relaxed">
-                                &gt; Senior Full-Stack Architect specialized in reactive UI environments and high-throughput backend orchestration.
+                                &gt; I’m a Software Developer who enjoys building things from scratch, turning ideas into working products using MERN stack and any modern technology that fits and works. I focus on performance, scalability, and clean user experience.
                                 <br /><br />
-                                &gt; Mission: Bridging the gap between speculative design and technical execution within the digital frontier.
+                                &gt; Mission: Creating software that solves real problems and delivers real value.
                             </p>
                         </div>
                     </div>
@@ -53,49 +53,76 @@ const About = () => {
                             <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
                                 <span className="material-symbols-outlined text-8xl">precision_manufacturing</span>
                             </div>
-                            <h3 className="text-white text-sm font-bold tracking-[0.3em] mb-6 uppercase border-l-2 border-primary pl-4">CORE_SPECIFICATIONS</h3>
+                            <h3 className="text-white text-sm font-bold tracking-[0.3em] mb-6 uppercase border-l-2 border-primary pl-4">CORE SKILLS</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                                 <div className="space-y-2">
-                                    <div className="flex justify-between text-[10px] font-mono uppercase">
-                                        <span className="text-slate-300">Frontend_Architecture</span>
-                                        <span className="text-primary">94%</span>
+                                    <div className="flex flex-col justify-between text-[10px] font-mono uppercase">
+                                        <span className="text-slate-300">Frontend Architecture</span>
+                                        <span className="text-slate-400">(React, State Management, Performance)</span>
                                     </div>
                                     <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                                        <div className="h-full bg-primary w-[94%] shadow-[0_0_10px_rgba(242,108,13,0.5)]"></div>
+                                        <div className="h-full bg-primary w-[100%] shadow-[0_0_10px_rgba(242,108,13,0.5)]"></div>
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <div className="flex justify-between text-[10px] font-mono uppercase">
-                                        <span className="text-slate-300">Neural_Logic (AI/ML)</span>
-                                        <span className="text-primary">78%</span>
+                                    <div className="flex flex-col justify-between text-[10px] font-mono uppercase">
+                                        <span className="text-slate-300">Backend API Design</span>
+                                        <span className="text-slate-400">(Node.js, Express)</span>
                                     </div>
                                     <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                                        <div className="h-full bg-primary w-[78%] shadow-[0_0_10px_rgba(242,108,13,0.5)]"></div>
+                                        <div className="h-full bg-primary w-[100%] shadow-[0_0_10px_rgba(242,108,13,0.5)]"></div>
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <div className="flex justify-between text-[10px] font-mono uppercase">
-                                        <span className="text-slate-300">Data_Systems</span>
-                                        <span className="text-primary">89%</span>
+                                    <div className="flex flex-col justify-between text-[10px] font-mono uppercase">
+                                        <span className="text-slate-300">Database Design</span>
+                                        <span className="text-slate-400">(MongoDB, Mongoose)</span>
                                     </div>
                                     <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                                        <div className="h-full bg-primary w-[89%] shadow-[0_0_10px_rgba(242,108,13,0.5)]"></div>
+                                        <div className="h-full bg-primary w-[100%] shadow-[0_0_10px_rgba(242,108,13,0.5)]"></div>
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <div className="flex justify-between text-[10px] font-mono uppercase">
-                                        <span className="text-slate-300">DevOps_Synthesis</span>
-                                        <span className="text-primary">82%</span>
+                                    <div className="flex flex-col justify-between text-[10px] font-mono uppercase">
+                                        <span className="text-slate-300">Real-Time Systems</span>
+                                        <span className="text-slate-400">(WebSockets)</span>
                                     </div>
                                     <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                                        <div className="h-full bg-primary w-[82%] shadow-[0_0_10px_rgba(242,108,13,0.5)]"></div>
+                                        <div className="h-full bg-primary w-[100%] shadow-[0_0_10px_rgba(242,108,13,0.5)]"></div>
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <div className="flex flex-col justify-between text-[10px] font-mono uppercase">
+                                        <span className="text-slate-300">AI Integration</span>
+                                        <span className="text-slate-400">(LLM APIs, Image Analysis)</span>
+                                    </div>
+                                    <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                                        <div className="h-full bg-primary w-[100%] shadow-[0_0_10px_rgba(242,108,13,0.5)]"></div>
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <div className="flex flex-col justify-between text-[10px] font-mono uppercase">
+                                        <span className="text-slate-300">Authentication & Security</span>
+                                        <span className="text-slate-400">(JWT, Role-Based Access)</span>
+                                    </div>
+                                    <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                                        <div className="h-full bg-primary w-[100%] shadow-[0_0_10px_rgba(242,108,13,0.5)]"></div>
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <div className="flex flex-col justify-between text-[10px] font-mono uppercase">
+                                        <span className="text-slate-300">Cloud Deployment</span>
+                                        <span className="text-slate-400">(Vercel, Production Builds)</span>
+                                    </div>
+                                    <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                                        <div className="h-full bg-primary w-[100%] shadow-[0_0_10px_rgba(242,108,13,0.5)]"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div className="flex flex-col gap-6">
-                            <h3 className="text-white text-sm font-bold tracking-[0.3em] uppercase border-l-2 border-primary pl-4">CHRONOLOGICAL_LOG</h3>
+                            <h3 className="text-white text-sm font-bold tracking-[0.3em] uppercase border-l-2 border-primary pl-4">Experience</h3>
                             <div className="flex flex-col gap-8 ml-4">
                                 <div className="relative group">
                                     <div className="absolute -left-[25px] top-1 size-4 bg-background-dark border-2 border-primary rounded-full z-10 group-hover:bg-primary transition-colors"></div>
@@ -108,7 +135,7 @@ const About = () => {
                                             </div>
                                             <span className="text-slate-500 text-[10px] font-mono">2021 — PRESENT</span>
                                         </div>
-                                        <p className="text-slate-400 text-xs leading-relaxed">Pioneered scalable microservices architecture for real-time data visualization. Developed Full-Stack applications, Backend APIs, and Web Socket systems. Managed a team of 1 - 2 operators across different projects.</p>
+                                        <p className="text-slate-400 text-xs leading-relaxed">I designed and built interactive frontend and scalable backend systems for real-time applications. Developed full-stack solutions, APIs, and WebSocket integrations, while leading a small team across multiple projects.</p>
                                     </div>
                                 </div>
                                 <div className="relative group">
@@ -122,7 +149,7 @@ const About = () => {
                                             </div>
                                             <span className="text-slate-500 text-[10px] font-mono">2022 — 2023</span>
                                         </div>
-                                        <p className="text-slate-400 text-xs leading-relaxed">Built interactive UI/UX and  Engineered secure backend systems and communication protocols using JavaScript and Node.js.</p>
+                                        <p className="text-slate-400 text-xs leading-relaxed">I built interactive UI/UX and Engineered secure backend systems and communication protocols using JavaScript and Node.js.</p>
                                     </div>
                                 </div>
                                 <div className="relative group">
@@ -135,7 +162,7 @@ const About = () => {
                                             </div>
                                             <span className="text-slate-500 text-[10px] font-mono">2023 — 2025</span>
                                         </div>
-                                        <p className="text-slate-400 text-xs leading-relaxed">BSc in Computer Science. Studied High-Performance Computing, Distributed Systems and Web Development.</p>
+                                        <p className="text-slate-400 text-xs leading-relaxed">BSc in Computer Science. <br /> Studied High-Performance Computing, Distributed Systems and Web Development.</p>
                                     </div>
                                 </div>
                             </div>
@@ -144,15 +171,15 @@ const About = () => {
 
                     <div className="lg:col-span-3 flex flex-col gap-6">
                         <div className="bg-white/5 border border-white/10 p-6 rounded-lg">
-                            <h4 className="text-white text-xs font-black tracking-[0.2em] mb-6 uppercase text-center">TECH_STACK_MODULE</h4>
+                            <h4 className="text-white text-xs font-black tracking-[0.2em] mb-6 uppercase text-center">TECH STACK</h4>
                             <div className="grid grid-cols-2 gap-3">
                                 {[
                                     { icon: 'javascript', label: 'REACT_JS' },
-                                    { icon: 'terminal', label: 'NODE_CORE' },
+                                    { icon: 'terminal', label: 'NODE_JS' },
                                     { icon: 'database', label: 'MONGODB' },
                                     { icon: 'cloud', label: 'AWS_CLOUD' },
                                     { icon: 'settings_ethernet', label: 'PYTHON_OS' },
-                                    { icon: 'security', label: 'K8S_ORCH' },
+                                    { icon: 'security', label: 'JWT_AUTH' },
                                 ].map((stack) => (
                                     <div key={stack.label} className="flex flex-col items-center justify-center gap-3 p-4 rounded border border-white/10 bg-white/5 hover:border-primary transition-colors group cursor-default">
                                         <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">{stack.icon}</span>
@@ -162,9 +189,9 @@ const About = () => {
                             </div>
                             <div className="mt-8 pt-8 border-t border-white/10">
                                 <div className="flex flex-col gap-4">
-                                    <h5 className="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Auxiliary_Tools</h5>
+                                    <h5 className="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Tools</h5>
                                     <div className="flex flex-wrap gap-2">
-                                        {['DOCKER', 'REDIS', 'GRAPHQL', 'NEXT.JS', 'TAILWINDCSS', 'POSTGRES'].map((tool) => (
+                                        {['DOCKER', 'REDIS', 'GRAPHQL', 'NEXT.JS', 'TAILWINDCSS'].map((tool) => (
                                             <span key={tool} className="px-2 py-1 bg-white/5 border border-white/10 text-[9px] text-slate-400 font-mono">{tool}</span>
                                         ))}
                                     </div>
@@ -175,19 +202,19 @@ const About = () => {
                             <div className="absolute top-0 right-0 p-2 opacity-20">
                                 <span className="material-symbols-outlined text-6xl">memory</span>
                             </div>
-                            <h4 className="text-white text-xs font-bold tracking-[0.3em] uppercase">SYSTEM_STATE</h4>
+                            <h4 className="text-white text-xs font-bold tracking-[0.3em] uppercase">Status</h4>
                             <div className="space-y-2">
                                 <div className="flex justify-between text-[10px] font-mono border-b border-white/10 pb-1">
-                                    <span className="text-slate-500 uppercase">Capacity:</span>
-                                    <span className="text-primary">85%_LOAD</span>
+                                    <span className="text-slate-500 uppercase">Full-time roles:</span>
+                                    <span className="text-primary">AVAILABLE</span>
                                 </div>
                                 <div className="flex justify-between text-[10px] font-mono border-b border-white/10 pb-1">
-                                    <span className="text-slate-500 uppercase">Sync:</span>
-                                    <span className="text-primary">ACTIVE</span>
+                                    <span className="text-slate-500 uppercase">Contract roles:</span>
+                                    <span className="text-primary">AVAILABLE</span>
                                 </div>
                             </div>
                             <p className="text-[10px] text-slate-500 font-mono mt-2 leading-relaxed italic">
-                                &gt; System.ready? (true)
+                                &gt; I am Open to opportunities
                             </p>
                         </div>
                     </div>
