@@ -24,11 +24,11 @@ const FeaturedProjects = () => {
     // Show loading state
     if (loading) {
         return (
-            <section className="py-32 bg-[#050505]" id="projects">
+            <section className="py-10 lg:py-32 bg-[#050505]" id="projects">
                 <div className="max-w-7xl mx-auto px-6 lg:px-12">
                     <div className="mb-20">
-                        <h2 className="text-primary font-bold text-xs tracking-[0.5em] uppercase mb-6 text-center">Case_Studies</h2>
-                        <h3 className="text-2xl md:text-5xl lg:text-7xl font-display font-bold tracking-tighter uppercase text-center leading-none">Deployment<br />Archive</h3>
+                        <h2 className="text-primary font-bold text-xs tracking-[0.5em] uppercase mb-6 text-center">Case Studies</h2>
+                        <h3 className="text-2xl md:text-5xl lg:text-7xl font-display font-bold tracking-tighter uppercase text-center leading-none">Deployed<br />Projects</h3>
                     </div>
                     <div className="flex justify-center items-center h-64">
                         <div className="text-primary text-sm font-mono uppercase tracking-widest">Loading_Projects...</div>
@@ -47,11 +47,11 @@ const FeaturedProjects = () => {
     const [mainProject, ...otherProjects] = projects;
 
     return (
-        <section className="py-32 bg-[#050505]" id="projects">
+        <section className="py-10 lg:py-32 bg-[#050505]" id="projects">
             <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <div className="mb-20">
-                    <h2 className="text-primary font-bold text-xs tracking-[0.5em] uppercase mb-6 text-center">Case_Studies</h2>
-                    <h3 className="text-2xl md:text-7xl font-display font-bold tracking-tighter uppercase text-center leading-none">Deployment<br />Archive</h3>
+                    <h2 className="text-primary font-bold text-xs tracking-[0.5em] uppercase mb-6 text-center">Case Studies</h2>
+                    <h3 className="text-2xl md:text-7xl font-display font-bold tracking-tighter uppercase text-center leading-none">Deployed<br />Projects</h3>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                     {/* Main Featured Project */}

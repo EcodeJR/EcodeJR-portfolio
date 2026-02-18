@@ -41,11 +41,14 @@ const TestimonialsSection = () => {
     }, []);
 
     return (
-        <section className="py-32 relative overflow-hidden">
+        <section className="py-10 lg:py-32 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-10">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-display font-black text-white/5 whitespace-nowrap">FEEDBACK_LOOP</div>
             </div>
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+                <div className="mb-20">
+                    <h2 className="text-primary font-bold text-xs tracking-[0.5em] uppercase mb-6 text-center">TESTIMONIALS</h2>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     {testimonials.map((t, index) => (
                         <div key={index} className="tech-card bg-surface-dark border border-white/10 p-6 sm:p-12 relative overflow-hidden group h-full flex flex-col">
