@@ -6,25 +6,25 @@ const ServicesSection = () => {
             id: '01',
             icon: 'terminal',
             title: 'Full-Stack\nEngineering',
-            description: 'Robust architecture using MongoDB, Express, React, and Node.js.'
+            description: 'Building scalable web applications using MongoDB, Express, React, and Node.js.'
         },
         {
             id: '02',
             icon: 'layers',
-            title: 'Frontend\nEngineering',
-            description: 'Designing interfaces that bridge the gap between human and machine.'
+            title: 'Frontend\nArchitecture',
+            description: 'Building responsive, accessible, and high-performance user interfaces with modern frameworks.'
         },
         {
             id: '03',
             icon: 'database',
-            title: 'Backend\nEngineering',
-            description: 'Optimized backend and database schemas for ultra-fast query performance.'
+            title: 'Backend\nSystems',
+            description: 'Designing scalable APIs and efficient database schemas for reliable performance.'
         },
         {
             id: '04',
             icon: 'hub',
-            title: 'API\nEngineering',
-            description: 'High-frequency RESTful and GraphQL communication layers.'
+            title: 'Real-Time\n& AI Integration',
+            description: 'Developing interactive real-time applications and AI-driven features.'
         }
     ];
 
@@ -37,7 +37,7 @@ const ServicesSection = () => {
                         <h3 className="text-2xl md:text-4xl lg:text-6xl font-display font-bold tracking-tighter uppercase leading-none">What I Do</h3>
                     </div>
                     <p className="text-zinc-500 text-sm max-w-xs font-medium uppercase tracking-wider">
-                        I build performant, secure, and user focused applications using modern web technologies.
+                        I enjoy building scalable, user-focused web applications that are fast, secure, and built to last.
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

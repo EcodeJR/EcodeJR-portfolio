@@ -31,22 +31,22 @@ const ForgotPassword = () => {
                     <div className="bg-primary/10 border-b border-primary/30 p-6 flex flex-col gap-1">
                         <div className="flex items-center gap-2">
                             <span className="size-2 rounded-full bg-primary animate-pulse"></span>
-                            <span className="text-[10px] font-bold tracking-[0.3em] text-primary uppercase">Recovery_Protocol</span>
+                            <span className="text-[10px] font-bold tracking-[0.3em] text-primary uppercase">Password_Recovery</span>
                         </div>
-                        <h1 className="text-primary text-2xl font-black tracking-[0.1em] md:tracking-[0.4em] uppercase">FORGOT_KEY</h1>
+                        <h1 className="text-primary text-xl font-black tracking-[0.1em] md:tracking-[0.4em] uppercase">FORGOT_PASSWORD</h1>
                     </div>
 
                     <form className="p-8 space-y-8" onSubmit={handleSubmit}>
                         <div className="space-y-6">
                             <p className="text-[10px] font-mono tracking-widest text-slate-400 uppercase leading-relaxed">
-                                Enter your registered identifier to receive an encrypted recovery link.
+                                Enter your registered email to receive an encrypted recovery link.
                             </p>
                             <div className="space-y-2">
-                                <label className="block text-[10px] font-mono tracking-widest text-slate-500 uppercase">USER_IDENTIFIER (Email)</label>
+                                <label className="block text-[10px] font-mono tracking-widest text-slate-500 uppercase">Email</label>
                                 <div className="relative">
                                     <input
                                         className="w-full bg-black/40 border border-primary/40 rounded py-3 px-4 text-sm font-mono text-white placeholder:text-slate-700 focus:border-primary focus:outline-none focus:shadow-[0_0_10px_rgba(242,108,13,0.4)] transition-all uppercase tracking-wider"
-                                        placeholder="ENTER_ID_STRING"
+                                        placeholder="ENTER_EMAIL"
                                         type="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}

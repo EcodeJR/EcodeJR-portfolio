@@ -14,24 +14,25 @@ const HeroSection = () => {
                 <div className="flex flex-col gap-12 max-w-4xl">
                     <div className="flex items-center gap-4 text-primary font-bold text-xs tracking-[0.4em] uppercase">
                         <span className="w-12 h-[1px] bg-primary"></span>
-                        Full Stack Architect
+                        Full Stack Engineer
                     </div>
                     <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-none wide-type">
                         BUILDING<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">FUTURE</span><br />
-                        SOLUTIONS
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-400">SCALABLE</span><br />
+                        WEB PRODUCTS
                     </h1>
                     <div className="flex flex-col md:flex-row items-start md:items-center gap-8 mt-4">
                         <p className="text-zinc-500 max-w-sm text-base md:text-lg leading-relaxed border-l-2 border-primary/30 pl-6">
-                            From concept to code to customers - building products that ship and scale. <br className="hidden sm:block" /> let's build the future one project at a time
+                            I design and build modern web applications with clean UI/UX, architecture and reliable backend systems.
+                            <br className="hidden sm:block" /> Turning ideas into real, working products.
                         </p>
                         <div className="flex gap-4">
-                            <Link to="/contact" className="size-20 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group">
+                            <Link to="/projects" className="size-20 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group">
                                 <span className="material-symbols-outlined group-hover:rotate-45 transition-transform">arrow_outward</span>
                             </Link>
                             <div className="flex flex-col justify-center">
-                                <span className="text-[10px] text-zinc-500 font-bold tracking-widest mb-1 uppercase">Next Project</span>
-                                <span className="text-sm font-display font-bold">GAME_NIGHT</span>
+                                {/* <span className="text-[10px] text-zinc-500 font-bold tracking-widest mb-1 uppercase">GAME_NIGHT</span> */}
+                                <span className="text-sm font-display font-bold">View Projects</span>
                             </div>
                         </div>
                     </div>

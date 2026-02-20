@@ -152,7 +152,7 @@ const Register = () => {
                             disabled={loading}
                             className="w-full bg-primary py-4 text-white text-xs font-black tracking-[0.4em] uppercase hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(242,108,13,0.4)] flex items-center justify-center gap-3 group relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
                         >
-                            <span className="relative z-10">{loading ? 'REGISTERING...' : 'REGISTER_NEW_NODE'}</span>
+                            <span className="relative z-10">{loading ? 'REGISTERING...' : 'REGISTER'}</span>
                             <span className="material-symbols-outlined relative z-10 text-sm group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
                             <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300"></div>
                         </button>

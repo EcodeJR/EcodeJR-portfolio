@@ -40,13 +40,13 @@ const ResetPassword = () => {
                             <span className="size-2 rounded-full bg-primary animate-pulse"></span>
                             <span className="text-[10px] font-bold tracking-[0.3em] text-primary uppercase">Identity_Recovery</span>
                         </div>
-                        <h1 className="text-primary text-2xl font-black tracking-[0.1em] md:tracking-[0.4em] uppercase">RESET_KEY</h1>
+                        <h1 className="text-primary text-2xl font-black tracking-[0.1em] md:tracking-[0.4em] uppercase">RESET_PASSWORD</h1>
                     </div>
 
                     <form className="p-8 space-y-8" onSubmit={handleSubmit}>
                         <div className="space-y-6">
                             <div className="space-y-2">
-                                <label className="block text-[10px] font-mono tracking-widest text-slate-500 uppercase">NEW_SECURE_KEY</label>
+                                <label className="block text-[10px] font-mono tracking-widest text-slate-500 uppercase">NEW_PASSWORD</label>
                                 <div className="relative">
                                     <input
                                         className="w-full bg-black/40 border border-primary/40 rounded py-3 px-4 text-sm font-mono text-white placeholder:text-slate-700 focus:border-primary focus:outline-none focus:shadow-[0_0_10px_rgba(242,108,13,0.4)] transition-all tracking-widest"
@@ -61,7 +61,7 @@ const ResetPassword = () => {
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <label className="block text-[10px] font-mono tracking-widest text-slate-500 uppercase">CONFIRM_NEW_KEY</label>
+                                <label className="block text-[10px] font-mono tracking-widest text-slate-500 uppercase">CONFIRM_NEW_PASSWORD</label>
                                 <div className="relative">
                                     <input
                                         className="w-full bg-black/40 border border-primary/40 rounded py-3 px-4 text-sm font-mono text-white placeholder:text-slate-700 focus:border-primary focus:outline-none focus:shadow-[0_0_10px_rgba(242,108,13,0.4)] transition-all tracking-widest"
@@ -82,7 +82,7 @@ const ResetPassword = () => {
                             type="submit"
                             disabled={loading}
                         >
-                            {loading ? 'UPDATING...' : 'UPDATE_SECURE_KEY'}
+                            {loading ? 'UPDATING...' : 'UPDATE_PASSWORD'}
                         </button>
                     </form>
 
