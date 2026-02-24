@@ -37,6 +37,8 @@ const portfolioProjectSchema = new mongoose.Schema({
     images: [String],
     imageUrl: String,
     heroImage: String,
+    previewImage: String,
+    fullViewImage: String,
     liveDemoUrl: String,
     githubUrl: String,
     projectUrl: String,

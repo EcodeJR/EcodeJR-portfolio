@@ -70,7 +70,7 @@ const FeaturedProjects = () => {
                         {mainProject && (
                             <div className="group">
                                 <div className="relative tech-card overflow-hidden bg-surface-dark aspect-[4/5] sm:aspect-[16/9] border border-white/10 group-hover:border-primary transition-all">
-                                    <div className="absolute inset-0 bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700" style={{ backgroundImage: `url('${mainProject.imageUrl}')` }}></div>
+                                    <div className="absolute inset-0 bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-700" style={{ backgroundImage: `url('${mainProject.previewImage || mainProject.imageUrl}')` }}></div>
                                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
                                     <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 flex justify-between items-end">
                                         <div>
@@ -117,7 +117,7 @@ const FeaturedProjects = () => {
                     <div className="lg:col-span-4 transition-all duration-500">
                         {currentSideProject ? (
                             <div className="relative tech-card h-full overflow-hidden bg-surface-dark border border-white/10 hover:border-primary transition-all p-8 flex flex-col group animate-in fade-in slide-in-from-right-4 duration-500" key={currentSideProject._id}>
-                                <div className="aspect-square bg-cover bg-center rounded-2xl mb-8 grayscale group-hover:grayscale-0 transition-all duration-700" style={{ backgroundImage: `url('${getSafeUrl(currentSideProject.imageUrl)}')` }}></div>
+                                <div className="aspect-square bg-cover bg-center rounded-2xl mb-8 grayscale group-hover:grayscale-0 transition-all duration-700" style={{ backgroundImage: `url('${getSafeUrl(currentSideProject.previewImage || currentSideProject.imageUrl)}')` }}></div>
                                 <div className="mt-auto">
                                     <span className="text-[10px] font-bold text-primary tracking-widest block mb-2 uppercase">{currentSideProject.category}</span>
                                     <h4 className="text-2xl font-display font-bold uppercase tracking-tighter mb-4">{currentSideProject.title}</h4>

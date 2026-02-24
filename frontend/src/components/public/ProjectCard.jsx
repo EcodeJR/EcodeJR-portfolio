@@ -7,7 +7,7 @@ const ProjectCard = ({ project }) => {
         <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
             <div className="relative h-48 w-full overflow-hidden">
                 <img
-                    src={project.heroImage || 'https://via.placeholder.com/600x400?text=Project+Image'}
+                    src={project.previewImage || project.heroImage || project.imageUrl || 'https://via.placeholder.com/600x400?text=Project+Image'}
                     alt={project.title}
                     className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
                 />

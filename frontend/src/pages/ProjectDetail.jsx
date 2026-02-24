@@ -181,6 +181,25 @@ const ProjectDetail = () => {
                                             </div>
                                         </div>
                                     </div>
+
+                                    {/* Section: Full View Project Image */}
+                                    {project.fullViewImage && (
+                                        <div className="mt-12 space-y-8">
+                                            <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                                                <h2 className="text-white text-2xl md:text-3xl font-bold leading-tight uppercase flex items-center gap-3">
+                                                    <span className="text-primary text-sm font-mono">[03]</span> Project Deep Dive
+                                                </h2>
+                                            </div>
+                                            <div className="w-full rounded-2xl overflow-hidden border border-white/10 bg-surface-dark shadow-2xl relative">
+                                                <img
+                                                    src={getSafeUrl(project.fullViewImage)}
+                                                    alt="Full Project View"
+                                                    className="w-full h-auto object-contain block"
+                                                />
+                                                <div className="absolute inset-0 pointer-events-none border border-white/5 rounded-2xl"></div>
+                                            </div>
+                                        </div>
+                                    )}
                                 </section>
 
                                 {/* Section: Results */}
@@ -188,7 +207,7 @@ const ProjectDetail = () => {
                                 {/* For now keeping hidden as schema doesn't match mock data fully yet */}
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16"></div>
                                 <h2 className="text-white text-2xl md:text-3xl font-bold leading-tight uppercase mb-8 flex items-center gap-3">
-                                    <span className="text-primary text-sm font-mono">[03]</span> MISSION_RESULTS
+                                    <span className="text-primary text-sm font-mono">[04]</span> MISSION_RESULTS
                                 </h2>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                                     <div className="flex flex-col gap-1">
@@ -208,6 +227,36 @@ const ProjectDetail = () => {
                                         <span className="text-gray-500 text-[10px] uppercase font-bold tracking-widest">Design_Audit</span>
                                     </div>
                                 </div>
+
+                                {/* Section: Gallery */}
+                                {project.images && project.images.length > 0 && (
+                                    <section className="mt-16 pt-16 border-t border-white/10">
+                                        <div className="flex flex-col gap-8">
+                                            <div>
+                                                <h2 className="text-white text-2xl md:text-3xl font-bold leading-tight uppercase flex items-center gap-3 mb-2">
+                                                    <span className="text-primary text-sm font-mono">[05]</span> Project Archive
+                                                </h2>
+                                                <p className="text-gray-500 text-xs font-mono uppercase tracking-widest">Full Interface Preview for Recruiters</p>
+                                            </div>
+
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                                {project.images.map((img, index) => (
+                                                    <div key={index} className="group relative rounded-xl overflow-hidden border border-white/10 bg-black aspect-video cursor-zoom-in">
+                                                        <img
+                                                            src={getSafeUrl(img)}
+                                                            alt={`Project Module ${index + 1}`}
+                                                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-105"
+                                                        />
+                                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                                                            <span className="text-[10px] font-mono text-primary uppercase bg-black/50 px-2 py-1 rounded border border-primary/30">Module_View_00{index + 1}</span>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </section>
+                                )}
+
                                 <p className="mt-8 text-gray-400 font-light italic leading-relaxed border-t border-white/10 pt-6">
                                     "The level of detail and technical precision in the Synthetic OS interface sets a new benchmark for our internal tools architecture." — System Administrator
                                 </p>

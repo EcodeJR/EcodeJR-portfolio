@@ -16,8 +16,14 @@ const ProjectForm = () => {
         problemStatement: '',
         solution: '',
         client: '',
-        imageUrl: '',
-        image: null,
+        imageUrl: '', // For backward compatibility / hero image
+        previewImage: '',
+        fullViewImage: '',
+        images: [], // Gallery images URLs
+        image: null, // File for imageUrl/hero
+        previewFile: null,
+        fullViewFile: null,
+        galleryFiles: [],
         technologies: '',
         projectUrl: '',
         repoUrl: '',
@@ -43,7 +49,10 @@ const ProjectForm = () => {
                     setFormData({
                         ...p,
                         technologies: p.technologies.join(', '), // Convert array to string
-                        image: null // Reset file
+                        image: null, // Reset file
+                        previewFile: null,
+                        fullViewFile: null,
+                        galleryFiles: []
                     });
                 } catch (err) {
                     console.error("Error fetching project", err);
@@ -73,7 +82,26 @@ const ProjectForm = () => {
     };
 
     const handleFileChange = (e) => {
-        setFormData(prev => ({ ...prev, image: e.target.files[0] }));
+        const { name } = e.target;
+        if (name === 'galleryFiles') {
+            setFormData(prev => ({ ...prev, galleryFiles: [...prev.galleryFiles, ...Array.from(e.target.files)] }));
+        } else {
+            setFormData(prev => ({ ...prev, [name]: e.target.files[0] }));
+        }
+    };
+
+    const removeGalleryFile = (index) => {
+        setFormData(prev => ({
+            ...prev,
+            galleryFiles: prev.galleryFiles.filter((_, i) => i !== index)
+        }));
+    };
+
+    const removeExistingImage = (index) => {
+        setFormData(prev => ({
+            ...prev,
+            images: prev.images.filter((_, i) => i !== index)
+        }));
     };
 
     const handleSubmit = async (e) => {
@@ -82,41 +110,64 @@ const ProjectForm = () => {
 
         try {
             let imageUrl = formData.imageUrl;
+            let previewImage = formData.previewImage;
+            let fullViewImage = formData.fullViewImage;
+            let galleryImages = [...(formData.images || [])];
 
-            // Handle Image Upload
-            if (formData.image) {
-                console.log("Starting image upload...");
-                setUploading(true);
+            const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+            const hostUrl = apiBaseUrl.replace('/api', '');
+
+            const uploadFile = async (file) => {
                 const uploadData = new FormData();
-                uploadData.append('image', formData.image);
-
+                uploadData.append('image', file);
                 const uploadRes = await api.post('/upload', uploadData, {
                     headers: { 'Content-Type': 'multipart/form-data' }
                 });
-
-                console.log("Upload successful:", uploadRes.data);
-
-                // Safe URL construction
-                const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-                const hostUrl = apiBaseUrl.replace('/api', '');
-
-                // If it's a Cloudinary URL (starts with http), use it as is. 
-                // Otherwise, prefix with hostUrl for legacy local storage.
                 const filePath = uploadRes.data.filePath;
-                imageUrl = filePath.startsWith('http') ? filePath : `${hostUrl}${filePath}`;
+                return filePath.startsWith('http') ? filePath : `${hostUrl}${filePath}`;
+            };
 
-                console.log("Constructed Image URL:", imageUrl);
-                setUploading(false);
+            setUploading(true);
+
+            // Handle Main Image Upload
+            if (formData.image) {
+                imageUrl = await uploadFile(formData.image);
             }
 
-            console.log("Preparing payload for save...");
+            // Handle Preview Image Upload
+            if (formData.previewFile) {
+                previewImage = await uploadFile(formData.previewFile);
+            }
+
+            // Handle Full View Image Upload
+            if (formData.fullViewFile) {
+                fullViewImage = await uploadFile(formData.fullViewFile);
+            }
+
+            // Handle Gallery Images Upload
+            if (formData.galleryFiles && formData.galleryFiles.length > 0) {
+                for (const file of formData.galleryFiles) {
+                    const url = await uploadFile(file);
+                    galleryImages.push(url);
+                }
+            }
+
+            setUploading(false);
 
             const payload = {
                 ...formData,
                 imageUrl,
+                previewImage,
+                fullViewImage,
+                images: galleryImages,
                 technologies: formData.technologies.split(',').map(t => t.trim()).filter(Boolean)
             };
-            delete payload.image; // Don't send file object in JSON
+
+            // Cleanup file objects before sending
+            delete payload.image;
+            delete payload.previewFile;
+            delete payload.fullViewFile;
+            delete payload.galleryFiles;
 
             if (isEditMode) {
                 await api.put(`/portfolio/${id}`, payload);
@@ -200,18 +251,55 @@ const ProjectForm = () => {
                     <div className="space-y-4">
                         <h3 className="text-xs font-mono text-primary uppercase tracking-[0.3em] border-b border-white/10 pb-2">Media_&_Links</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="md:col-span-2">
-                                <label className="block text-xs font-mono text-slate-500 uppercase mb-1">Project Image</label>
-                                <input type="file" onChange={handleFileChange} className="w-full bg-black/50 border border-white/20 rounded p-2 text-xs text-slate-400" />
+                            <div>
+                                <label className="block text-xs font-mono text-slate-500 uppercase mb-1">Main Hero Image</label>
+                                <input type="file" name="image" onChange={handleFileChange} className="w-full bg-black/50 border border-white/20 rounded p-2 text-xs text-slate-400" title="Primary image for the project detail header" />
                                 {formData.imageUrl && <p className="text-[10px] text-primary mt-1 truncate">Current: {formData.imageUrl}</p>}
                             </div>
                             <div>
-                                <label className="block text-xs font-mono text-slate-500 uppercase mb-1">Live URL</label>
+                                <label className="block text-xs font-mono text-slate-500 uppercase mb-1">Preview Image (Home/Gallery Card)</label>
+                                <input type="file" name="previewFile" onChange={handleFileChange} className="w-full bg-black/50 border border-white/20 rounded p-2 text-xs text-slate-400" title="Image displayed on the home page and project gallery cards" />
+                                {formData.previewImage && <p className="text-[10px] text-primary mt-1 truncate">Current: {formData.previewImage}</p>}
+                            </div>
+                            <div className="md:col-span-2">
+                                <label className="block text-xs font-mono text-slate-500 uppercase mb-1">Full Case Study View (Long Height Image)</label>
+                                <input type="file" name="fullViewFile" onChange={handleFileChange} className="w-full bg-black/50 border border-white/20 rounded p-2 text-xs text-slate-400" title="Complete long image for the deep dive section" />
+                                {formData.fullViewImage && <p className="text-[10px] text-primary mt-1 truncate">Current: {formData.fullViewImage}</p>}
+                            </div>
+                            <div>
+                                <label className="block text-xs font-mono text-slate-500 uppercase mb-1">Live URL (Demo)</label>
                                 <input name="projectUrl" value={formData.projectUrl} onChange={handleChange} className="w-full bg-black/50 border border-white/20 rounded p-3 text-sm focus:border-primary focus:outline-none" placeholder="https://example.com" />
                             </div>
                             <div>
-                                <label className="block text-xs font-mono text-slate-500 uppercase mb-1">Repo URL</label>
+                                <label className="block text-xs font-mono text-slate-500 uppercase mb-1">Repo URL (GitHub)</label>
                                 <input name="repoUrl" value={formData.repoUrl} onChange={handleChange} className="w-full bg-black/50 border border-white/20 rounded p-3 text-sm focus:border-primary focus:outline-none" placeholder="https://github.com/..." />
+                            </div>
+                            <div className="md:col-span-2">
+                                <label className="block text-xs font-mono text-slate-500 uppercase mb-1">Project Page Archive (Multiple Gallery Images for Recruiters)</label>
+                                <input type="file" name="galleryFiles" multiple onChange={handleFileChange} className="w-full bg-black/50 border border-white/20 rounded p-2 text-xs text-slate-400" title="Preview all important pages/screens of this project" />
+
+                                <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                    {/* Existing Gallery Images */}
+                                    {formData.images && formData.images.map((url, idx) => (
+                                        <div key={`existing-${idx}`} className="relative group aspect-video bg-surface-dark border border-white/10 rounded overflow-hidden">
+                                            <img src={url} alt={`Gallery ${idx}`} className="w-full h-full object-cover" />
+                                            <button type="button" onClick={() => removeExistingImage(idx)} className="absolute top-1 right-1 bg-red-500/80 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <span className="material-symbols-outlined text-xs">delete</span>
+                                            </button>
+                                        </div>
+                                    ))}
+                                    {/* New Gallery Files */}
+                                    {formData.galleryFiles && formData.galleryFiles.map((file, idx) => (
+                                        <div key={`new-${idx}`} className="relative group aspect-video bg-primary/10 border border-primary/30 rounded overflow-hidden">
+                                            <div className="w-full h-full flex items-center justify-center text-[10px] text-primary font-mono text-center p-2 truncate">
+                                                {file.name}
+                                            </div>
+                                            <button type="button" onClick={() => removeGalleryFile(idx)} className="absolute top-1 right-1 bg-red-500/80 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <span className="material-symbols-outlined text-xs">delete</span>
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
