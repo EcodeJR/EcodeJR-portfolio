@@ -1,5 +1,6 @@
 import React from 'react';
 import about_profile from '../assets/about_profile.jpeg';
+import my_cv from '../assets/Emmanuel_Dalyop_CV.pdf';
 
 const About = () => {
     return (
@@ -40,11 +41,20 @@ const About = () => {
                                 <span className="material-symbols-outlined text-sm">fingerprint</span>
                                 PROFILE
                             </h4>
-                            <p className="text-slate-400 text-xs font-mono leading-relaxed">
+                            <p className="text-slate-400 text-xs font-mono leading-relaxed mb-6">
                                 &gt; I’m a Software Developer who enjoys building things from scratch, turning ideas into working products using MERN stack and any modern technology that fits and works. I focus on performance, scalability, and clean user experience.
                                 <br /><br />
                                 &gt; Mission: Creating software that solves real problems and delivers real value.
                             </p>
+
+                            <a
+                                href={my_cv}
+                                download="Emmanuel_Dalyop_CV.pdf"
+                                className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-primary text-background-dark font-black text-xs uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_20px_rgba(242,108,13,0.3)] animate-pulse hover:animate-none"
+                            >
+                                <span className="material-symbols-outlined text-sm">download</span>
+                                DOWNLOAD_CV
+                            </a>
                         </div>
                     </div>
 
@@ -135,7 +145,7 @@ const About = () => {
                                             </div>
                                             <span className="text-slate-500 text-[10px] font-mono">2021 — PRESENT</span>
                                         </div>
-                                        <p className="text-slate-400 text-xs leading-relaxed">I designed and built interactive frontend and scalable backend systems for real-time applications. Developed full-stack solutions, APIs, and WebSocket integrations, while leading a small team across multiple projects.</p>
+                                        <p className="text-slate-400 text-xs leading-relaxed">I design and build interactive frontend and scalable backend systems for real-time applications. Develop full-stack solutions, APIs, and WebSocket integrations, while leading a small team across multiple projects.</p>
                                     </div>
                                 </div>
                                 <div className="relative group">
