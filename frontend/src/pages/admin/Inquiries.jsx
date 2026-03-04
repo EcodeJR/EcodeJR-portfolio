@@ -37,6 +37,26 @@ const Inquiries = () => {
         }
     };
 
+    const handleDelete = async (inquiryId) => {
+        if (!window.confirm('Are you sure you want to permanently delete this inquiry signal? This action cannot be undone.')) return;
+        try {
+            await api.delete(`/inquiries/${inquiryId}`);
+            alert('Inquiry purged from database.');
+
+            // Update local state instead of full refresh for smoother UX
+            const updatedInquiries = inquiries.filter(i => i._id !== inquiryId);
+            setInquiries(updatedInquiries);
+
+            // Clear selection or select next available
+            if (selectedInquiry?._id === inquiryId) {
+                setSelectedInquiry(updatedInquiries.length > 0 ? updatedInquiries[0] : null);
+            }
+        } catch (err) {
+            console.error('Deletion failed:', err);
+            alert(err.response?.data?.message || 'Failed to delete inquiry');
+        }
+    };
+
     const getStatusColor = (status) => {
         switch (status) {
             case 'new': return 'text-primary bg-primary/10 border-primary/20';
@@ -74,7 +94,16 @@ const Inquiries = () => {
                             className={`p-5 sm:p-6 rounded-2xl relative overflow-hidden group hover:border-primary/50 cursor-pointer transition-all border min-h-[140px] flex flex-col justify-between ${selectedInquiry?._id === inquiry._id ? 'bg-white/10 border-primary shadow-[0_0_20px_rgba(249,107,6,0.1)]' : 'bg-white/5 border-white/10'}`}
                         >
                             <div className="flex flex-col gap-2">
-                                <p className="text-[10px] text-slate-500 font-mono tracking-tighter">ID: {inquiry._id.substring(0, 8)}</p>
+                                <div className="flex justify-between items-start">
+                                    <p className="text-[10px] text-slate-500 font-mono tracking-tighter">ID: {inquiry._id.substring(0, 8)}</p>
+                                    <button
+                                        onClick={(e) => { e.stopPropagation(); handleDelete(inquiry._id); }}
+                                        className="opacity-0 group-hover:opacity-100 p-1 hover:text-red-500 transition-all"
+                                        title="Purge Signal"
+                                    >
+                                        <span className="material-symbols-outlined text-sm">delete_forever</span>
+                                    </button>
+                                </div>
                                 <h3 className="text-sm font-bold text-white group-hover:text-primary transition-colors uppercase truncate">{inquiry.subject || inquiry.name}</h3>
                                 <div className="flex items-center gap-2 overflow-hidden">
                                     <span className={`text-[8px] font-black px-2 py-0.5 rounded-full border shrink-0 ${inquiry.inquiryType === 'urgent' ? 'text-red-400 border-red-400/30 bg-red-400/10' : inquiry.inquiryType === 'consultation' ? 'text-blue-400 border-blue-400/30 bg-blue-400/10' : 'text-primary border-primary/30 bg-primary/10'}`}>
@@ -205,6 +234,13 @@ const Inquiries = () => {
                                 <span className="material-symbols-outlined text-lg">terminal</span>
                                 Establish_Contact
                             </a>
+                            <button
+                                onClick={() => handleDelete(selectedInquiry._id)}
+                                className="flex-1 sm:flex-none px-6 sm:px-10 py-4 bg-red-500/10 border border-red-500/50 text-red-500 hover:bg-red-500 hover:text-white hover:shadow-[0_0_30px_rgba(239,68,68,0.4)] hover:scale-[1.02] rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2"
+                            >
+                                <span className="material-symbols-outlined text-lg">delete_sweep</span>
+                                Purge_Signal
+                            </button>
                         </div>
                     </div>
                 ) : (

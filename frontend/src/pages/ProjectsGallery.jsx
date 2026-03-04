@@ -28,14 +28,23 @@ const ProjectsGallery = () => {
         fetchProjects();
     }, []);
 
+    // Helper to normalize tech names for merging (e.g., "tailwind-css" -> "tailwindcss")
+    const normalizeTech = (tech) => tech.toLowerCase().replace(/[^a-z0-9]/g, '');
+
     // Get unique tech stacks and categories for dynamic filtering
-    const { availableTech, availableCategories, availableYears } = React.useMemo(() => {
-        const techSet = new Set();
+    const { availableTech, availableCategories, availableYears, techNormalizationMap } = React.useMemo(() => {
+        const techGroups = {}; // normalized -> display name
         const categorySet = new Set();
         const yearSet = new Set();
 
         projects.forEach(project => {
-            project.technologies?.forEach(tech => techSet.add(tech));
+            project.technologies?.forEach(tech => {
+                const normalized = normalizeTech(tech);
+                // Keep the first (or most conventional) casing as display name
+                if (!techGroups[normalized]) techGroups[normalized] = tech;
+                // If we find a version with better casing (e.g., "React" vs "react"), we could improve this
+                // but for now, first-come-first-served is simple and effective
+            });
             if (project.projectType) categorySet.add(project.projectType);
             if (project.dateCompleted) {
                 yearSet.add(new Date(project.dateCompleted).getFullYear().toString());
@@ -43,7 +52,8 @@ const ProjectsGallery = () => {
         });
 
         return {
-            availableTech: Array.from(techSet).sort(),
+            availableTech: Object.values(techGroups).sort(),
+            techNormalizationMap: techGroups, // maps normalized -> canonical display
             availableCategories: Array.from(categorySet).sort(),
             availableYears: Array.from(yearSet).sort((a, b) => b - a)
         };
@@ -52,14 +62,20 @@ const ProjectsGallery = () => {
     // Calculate counts for each filter option
     const filterCounts = React.useMemo(() => {
         const counts = {
-            tech: {},
+            tech: {}, // key is display name
             category: {},
             timeline: {}
         };
 
         projects.forEach(project => {
+            const seenNormalizedInProject = new Set();
             project.technologies?.forEach(tech => {
-                counts.tech[tech] = (counts.tech[tech] || 0) + 1;
+                const normalized = normalizeTech(tech);
+                if (!seenNormalizedInProject.has(normalized)) {
+                    const displayName = techNormalizationMap[normalized];
+                    counts.tech[displayName] = (counts.tech[displayName] || 0) + 1;
+                    seenNormalizedInProject.add(normalized);
+                }
             });
             if (project.projectType) {
                 counts.category[project.projectType] = (counts.category[project.projectType] || 0) + 1;
@@ -71,7 +87,7 @@ const ProjectsGallery = () => {
         });
 
         return counts;
-    }, [projects]);
+    }, [projects, techNormalizationMap]);
 
     // Filtering and Sorting Logic
     const filteredProjects = React.useMemo(() => {
@@ -80,7 +96,7 @@ const ProjectsGallery = () => {
         // Filter by Tech Stack (OR logic: if project has ANY of the selected techs)
         if (filters.techStack.length > 0) {
             result = result.filter(project =>
-                project.technologies?.some(tech => filters.techStack.includes(tech))
+                project.technologies?.some(tech => filters.techStack.includes(normalizeTech(tech)))
             );
         }
 
@@ -115,11 +131,12 @@ const ProjectsGallery = () => {
     }, [projects, filters]);
 
     const handleTechToggle = (tech) => {
+        const normalized = normalizeTech(tech);
         setFilters(prev => ({
             ...prev,
-            techStack: prev.techStack.includes(tech)
-                ? prev.techStack.filter(t => t !== tech)
-                : [...prev.techStack, tech]
+            techStack: prev.techStack.includes(normalized)
+                ? prev.techStack.filter(t => t !== normalized)
+                : [...prev.techStack, normalized]
         }));
     };
 
@@ -152,11 +169,11 @@ const ProjectsGallery = () => {
                                             <div className="flex items-center gap-3">
                                                 <input
                                                     type="checkbox"
-                                                    checked={filters.techStack.includes(tech)}
+                                                    checked={filters.techStack.includes(normalizeTech(tech))}
                                                     onChange={() => handleTechToggle(tech)}
                                                     className="hidden"
                                                 />
-                                                <div className={`w-2 h-2 rounded-full ring-4 ring-primary/20 ${filters.techStack.includes(tech) ? 'bg-primary' : 'bg-white/20'}`}></div>
+                                                <div className={`w-2 h-2 rounded-full ring-4 ring-primary/20 ${filters.techStack.includes(normalizeTech(tech)) ? 'bg-primary' : 'bg-white/20'}`}></div>
                                                 <span className="text-xs font-mono uppercase tracking-widest text-white">{tech}</span>
                                             </div>
                                             <span className="text-[9px] font-mono text-primary bg-primary/10 px-1.5 py-0.5 rounded">
