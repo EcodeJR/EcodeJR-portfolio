@@ -69,10 +69,19 @@ exports.projectInitiatedAccountEmail = (name, projectName, email, temporaryPassw
 
         <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #f26c0d;">
             <p style="margin-top: 0;"><strong>Dashboard Login Details</strong></p>
-            <p style="margin: 6px 0;"><strong>Email:</strong> ${email}</p>
-            ${hasTemporaryPassword
-              ? `<p style="margin: 6px 0;"><strong>Temporary Password:</strong> ${temporaryPassword}</p>`
-              : `<p style="margin: 6px 0;">Use your existing password to login. If you forgot it, use the password reset option.</p>`}
+          <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%; border-collapse: collapse; margin: 12px 0;">
+            <tr>
+              <td style="padding: 10px; border: 1px solid #e5e5e5; background-color: #ffffff; width: 170px;"><strong>Login Email</strong></td>
+              <td style="padding: 10px; border: 1px solid #e5e5e5; background-color: #ffffff; font-family: monospace; font-size: 14px;">${email}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border: 1px solid #e5e5e5; background-color: #ffffff; width: 170px;"><strong>Temporary Password</strong></td>
+              <td style="padding: 10px; border: 1px solid #e5e5e5; background-color: #ffffff; font-family: monospace; font-size: 14px;">${hasTemporaryPassword ? temporaryPassword : 'Use your existing password or reset it if needed.'}</td>
+            </tr>
+          </table>
+          ${hasTemporaryPassword
+            ? `<p style="margin: 6px 0; color: #333;">Use the login email and temporary password above for your first sign in.</p>`
+            : `<p style="margin: 6px 0; color: #333;">Use your existing password to login. If you forgot it, use the password reset option.</p>`}
             <div style="text-align: center; margin: 20px 0 5px;">
                 <a href="${process.env.CLIENT_URL}/login" style="background-color: #f26c0d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px;">LOGIN TO DASHBOARD</a>
             </div>
@@ -84,6 +93,27 @@ exports.projectInitiatedAccountEmail = (name, projectName, email, temporaryPassw
         <p style="font-size: 0.8em; color: #777;">System: EcodeJR-Portfolio_Project_Onboarding</p>
     </div>
   `;
+};
+
+exports.projectInitiatedAccountEmailText = (name, projectName, email, temporaryPassword) => {
+  const loginPassword = temporaryPassword || 'Use your existing password or reset it if needed.';
+
+  return [
+    `Hi ${name},`,
+    '',
+    `Your project request "${projectName}" has been received and is currently under review.`,
+    'You should expect a response from the development team soon with next steps.',
+    '',
+    'Dashboard Login Details',
+    `Login Email: ${email}`,
+    `Temporary Password: ${loginPassword}`,
+    `Login URL: ${process.env.CLIENT_URL}/login`,
+    '',
+    'Please change your password immediately after your first login.',
+    '',
+    'Best regards,',
+    'EcodeJR Support'
+  ].join('\n');
 };
 
 exports.passwordResetEmail = (name, resetUrl) => {

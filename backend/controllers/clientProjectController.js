@@ -5,7 +5,7 @@ const Media = require('../models/Media');
 const File = require('../models/File');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
-const { milestoneUpdateEmail, projectInitiatedAccountEmail } = require('../utils/emailTemplates');
+const { milestoneUpdateEmail, projectInitiatedAccountEmail, projectInitiatedAccountEmailText } = require('../utils/emailTemplates');
 
 // @desc    Get all client projects (Admin sees all, Client sees own)
 // @route   GET /api/projects
@@ -253,6 +253,12 @@ exports.createProjectFromInquiry = async (req, res) => {
                 email: user.email,
                 subject: 'Project Received & Dashboard Access - EcodeJR',
                 html: projectInitiatedAccountEmail(
+                    user.name || inquiry.name,
+                    project.projectName,
+                    user.email,
+                    tempPassword
+                ),
+                text: projectInitiatedAccountEmailText(
                     user.name || inquiry.name,
                     project.projectName,
                     user.email,
