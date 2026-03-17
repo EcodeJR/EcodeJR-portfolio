@@ -46,16 +46,42 @@ exports.userInquiryConfirmationEmail = (name, inquiryType) => {
         
         ${isProject ? `
         <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #f26c0d;">
-            <p style="margin-top: 0;"><strong>Next Step:</strong> To track your project progress and manage assets, please create an account on our platform using this email address.</p>
-            <div style="text-align: center; margin: 20px 0;">
-                <a href="${process.env.CLIENT_URL}/register" style="background-color: #f26c0d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px;">CREATE ACCOUNT</a>
-            </div>
+          <p style="margin-top: 0;"><strong>Next Step:</strong> Once your project is initiated, you will receive another email with your dashboard login email and temporary password so you can monitor progress.</p>
         </div>
         ` : ''}
         
         <p>Best regards,<br>EcodeJR Support</p>
         <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
         <p style="font-size: 0.8em; color: #777;">System: EcodeJR-Portfolio_Gateway_v4.2</p>
+    </div>
+  `;
+};
+
+exports.projectInitiatedAccountEmail = (name, projectName, email, temporaryPassword) => {
+  const hasTemporaryPassword = Boolean(temporaryPassword);
+
+  return `
+    <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+        <h2 style="color: #f26c0d;">PROJECT UNDER REVIEW</h2>
+        <p>Hi ${name},</p>
+        <p>Your project request <strong>${projectName}</strong> has been received and is currently under review.</p>
+        <p>You should expect a response from the development team soon with next steps.</p>
+
+        <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #f26c0d;">
+            <p style="margin-top: 0;"><strong>Dashboard Login Details</strong></p>
+            <p style="margin: 6px 0;"><strong>Email:</strong> ${email}</p>
+            ${hasTemporaryPassword
+              ? `<p style="margin: 6px 0;"><strong>Temporary Password:</strong> ${temporaryPassword}</p>`
+              : `<p style="margin: 6px 0;">Use your existing password to login. If you forgot it, use the password reset option.</p>`}
+            <div style="text-align: center; margin: 20px 0 5px;">
+                <a href="${process.env.CLIENT_URL}/login" style="background-color: #f26c0d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px;">LOGIN TO DASHBOARD</a>
+            </div>
+        </div>
+
+        <p><strong>Security tip:</strong> Please change your password immediately after your first login.</p>
+        <p>Best regards,<br>EcodeJR Support</p>
+        <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+        <p style="font-size: 0.8em; color: #777;">System: EcodeJR-Portfolio_Project_Onboarding</p>
     </div>
   `;
 };

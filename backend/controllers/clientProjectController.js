@@ -4,7 +4,8 @@ const Inquiry = require('../models/Inquiry');
 const Media = require('../models/Media');
 const File = require('../models/File');
 const sendEmail = require('../utils/sendEmail');
-const { milestoneUpdateEmail } = require('../utils/emailTemplates');
+const crypto = require('crypto');
+const { milestoneUpdateEmail, projectInitiatedAccountEmail } = require('../utils/emailTemplates');
 
 // @desc    Get all client projects (Admin sees all, Client sees own)
 // @route   GET /api/projects
@@ -200,10 +201,11 @@ exports.createProjectFromInquiry = async (req, res) => {
 
         // Check if user exists as client
         let user = await User.findOne({ email: inquiry.email.toLowerCase() });
+        let tempPassword;
 
         if (!user) {
             // Create a "Shadow Client"
-            const tempPassword = Math.random().toString(36).slice(-12);
+            tempPassword = crypto.randomBytes(8).toString('hex');
             user = await User.create({
                 name: inquiry.name,
                 email: inquiry.email.toLowerCase(),
@@ -213,7 +215,13 @@ exports.createProjectFromInquiry = async (req, res) => {
                 phone: inquiry.phone,
                 company: inquiry.company
             });
-            // Note: In a real app, send a password reset or invite email here
+        } else if (!user.isVerified) {
+            // Refresh temporary credentials for older unverified accounts.
+            tempPassword = crypto.randomBytes(8).toString('hex');
+            user.password = tempPassword;
+            user.phone = user.phone || inquiry.phone;
+            user.company = user.company || inquiry.company;
+            await user.save();
         }
 
         // Create the project
@@ -238,6 +246,22 @@ exports.createProjectFromInquiry = async (req, res) => {
         // Update inquiry status
         inquiry.status = 'converted';
         await inquiry.save();
+
+        // Notify client with project status and dashboard access details.
+        try {
+            await sendEmail({
+                email: user.email,
+                subject: 'Project Received & Dashboard Access - EcodeJR',
+                html: projectInitiatedAccountEmail(
+                    user.name || inquiry.name,
+                    project.projectName,
+                    user.email,
+                    tempPassword
+                )
+            });
+        } catch (emailError) {
+            console.error('Project onboarding email failed:', emailError.message);
+        }
 
         res.status(201).json({ success: true, data: project });
     } catch (error) {
