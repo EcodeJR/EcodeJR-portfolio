@@ -61,7 +61,7 @@ const Services = () => {
                             <span className="text-xs font-mono text-primary uppercase tracking-widest">System Capabilities Online</span>
                         </div>
                         <h1 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight mb-6">
-                            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#00f0ff] glitch-text" data-text="Expertise">Expertise</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#00f0ff] glitch-text" data-text="Expertise">Expertise</span>
                         </h1>
                         <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
                             Deploying advanced digital solutions. We specialize in architecting the future of the web, one line of code at a time.
@@ -84,9 +84,14 @@ const Services = () => {
                                         <h3 className="text-xl font-bold uppercase tracking-wider mb-3 group-hover:text-primary transition-colors">
                                             {service.title}
                                         </h3>
-                                        <p className="text-slate-400 mb-6 text-sm leading-relaxed flex-grow">
+                                        <p className="text-slate-400 mb-4 text-sm leading-relaxed flex-grow">
                                             {service.description}
                                         </p>
+                                        <div className="mb-6">
+                                            <div className="inline-block px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold tracking-widest uppercase rounded">
+                                                Starting from ₦150,000
+                                            </div>
+                                        </div>
                                         <ul className="space-y-2 mb-8">
                                             {service.features.map((feature, idx) => (
                                                 <li key={idx} className="flex items-center gap-3 text-sm text-slate-300 font-mono">

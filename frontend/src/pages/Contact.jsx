@@ -96,34 +96,48 @@ const Contact = () => {
                         <div className="flex flex-col gap-4">
                             <h3 className="text-primary text-[10px] sm:text-sm font-bold tracking-widest border-l-2 border-primary pl-3">CONTACT LINKS</h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer">
+                                <a href="mailto:emmanueldcode@gmail.com" target="_blank" rel="noopener noreferrer" className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer block">
                                     <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">mail</span>
-                                    <a href="mailto:emmanueldcode@gmail.com" target="_blank" rel="noopener noreferrer" className="flex flex-col">
+                                    <div className="flex flex-col">
                                         <h2 className="text-white text-xs font-bold tracking-widest">EMAIL</h2>
                                         <p className="text-slate-400 text-[10px] font-mono mt-1">emmanueldcode@gmail.com</p>
-                                    </a>
-                                </div>
-                                <div className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer">
+                                    </div>
+                                </a>
+                                <a href="https://github.com/EcodeJR" target="_blank" rel="noopener noreferrer" className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer block">
                                     <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">code</span>
-                                    <a href="https://github.com/EcodeJR" target="_blank" rel="noopener noreferrer" className="flex flex-col">
+                                    <div className="flex flex-col">
                                         <h2 className="text-white text-xs font-bold tracking-widest">GITHUB</h2>
                                         <p className="text-slate-400 text-[10px] font-mono mt-1">EcodeJR</p>
-                                    </a>
-                                </div>
-                                <div className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer">
+                                    </div>
+                                </a>
+                                <a href="https://www.linkedin.com/in/emmanuel-dalyop-5b6a1b178?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer block">
                                     <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">hub</span>
-                                    <a href="https://www.linkedin.com/in/emmanuel-dalyop-5b6a1b178?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="flex flex-col">
+                                    <div className="flex flex-col">
                                         <h2 className="text-white text-xs font-bold tracking-widest">LINKEDIN</h2>
                                         <p className="text-slate-400 text-[10px] font-mono mt-1">Emmanuel Dalyop</p>
-                                    </a>
-                                </div>
-                                <div className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer">
+                                    </div>
+                                </a>
+                                <a href="https://maps.app.goo.gl/pMSxeYsAn3hTuXSx5" target="_blank" rel="noopener noreferrer" className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer block">
                                     <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">location_on</span>
-                                    <a href="https://maps.app.goo.gl/pMSxeYsAn3hTuXSx5" target="_blank" rel="noopener noreferrer" className="flex flex-col">
+                                    <div className="flex flex-col">
                                         <h2 className="text-white text-xs font-bold tracking-widest">LOCATION</h2>
                                         <p className="text-slate-400 text-[10px] font-mono mt-1">Abuja-Keffi Express Way, Nasarawa State, Nigeria</p>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
+                                <a href="https://wa.me/2347051242451" target="_blank" rel="noopener noreferrer" className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer block">
+                                    <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">chat</span>
+                                    <div className="flex flex-col">
+                                        <h2 className="text-white text-xs font-bold tracking-widest">WHATSAPP</h2>
+                                        <p className="text-slate-400 text-[10px] font-mono mt-1">+234 705 124 2451</p>
+                                    </div>
+                                </a>
+                                <a href="https://twitter.com/EcodeJR" target="_blank" rel="noopener noreferrer" className="flex flex-col gap-3 rounded border border-white/10 bg-white/5 p-4 hover:border-primary/50 transition-colors group cursor-pointer block">
+                                    <span className="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">alternate_email</span>
+                                    <div className="flex flex-col">
+                                        <h2 className="text-white text-xs font-bold tracking-widest">TWITTER</h2>
+                                        <p className="text-slate-400 text-[10px] font-mono mt-1">@EcodeJR</p>
+                                    </div>
+                                </a>
                             </div>
                         </div>
 

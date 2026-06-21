@@ -47,9 +47,14 @@ const ServicesSection = () => {
                                 <span className="text-zinc-600 font-display text-xs">{service.id}//</span>
                                 <span className="material-symbols-outlined text-primary text-3xl opacity-50 group-hover:opacity-100 transition-opacity">{service.icon}</span>
                             </div>
-                            <div>
+                            <div className="flex flex-col h-full">
                                 <h4 className="text-xl font-display font-bold mb-4 uppercase tracking-tight whitespace-pre-line">{service.title}</h4>
-                                <p className="text-zinc-500 text-sm leading-relaxed mb-6">{service.description}</p>
+                                <p className="text-zinc-500 text-sm leading-relaxed mb-4">{service.description}</p>
+                                <div className="mt-auto mb-6">
+                                    <div className="inline-block px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold tracking-widest uppercase rounded">
+                                        Starting from ₦150,000
+                                    </div>
+                                </div>
                                 <div className="h-[1px] w-full bg-white/10 group-hover:bg-primary transition-colors"></div>
                             </div>
                         </div>

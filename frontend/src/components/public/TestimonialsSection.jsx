@@ -14,7 +14,7 @@ const FALLBACK_TESTIMONIALS = [
         clientName: "SARAH JENKINS",
         clientCompany: "STREAMLINE",
         clientRole: "PRODUCT LEAD",
-        review: "Incredible attention to detail. Users have consistently praised the dashboard for its intuitiveness and speed.",
+        review: "Incredible attention to detail. Users have consistently praised the final product for its intuitiveness and speed.",
         rating: 5,
         clientPhoto: "https://lh3.googleusercontent.com/aida-public/AB6AXuCYBW5cYmaS2KbfWiTbZNJLg5znypFp8a-MTk3xhSno-dXiIXAPg9FOK_lMDU2EYf_1Wq0FrJ_qUJEsd_2h_A2D_yf6x7UbcN-2ovJrDTAPBy17DWzGE-VaXVQARfP-P7CwT9O51Bkbfdy_G2HTZQS6t9P7SRsv4TRF_qCiVAQ8Gcv6zNRvmEkkx2xAQBvzoVEaqz3m1uMheaRqNOwv_qdHbk2wjb7VoLp14E0fCAua1rkhBXsW4i47caV0rgE4c96ikyUxfshRyf39sypyuE8pSIg0APRDnIhmCj48Qw"
     }

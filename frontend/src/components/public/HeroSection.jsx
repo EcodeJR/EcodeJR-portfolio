@@ -23,16 +23,24 @@ const HeroSection = () => {
                     </h1>
                     <div className="flex flex-col md:flex-row items-start md:items-center gap-8 mt-4">
                         <p className="text-zinc-500 max-w-sm text-base md:text-lg leading-relaxed border-l-2 border-primary/30 pl-6">
-                            I design and build modern web applications with clean UI/UX, architecture and reliable backend systems.
-                            <br className="hidden sm:block" /> Turning ideas into real, working products.
+                            I build websites and web apps for businesses ready to go digital.
                         </p>
-                        <div className="flex gap-4">
-                            <Link to="/projects" className="size-20 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group">
-                                <span className="material-symbols-outlined group-hover:rotate-45 transition-transform">arrow_outward</span>
-                            </Link>
-                            <div className="flex flex-col justify-center">
-                                {/* <span className="text-[10px] text-zinc-500 font-bold tracking-widest mb-1 uppercase">GAME_NIGHT</span> */}
-                                <span className="text-sm font-display font-bold">View Projects</span>
+                        <div className="flex flex-col sm:flex-row gap-6">
+                            <div className="flex gap-4">
+                                <Link to="/projects" className="size-16 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary hover:border-primary transition-all group">
+                                    <span className="material-symbols-outlined group-hover:rotate-45 transition-transform">arrow_outward</span>
+                                </Link>
+                                <div className="flex flex-col justify-center">
+                                    <span className="text-sm font-display font-bold">View Projects</span>
+                                </div>
+                            </div>
+                            <div className="flex gap-4">
+                                <a href="https://wa.me/2347051242451" target="_blank" rel="noopener noreferrer" className="size-16 rounded-full border border-white/20 bg-green-500/10 text-green-500 hover:bg-green-500 hover:text-white hover:border-green-500 flex items-center justify-center transition-all group">
+                                    <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
+                                </a>
+                                <div className="flex flex-col justify-center">
+                                    <span className="text-sm font-display font-bold">WhatsApp Me</span>
+                                </div>
                             </div>
                         </div>
                     </div>
