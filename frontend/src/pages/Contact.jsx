@@ -202,7 +202,6 @@ const Contact = () => {
                             {activeTab === 'project' && (
                                 <div className="flex flex-col gap-4 animate-in fade-in duration-300">
                                     <label className="text-white text-xs font-black tracking-widest uppercase flex flex-col md:flex-row item-start md:items-center gap-2">
-                                        <span className="material-symbols-outlined text-sm">project type</span>
                                         Select Project Type
                                     </label>
                                     <div className="flex flex-wrap gap-2">

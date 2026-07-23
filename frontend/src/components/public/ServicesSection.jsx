@@ -6,24 +6,28 @@ const ServicesSection = () => {
             id: '01',
             icon: 'terminal',
             title: 'Full-Stack\nEngineering',
+            amount: '₦300,000',
             description: 'Building scalable web applications using MongoDB, Express, React, and Node.js.'
         },
         {
             id: '02',
             icon: 'layers',
             title: 'Frontend\nArchitecture',
+            amount: '₦100,000',
             description: 'Building responsive, accessible, and high-performance user interfaces with modern frameworks.'
         },
         {
             id: '03',
             icon: 'database',
             title: 'Backend\nSystems',
+            amount: '₦200,000',
             description: 'Designing scalable APIs and efficient database schemas for reliable performance.'
         },
         {
             id: '04',
             icon: 'hub',
             title: 'Real-Time\n& AI Integration',
+            amount: '₦300,000',
             description: 'Developing interactive real-time applications and AI-driven features.'
         }
     ];
@@ -52,7 +56,7 @@ const ServicesSection = () => {
                                 <p className="text-zinc-500 text-sm leading-relaxed mb-4">{service.description}</p>
                                 <div className="mt-auto mb-6">
                                     <div className="inline-block px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold tracking-widest uppercase rounded">
-                                        Starting from ₦150,000
+                                        Starting from {service.amount}
                                     </div>
                                 </div>
                                 <div className="h-[1px] w-full bg-white/10 group-hover:bg-primary transition-colors"></div>

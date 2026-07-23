@@ -6,39 +6,45 @@ import Button from '../components/common/Button';
 const Services = () => {
     const services = [
         {
-            title: "NEURAL_WEB_DEV",
+            title: "WEB_DEVELOPMENT",
             icon: "language",
-            description: "High-performance web applications built on modern frameworks. We engineer digital experiences that are faster, smarter, and scalable.",
+            amount: "₦300,000",
+            description: "High-performance web applications built on modern frameworks. I engineer digital experiences that are faster, smarter, and scalable.",
             features: ["React / Next.js Architecture", "Progressive Web Apps (PWA)", "WebGL Integrations"]
         },
         {
-            title: "UI/UX_PROTOCOLS",
+            title: "UI/UX_LANDING PAGE",
             icon: "design_services",
-            description: "Designing intuitive interfaces for human-machine interaction. We focus on usability, accessibility, and futuristic aesthetics.",
+            amount: "₦70,000",
+            description: "Designing intuitive interfaces for human-machine interaction. I focus on usability, accessibility, and futuristic aesthetics.",
             features: ["Wireframing & Prototyping", "Design Systems", "User Research Analysis"]
         },
         {
             title: "SYSTEM_BACKEND",
             icon: "dns",
-            description: "Robust server-side solutions. We build secure, efficient APIs and database structures to power your applications.",
+            amount: "₦200,000",
+            description: "Robust server-side solutions. I'll build secure, efficient APIs and database structures to power your applications.",
             features: ["Node.js / Python API", "Database Design (SQL/NoSQL)", "Cloud Infrastructure (AWS/Azure)"]
         },
         {
-            title: "MOBILE_LINK",
+            title: "MOBILE_APPS",
             icon: "smartphone",
+            amount: "₦300,000",
             description: "Native and cross-platform mobile applications. extending your reach to every device in the network.",
             features: ["React Native Development", "iOS & Android", "Offline Capabilities"]
         },
         {
             title: "CYBER_SECURITY",
             icon: "security",
-            description: "Fortifying your digital assets against threats. We implement best practices in security to protect your data.",
+            amount: "₦150,000",
+            description: "Fortifying your digital assets against threats. I implement best practices in security to protect your data.",
             features: ["Vulnerability Assessment", "Secure Coding Practices", "Data Encryption"]
         },
         {
             title: "AI_INTEGRATION",
             icon: "psychology",
-            description: "Embedding intelligence into your software. From chatbots to data analysis, we leverage AI to enhance functionality.",
+            amount: "₦100,000",
+            description: "Embedding intelligence into your software. From chatbots to data analysis, I leverage AI to enhance functionality.",
             features: ["Machine Learning Models", "NLP Integration", "Predictive Analytics"]
         }
     ];
@@ -56,15 +62,15 @@ const Services = () => {
                     </div>
 
                     <div className="max-w-7xl mx-auto text-center relative z-10">
-                        <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm">
+                        {/* <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm">
                             <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                             <span className="text-xs font-mono text-primary uppercase tracking-widest">System Capabilities Online</span>
-                        </div>
+                        </div> */}
                         <h1 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight mb-6">
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#00f0ff] glitch-text" data-text="Expertise">Expertise</span>
                         </h1>
                         <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                            Deploying advanced digital solutions. We specialize in architecting the future of the web, one line of code at a time.
+                            Deploying advanced digital solutions. I specialize in architecting the future of the web, one line of code at a time.
                         </p>
                     </div>
                 </section>
@@ -89,7 +95,7 @@ const Services = () => {
                                         </p>
                                         <div className="mb-6">
                                             <div className="inline-block px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold tracking-widest uppercase rounded">
-                                                Starting from ₦150,000
+                                                Starting from {service.amount}
                                             </div>
                                         </div>
                                         <ul className="space-y-2 mb-8">
