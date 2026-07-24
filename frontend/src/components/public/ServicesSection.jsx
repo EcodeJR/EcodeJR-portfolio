@@ -48,7 +48,7 @@ const ServicesSection = () => {
                     {services.map((service) => (
                         <div key={service.id} className="group tech-card bg-surface-dark p-6 sm:p-10 border border-white/5 hover:border-primary/50 transition-all flex flex-col min-h-[300px] md:h-[400px]">
                             <div className="flex justify-between items-start mb-auto">
-                                <span className="text-zinc-600 font-display text-xs">{service.id}//</span>
+                                <span className="text-zinc-600 font-display text-xs">{service.id}</span>
                                 <span className="material-symbols-outlined text-primary text-3xl opacity-50 group-hover:opacity-100 transition-opacity">{service.icon}</span>
                             </div>
                             <div className="flex flex-col h-full">

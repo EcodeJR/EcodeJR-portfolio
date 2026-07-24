@@ -22,11 +22,11 @@ const Navbar = () => {
     return (
         <div className="fixed top-4 md:top-8 left-0 w-full z-50 px-4 md:px-6">
             <div className="max-w-7xl mx-auto flex items-center justify-between bg-black/20 backdrop-blur-md rounded-full px-4 py-2 border border-white/5">
-                <Link to="/" onClick={closeMenu} className="flex items-center gap-2 sm:gap-3 bg-white text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full font-display font-bold text-[10px] sm:text-xs md:text-sm tracking-widest hover:bg-primary transition-colors">
+                <Link to="/" onClick={closeMenu} className="flex items-center gap-2 sm:gap-3 bg-white text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full font-display font-bold text-md sm:text-sm md:text-md tracking-widest hover:bg-primary transition-colors">
                     ED
                 </Link>
 
-                <nav className="hidden md:flex items-center gap-2 pill-nav p-1.5 rounded-full">
+                <nav className="hidden md:flex items-center text-center gap-2 pill-nav p-1.5 rounded-full">
                     <NavLink className={({ isActive }) => isActive ? activeLink : normalLink} to="/about">ABOUT ME</NavLink>
                     <NavLink className={({ isActive }) => isActive ? activeLink : normalLink} to="/projects">PROJECTS</NavLink>
                     <NavLink className={({ isActive }) => isActive ? activeLink : normalLink} to="/services">SERVICES</NavLink>
